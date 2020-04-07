@@ -1,0 +1,75 @@
+{
+    "pages": [
+        {
+            "id": 0,
+            "title": "Home",
+            "content": "this is some content",
+            "slug": "index"
+        },
+        {
+            "id": 1,
+            "title": "About",
+            "content": "some more content",
+            "slug": "about"
+        },
+        {
+            "id": 2,
+            "title": "Posts",
+            "content": "index content",
+            "slug": "posts"
+        },
+        {
+            "id": 3,
+            "title": "Example Post",
+            "content": "post content",
+            "slug": "example-post",
+            "pageId": 2,
+            "parentId": "posts"
+        },
+        {
+            "id": 4,
+            "title": "Another Post",
+            "content": "post content",
+            "slug": "another-post",
+            "pageId": 2,
+            "parentId": "posts"
+        },
+        {
+            "id": 5,
+            "title": "Services",
+            "content": "Services homepage",
+            "slug": "services"
+        },
+        {
+            "id": 6,
+            "title": "Web Design",
+            "content": "Web Design content",
+            "slug": "web-design",
+            "parentId": "services"
+        },
+        {
+            "id": 7,
+            "title": "Graphic Design",
+            "content": "Graphic Design content",
+            "slug": "graphic-design",
+            "parentId": "services"
+        }
+    ],
+    "images": [
+        {
+            "id": 0,
+            "src": "logo.png",
+            "pageId": "example-post"
+        },
+        {
+            "id": 1,
+            "src": "photo.png",
+            "pageId": "example-post"
+        },
+        {
+            "id": 2,
+            "src": "services.png",
+            "pageId": "services"
+        }
+    ]
+}
