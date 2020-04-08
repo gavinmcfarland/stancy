@@ -157,3 +157,23 @@ To access images of a page `/pages/services/images`.
   }
 ]
 ```
+
+## Instalation
+
+To install the dependencies
+
+```
+npm install
+```
+
+To build the database/api
+
+```
+node api.js
+```
+
+To run the api/server
+
+```
+node server.js
+```
