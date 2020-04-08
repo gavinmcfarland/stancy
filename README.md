@@ -166,14 +166,8 @@ To install the dependencies
 npm install
 ```
 
-To build the database/api
+To run the API
 
 ```
-node api.js
-```
-
-To run the api/server
-
-```
-node server.js
+npm start
 ```

@@ -2,12 +2,14 @@
 const jsonServer = require('json-server')
 const singular = require('./singular.js')
 const field = require('./field.js')
-const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
 const database = require('./database.js')
 
-database
+const server = jsonServer.create()
+const router = jsonServer.router(database)
+const middlewares = jsonServer.defaults()
+
+
+
 
 server.use(middlewares)
 server.use(singular)

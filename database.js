@@ -60,11 +60,11 @@ function createDatabase(dir) {
 
     }
 
-    return JSON.stringify(createObject(dir), null, '\t')
+    return createObject(dir)
 }
 
 function buildFile(dir) {
-    let db = createDatabase(dir)
+    let db = JSON.stringify(createDatabase(dir), null, '\t')
     fs.writeFile('db.json', db, (err) => {
         if (err) throw err;
         // console.log('The file has been saved!');
@@ -72,4 +72,4 @@ function buildFile(dir) {
     });
 }
 
-module.exports = buildFile('content/')
+module.exports = createDatabase('content/')
