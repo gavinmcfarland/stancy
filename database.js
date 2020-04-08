@@ -21,7 +21,7 @@ function createDatabase(dir) {
                 id: index,
                 title: item,
                 content: 'content',
-                slug: 'slug',
+                slug: item.split('.')[0],
             }
 
             if (!folder) {
