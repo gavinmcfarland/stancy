@@ -5,6 +5,9 @@ const field = require('./field.js')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
+const database = require('./database.js')
+
+database
 
 server.use(middlewares)
 server.use(singular)

@@ -67,13 +67,9 @@ function buildFile(dir) {
     let db = createDatabase(dir)
     fs.writeFile('db.json', db, (err) => {
         if (err) throw err;
-        console.log('The file has been saved!');
-        console.log(db)
+        // console.log('The file has been saved!');
+        // console.log(db)
     });
 }
 
-buildFile('content/')
-
-
-
-
+module.exports = buildFile('content/')
