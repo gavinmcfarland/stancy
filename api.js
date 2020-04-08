@@ -9,48 +9,79 @@ const dir = 'content/'
 let database = {}
 let object = {}
 
-function createObject(dir, parent, level = 1) {
+function createObject(dir, parent, level = 0, object = {}, array = []) {
+    level++
 
-    let array = fs.readdirSync(dir)
-
-    array.map((item, index) => {
+    // For each item in the folder
+    fs.readdirSync(dir).map((item, index) => {
 
         let folder = !(/\..+$/.test(item))
 
-        // If Directory
+        // If the item is a folder
         if (folder) {
-            if (level === 1) {
-                level++
-                database[item] = []
-                createObject(dir + item + '/', item, level)
+            array = [{
+                [item]: {}
+            }]
+            createObject(dir + item + '/', item, level, object, array)
+        }
+
+        else {
+            let name = item.split('.')[0]
+
+            object = {
+                [name]: {
+                    id: index,
+                    content: fs.readFileSync(path.join(dir, item), 'utf8'),
+                    title: name
+                }
             }
+
+            if (parent) {
+                array.push(object)
+                // console.log(database[parent])
+            }
+
+
+            // if (parent) {
+            //     database[parent].push(object)
+            // }
+            // else {
+            //     database.object
+            // }
 
         }
 
-        if (parent) {
-
-            let object = {}
-            let page = item.split('.')[0]
-            let content = ""
-
-            if (/\..+$/.test(item)) {
-                content = fs.readFileSync(path.join(dir, item), 'utf8')
-            }
-
-            object.id = index
-            object.title = page
-            object.content = content
-
-            if (!(/\..+$/.test(item))) {
-                object.children = fs.readdirSync(dir + item + '/').map(item => {
-                    return item.split('.')[0]
-                })
 
 
-            }
 
-            database[parent].push(object)
-        }
+
+        // console.log(object)
+
+
+        // if (parent) {
+
+        //     let object = {}
+        //     let page = item.split('.')[0]
+        //     let content = ""
+
+        //     if (/\..+$/.test(item)) {
+        //         content = fs.readFileSync(path.join(dir, item), 'utf8')
+        //     }
+
+        //     object.id = index
+        //     object.title = page
+        //     object.content = content
+
+        //     if (!(/\..+$/.test(item))) {
+        //         object.children = fs.readdirSync(dir + item + '/').map(item => {
+        //             return item.split('.')[0]
+        //         })
+
+
+        //     }
+
+        //     database[parent].push(object)
+        // }
 
     })
 
@@ -63,83 +94,69 @@ function createObject(dir, parent, level = 1) {
 
 
 
-console.log(JSON.stringify(createObject(dir), null, '\t'))
+// console.log(JSON.stringify(createObject(dir), null, '\t'))
 
 
 
 
 
-function getArray(dir) {
-    // Get array of file names in dir
-    return fs.readdirSync(dir)
-}
+let thing = []
 
-function getFile(array) {
+function createFolderArray(dir, parent, object = {}, level = 0) {
 
-    return array.map(key => {
+    let database = {}
+    level++
+    let array = []
+    let collection = {}
 
-        return array.reduce((acc, curr, index, array) => {
-            console.log(curr)
+    fs.readdirSync(dir).forEach((item, index) => {
+        let folder = !(/\..+$/.test(item))
 
-            return {
-                [curr.split('.')[0]]: curr
-            }
-        }, {})
+        object = {
+            id: index,
+            title: item,
+            content: 'content',
+            slug: 'slug',
+        }
 
+        if (!folder) {
 
-
-
-        // Is a file
-        if (/\.md$/.test(fileName)) {
-
-            const pageName = fileName.split('.')[0]
-            const page = {
-                [pageName]: {
-                    name: fileName,
-                    content: fs.readFileSync(path.join(dir, fileName), 'utf8')
+            if (!parent) {
+                collection = {
+                    [item.split('.')[0]]: object
                 }
+
+                // Object.assign(database, collection);
+            }
+            else {
+                array.push(object)
+
+                collection = {
+                    [parent]: array
+                }
+
             }
 
-            return page
         }
 
-        // Is a directory
-        else {
+        if (folder) {
+            array.push(object)
+            createFolderArray(dir + '/' + item, item, object, level)
 
         }
 
-        // return file
+        thing.push(collection)
+
     })
-}
 
-function parseFile(page) {
-    return parseMarkdown(page)
-}
+    Object.assign(database, ...thing);
 
-function parseMarkdown(page) {
-    console.log(page)
-    if (/\.md$/.test(page.name)) {
-        // get matter data
-        const { data, content } = matter(page.content)
-        const { title, date } = data
-        const slug = page.name.split('.')[0]
-        const html = marked(content)
-        return {
-            title: title || slug,
-            slug,
-            content,
-            date,
-            html
-        }
-    }
+    return database
+
 }
 
 
+database = createFolderArray(dir)
 
+console.log(database)
 
-
-
-
-// Get array of directories and files
-// If item in array is file then create object
-// If item in array is directory then get array of directorys and files

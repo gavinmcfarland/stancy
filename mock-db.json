@@ -16,23 +16,25 @@
             "id": 2,
             "title": "Posts",
             "content": "index content",
-            "slug": "posts"
-        },
-        {
-            "id": 3,
-            "title": "Example Post",
-            "content": "post content",
-            "slug": "example-post",
-            "pageId": 2,
-            "parentId": "posts"
-        },
-        {
-            "id": 4,
-            "title": "Another Post",
-            "content": "post content",
-            "slug": "another-post",
-            "pageId": 2,
-            "parentId": "posts"
+            "slug": "posts",
+            "children": [
+                {
+                    "id": 0,
+                    "title": "Example Post",
+                    "content": "post content",
+                    "slug": "example-post",
+                    "pageId": 2,
+                    "parentId": "posts"
+                },
+                {
+                    "id": 1,
+                    "title": "Another Post",
+                    "content": "post content",
+                    "slug": "another-post",
+                    "pageId": 2,
+                    "parentId": "posts"
+                }
+            ]
         },
         {
             "id": 5,
@@ -53,6 +55,20 @@
             "content": "Graphic Design content",
             "slug": "graphic-design",
             "parentId": "services"
+        }
+    ],
+    "users": [
+        {
+            "id": 0,
+            "name": "Jeffry"
+        },
+        {
+            "id": 1,
+            "name": "Sarah"
+        },
+        {
+            "id": 2,
+            "name": "Johanna"
         }
     ],
     "images": [
