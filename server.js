@@ -8,9 +8,9 @@ const middlewares = jsonServer.defaults()
 server.use(middlewares)
 server.use(singular)
 server.use(jsonServer.rewriter({
-    "/pages/:page": "/pages?slug=:page&singular=1",
-    "/pages/:parent/children": "/pages?parentId=:parent",
-    "/pages/:page/images": "/images?pageId=:page"
+    "/:folder/:page": "/:folder?slug=:page&singular=1",
+    "/:folder/:parent/children": "/:folder?parentId=:parent",
+    "/:folder/:page/images": "/images?pageId=:page"
 }))
 
 server.use(router)

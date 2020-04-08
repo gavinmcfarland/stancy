@@ -6,7 +6,7 @@ A simple API for accessing flat file content in folders.
 
 ## How Should it Work?
 
-Files are stored in a folder and parsed (depending on their file type) into a JSON datables which can be accessed using an API. The API structure roughly follows the structure of the content.
+Files are stored in a folder and parsed (depending on their file type) into a JSON database which can be accessed using an API. The API structure roughly follows the structure of the content.
 
 ## Folder Structure
 
