@@ -1,15 +1,17 @@
 // server.js
 const jsonServer = require('json-server')
 const singular = require('./singular.js')
+const field = require('./field.js')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 server.use(singular)
+server.use(field)
 server.use(jsonServer.rewriter({
     "/:folder/:page": "/:folder?slug=:page&singular=1",
-    "/:folder/:parent/children": "/:folder?parentId=:parent",
+    "/:folder/:page/children": "/:folder?slug=:page&singular=1&_field=children",
     "/:folder/:page/images": "/images?pageId=:page"
 }))
 
