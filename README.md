@@ -2,7 +2,7 @@
 
 A minimalistic API for accessing flat file content.
 
-Given a directory, it turns all top-level folders/files into collections which can be access by calling `/:collection[/:item]`. It converts a directory of files into an database which can be accessed using the API.
+It turns all top-level folders and files in a directory into collections which can be accessed by calling `/:collection[/:item]`. It does this by converting the files and folders into an objects which can be accessed using the API.
 
 > This is a work in pogress. Please let me know if you encounter any issues.
 
