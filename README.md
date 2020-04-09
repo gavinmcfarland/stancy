@@ -30,10 +30,10 @@ You can request content using the following calls:
 - [localhost:3000/site](http://localhost:3000/site)
 - [localhost:3000/users](http://localhost:3000/users)
 - [localhost:3000/users/jerry](http://localhost:3000/users/jerry)
-- [localhost:3000/pages](localhost:3000/pages)
-- [localhost:3000/pages/about](localhost:3000/pages/about)
+- [localhost:3000/pages](http://localhost:3000/pages)
+- [localhost:3000/pages/about](http://localhost:3000/pages/about)
 - [localhost:3000/pages/posts](http://localhost:3000/pages/posts)
-- [localhost:3000/pages/posts/children](localhost:3000/pages/posts/children)
+- [localhost:3000/pages/posts/children](http://ocalhost:3000/pages/posts/children)
 
 ## Installation
 
