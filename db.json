@@ -4,53 +4,46 @@
 			"id": 0,
 			"title": "about.md",
 			"content": "content",
-			"slug": "slug"
+			"slug": "about",
+			"parent": "pages"
 		},
 		{
 			"id": 1,
 			"title": "example.md",
 			"content": "content",
-			"slug": "slug"
+			"slug": "example",
+			"parent": "pages"
 		},
 		{
 			"id": 2,
 			"title": "posts",
 			"content": "content",
-			"slug": "slug"
-		}
-	],
-	"posts": [
-		{
-			"id": 0,
-			"title": "another-post.md",
-			"content": "content",
-			"slug": "slug"
+			"slug": "posts",
+			"parent": "pages",
+			"children": []
 		},
 		{
-			"id": 1,
-			"title": "blog-post.md",
+			"id": 3,
+			"title": "services",
 			"content": "content",
-			"slug": "slug"
-		},
-		{
-			"id": 2,
-			"title": "hello-world.md",
-			"content": "content",
-			"slug": "slug"
+			"slug": "services",
+			"parent": "pages",
+			"children": []
 		}
 	],
 	"site": {
 		"id": 1,
 		"title": "site.md",
 		"content": "content",
-		"slug": "slug"
+		"slug": "site"
 	},
 	"users": [
 		{
 			"id": 0,
 			"title": "jerry.md",
 			"content": "content",
-			"slug": "slug"
+			"slug": "jerry",
+			"parent": "users"
 		}
 	]
 }
