@@ -1,164 +1,78 @@
-## Folder API
+# Folder API
 
-A simple API for accessing flat file content in folders.
+A minimalistic API for accessing flat file content.
 
-> This is a work in progress/experiment. Currently it just uses a dummy database to demonstrate the usage of the API.
+Given a directory, it turns all top-level folders/files into collections which can be access by calling `/:collection[/:item]`. It converts a directory of files into an database which can be accessed using the API.
 
-## How Should it Work?
+> This is a work in pogress. Please let me know if you encounter any issues.
 
-Files are stored in a folder and parsed (depending on their file type) into a JSON database which can be accessed using an API. The API structure roughly follows the structure of the content.
-
-## Folder Structure
-
-Below is an example project structure.
+For example with the following content:
 
 ```bash
 content/
+  site.md
+  users/
+    jerry.md
+    johanna.md
   pages/
-    posts/
-      index.md
-      my-post.md
-      example-post.md
-      another-post.md
     about.md
     services/
       index.md
-      icon.png
-    index.md
-```
-
-## Pages
-
-You can access a page by calling the name directly `/pages/about`.
-
-```json
-{
-  "id": "about",
-  "content": "About page content"
-}
-```
-
-You can also structure files so that pages are stored in folders. This can be useful if you want to store related content together.
-
-For example if you have the following structure.
-
-```
-content/
-  pages/
-    services/
+    posts/
       index.md
-      icon.png
+      my-first-post.md
+      how-to-write-code.md
+      things-come-in-threes.md
 ```
 
-You can access this by calling `/pages/services`.
+You can request content using the following calls:
 
-```json
-{
-  "id": "services",
-  "content": "Services page content"
-}
-```
+- [localhost:3000/site]()
+- [localhost:3000/users]()
+- [localhost:3000/users/jerry]()
+- [localhost:3000/pages]()
+- [localhost:3000/pages/about]()
+- [localhost:3000/pages/posts]()
+- [localhost:3000/pages/posts/children]()
 
-## Collections
+## Installation
 
-Each folder creates a collection which excludes index files and images.
-
-For example using the following folder structure.
+Add the npm package to your project.
 
 ```bash
-content/
-  pages/
-    posts/
-      index.md
-    about.md
-    services/
-      index.md
-    index.md
+cd my-project
+npm install https://github.com/limitlessloop/folder-api.git
 ```
 
-You can access a list of pages by calling `/pages`.
+In your application specify where the content lives and start the API server.
 
-```json
-[
-  {
-    "id": 0,
-    "title": "Home",
-    "content": "this is some content",
-    "slug": "index"
-  },
-  {
-    "id": 1,
-    "title": "About",
-    "content": "some more content",
-    "slug": "about"
-  },
-  {
-    "id": 2,
-    "title": "Posts",
-    "content": "index content",
-    "slug": "posts"
-  },
-  {
-    "id": 3,
-    "title": "Example Post",
-    "content": "post content",
-    "slug": "example-post",
-    "pageId": 2,
-    "parentId": "posts"
-  },
-  {
-    "id": 4,
-    "title": "Another Post",
-    "content": "post content",
-    "slug": "another-post",
-    "pageId": 2,
-    "parentId": "posts"
-  },
-  {
-    "id": 5,
-    "title": "Services",
-    "content": "Services homepage",
-    "slug": "services"
-  }
-]
+```js
+// app.js
+const api = require(`./node_modules/folder-api/index.js`)
+
+api.start('content/')
 ```
 
-You can access a list of children pages by calling `/pages/posts/children`.
+To get content
 
-```json
-[
-  {
-    "id": "1",
-    "title": "My Post",
-    "content": "Post example 1"
-  },
-  {
-    "id": "2",
-    "title": "Another Post",
-    "content": "Post example 2"
-  },
-  {
-    "id": "3",
-    "title": "Example Post",
-    "content": "Post example 3"
-  },
-]
+```js
+async function getContent() {
+    return await api.get(`pages/about`, null);
+}
+
+getContent().then((content) => {
+  console.log(content)
+})
+
+// => {
+//   id: 0,
+//   title: 'about.md',
+//   content: 'Some about content',
+//   slug: 'about'
+// }
 ```
 
-## Images
-
-To access images of a page `/pages/services/images`.
-
-```json
-[
-  {
-    "pageId": "services",
-    "src": "icon.png"
-  }
-]
-```
-
-## Instalation
+## Development
 
 To install the dependencies
 
@@ -169,5 +83,5 @@ npm install
 To run the API
 
 ```
-npm start
+npm run demo
 ```

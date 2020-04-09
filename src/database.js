@@ -50,32 +50,32 @@ function createObject(dir, item, index) {
     }
 
     if (isFile(item)) {
-
+        object.content = fs.readFileSync(path.join(dir, item), 'utf8')
     }
     else {
         let containsChildren = false
         let hasIndex = false
-        fs.readdirSync(path.join(dir, item)).map((item) => {
+        let subDir = path.join(dir, item)
+        fs.readdirSync(subDir).map((item) => {
             if (!(/\index..+$/.test(item))) {
                 containsChildren = true
             }
             else {
-                hasIndex = item
+                hasIndex = fs.readFileSync(path.join(subDir, item), 'utf8')
             }
         })
         if (containsChildren) {
             object.children = createArray(dir, item, index)
         }
-        else {
-            object.content = hasIndex
-        }
+        object.content = hasIndex
+
 
     }
 
     return object
 }
 
-function createDatabase(dir) {
+module.exports = function createDatabase(dir) {
 
 
     // For each item in array
@@ -103,8 +103,6 @@ function createDatabase(dir) {
 
 }
 
-// console.log(JSON.stringify(createDatabase('content/'), null, '\t'))
-
 
 function buildFile(dir) {
     let db = JSON.stringify(createDatabase(dir), null, '\t')
@@ -117,4 +115,4 @@ function buildFile(dir) {
 
 // buildFile('content/')
 
-module.exports = createDatabase('content/')
+
