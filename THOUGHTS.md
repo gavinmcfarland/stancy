@@ -1,18 +1,23 @@
-# Future Ideas and Thoughts
+# Static Endpoint API Generator
 
-You can use files and folders to automatically create endpoints to access their content. Each top level file or folder creates an endpoint for a different resource.
+Use files and folders to automatically create endpoints to access their content. Each top level file or folder creates a root endpoint for different resources.
 
 ## Usage
 
-Create a file to create an individual resource or a plural sounding folder containing files to create a collection.
+Create a file to create a resource, or a plural sounding folder containing files to create a collection.
 
-__Individual Resource__
+```
+:resource
+:collection[/:resource]
+```
+
+### Creating a resource
+
+Creating a file called `site.md`.
 ```
 site.md
 ```
-
-Will create a site resource which can be accessed using `GET site`.
-
+Will create a resource which can be accessed using `GET site`.
 ```json
 {
     "id": 0,
@@ -21,7 +26,10 @@ Will create a site resource which can be accessed using `GET site`.
 }
 ```
 
-__Collection of Resources__
+### Creating a collection
+
+Creating a folder with several files.
+
 ```
 users/
   jeffery.md
@@ -57,21 +65,35 @@ Calling `GET users/jeffery` will return:
 
 ## Features
 
-#### Params
+### Singular Folders
 
-You can filter by any feild using the field as a parameter.
+When a singular name is used for a folder a resource will be created (instead of a collection). The files contained in that folder will become fields in that resource.
 
-- `?url=:url`
+### Index File or Folder
+
+Placing an index file or folder inside a folder will turn it into a resource. The files contained in that folder become children of that resource.
+
+### Filtering
+
+You can filter using any feild by using the field as a parameter.
+
+```
+?url=:url
+```
 
 For example: `pages?url="services/web-design"/images`
 
+### Fields
+
 You can show the data for any field by chosing which field to show.
 
-- `?field=:field`
+```
+?field=:field
+```
 
 For example: `pages?field=children`
 
-#### Order
+### Order
 
 Prepend a number to the file or folder to change its order.
 
@@ -81,7 +103,7 @@ Prepend a number to the file or folder to change its order.
 03_work/
 ```
 
-#### Hidden
+### Hidden
 
 Prepend an underscore to hide a file or folder.
 
@@ -89,10 +111,25 @@ Prepend an underscore to hide a file or folder.
 _hidden/
 ```
 
-#### Singular or Plural
-Folders with a singular name are treated as individual resources. Folders with a plural name are treated as collections.
+## Extend
 
-However if a folder contains a file called `index.md` it is treated as an individual resource. All the files contained by the folder will because children of that resource.
+### Fields
+
+You can programmatically create fields.
+
+```js
+seag.collection('pages').field((item, collection) => {
+
+  // Assign a URL to each page
+	if(item.name === 'home') item.url = '/'
+  else item.url = '/' + item.path
+  
+  // Provide a tag for which collection the endpoint is part of
+  item.collection = collection.name
+	
+	return item
+})
+```
 
 ## Examples
 
@@ -117,6 +154,7 @@ pages?url=:url/files/
 ```
 users
 users/:user
+users/repos/
 ```
 
 ### Images
@@ -132,7 +170,12 @@ config/preferences
 config/user
 config/colours
 ```
-  
+
+### Movies
+
+```
+movies/:language/:genre/:year/:movie
+```
 
 ## Ideas
 
@@ -142,6 +185,8 @@ config/colours
 4. If a folder has an index file, it is presumed to be a resource.
 5. If the name of a folder is not a plural rest it as an object.
 6. Need a way to let user add what data can be included in resource, perhaps by adding a file to the folder.
+7. Need a way to let users add fields to individual resources
+8. Need a way to let users create custom routes
 
 # Future
 
@@ -197,4 +242,26 @@ repos/
 
     }
 }
+```
+
+
+```
+pages/
+  home/
+  contact/
+  about/
+  services/
+    index.md
+    images/
+  posts/
+    index.md
+    my-first-post.md
+
+
+movies/
+  action/
+  thriller/
+  romcom/
+  comedy/
+
 ```
