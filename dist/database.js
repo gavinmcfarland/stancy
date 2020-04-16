@@ -125,7 +125,7 @@ function createObject(dir, item, index) {
   var object = {};
   object = {
     _id: index,
-    _file: item
+    _name: item
   };
 
   if (isFile(item)) {
