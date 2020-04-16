@@ -1,6 +1,10 @@
-const api = require('../index')
+const api = require('./index')
 
-api.start('content/')
+// api.database('content/')
+
+api.write('content/')
+
+// api.start('content/')
 
 // async function getContent() {
 //     return await api.get(`pages/about`, null);

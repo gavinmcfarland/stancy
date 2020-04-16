@@ -1,0 +1,86 @@
+{
+	"config": {
+		"_id": 0,
+		"_file": "config",
+		"site": {
+			"domain": "mydomain.com",
+			"description": "A cool site"
+		},
+		"user": {
+			"theme": "dark"
+		}
+	},
+	"pages": [
+		{
+			"_id": 0,
+			"_file": "about.md",
+			"content": "<p>Some about content</p>\n"
+		},
+		{
+			"_id": 1,
+			"_file": "example.md",
+			"content": "<p>this is some content</p>\n"
+		},
+		{
+			"_id": 2,
+			"_file": "posts",
+			"content": "<p>Homepage for blog</p>\n",
+			"children": [
+				{
+					"_id": 0,
+					"_file": "another-post",
+					"content": "<hr>\n<p>title: Another Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+				},
+				{
+					"_id": 1,
+					"_file": "blog-post.md",
+					"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+				},
+				{
+					"_id": 2,
+					"_file": "hello-world.md",
+					"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+				}
+			]
+		},
+		{
+			"_id": 3,
+			"_file": "services",
+			"content": "<p>Services content</p>\n"
+		}
+	],
+	"site": {
+		"_id": 2,
+		"_file": "site.md",
+		"content": "<p>Site config</p>\n"
+	},
+	"things": [
+		{
+			"_id": 0,
+			"_file": "about.md",
+			"content": "<p>Some about content</p>\n"
+		},
+		{
+			"_id": 1,
+			"_file": "example.md",
+			"content": "<p>this is some content</p>\n"
+		},
+		{
+			"_id": 3,
+			"_file": "services",
+			"content": "<p>Services content</p>\n"
+		}
+	],
+	"users": [
+		{
+			"_id": 0,
+			"_file": "jerry.md",
+			"content": "<p>Jerry</p>\n"
+		},
+		{
+			"_id": 1,
+			"_file": "johanna.md",
+			"content": "<p>Johanna</p>\n"
+		}
+	]
+}
