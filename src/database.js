@@ -111,6 +111,9 @@ function parseContent(dir, item) {
 }
 
 function createObject(dir, item, index) {
+    if (/^_/.test(item)) {
+        return undefined
+    }
     let object = {}
 
     object = {

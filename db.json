@@ -29,6 +29,36 @@
 			"theme": "dark"
 		}
 	},
+	"hidden": {
+		"_id": 1,
+		"_file": "hidden",
+		"colour": {
+			"title": "Technopastoral",
+			"date": "January 19, 2038",
+			"tags": [
+				"garden",
+				"engineering"
+			],
+			"text": "To deprogram oneself necessitates keeping to very specific schedules, which are what Foucault, once again, described as techniques of the self, echoing Seneca."
+		},
+		"example": {
+			"YAML": [
+				"A human-readable data serialization language",
+				"https://en.wikipedia.org/wiki/YAML"
+			],
+			"yaml": [
+				"A complete JavaScript implementation",
+				"https://www.npmjs.com/package/yaml"
+			]
+		},
+		"site": {
+			"domain": "mydomain.com",
+			"description": "A cool site"
+		},
+		"user": {
+			"theme": "dark"
+		}
+	},
 	"pages": [
 		{
 			"_id": 0,
@@ -69,7 +99,7 @@
 		}
 	],
 	"site": {
-		"_id": 2,
+		"_id": 3,
 		"_file": "site.md",
 		"content": "<p>Site config</p>\n"
 	},

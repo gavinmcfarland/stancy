@@ -1,6 +1,6 @@
 "use strict";
 
-var api = require('./index'); // api.database('content/')
+var api = require('./server2'); // api.database('content/')
 
 
 api.write('content/');

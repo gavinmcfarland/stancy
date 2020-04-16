@@ -58,7 +58,7 @@ You can request the content using the following calls:
 
 - ### Singular Folders
   
-  When a singular name is used for a folder an item will be created (instead of a collection). The files contained in that folder will become fields in that resource.
+  When a singular name is used for a folder an item will be created (instead of a collection). The files contained in that folder will become fields in that item.
 
 ---
 
@@ -66,11 +66,19 @@ You can request the content using the following calls:
 
   Placing an index file inside a folder will turn it into an item. The files contained inside that folder become children of that item.
 
+- ### Hidden
+
+  Prepend an underscore to hide a file or folder.
+
+  ```
+  _hidden/
+  ```
+
 ---
 
-- ### Data Files
+- ### Preprocessing
 
-  Seag can parse the following formats `text`, `json`, `markdown` and `yaml`.
+  Seag will process the following formats `text`, `json`, `markdown` and `yaml`.
 
 
 ## Advanced
@@ -102,15 +110,13 @@ You can request the content using the following calls:
 Add the npm package to your project.
 
 ```bash
-cd my-project
 npm install seag
 ```
 
 In your application specify where the content lives and start the API server.
 
 ```js
-// app.js
-const seag = require(`seag`)
+import seag from 'seag'
 
 seag.start('content/')
 ```
@@ -119,7 +125,7 @@ To get content
 
 ```js
 async function getContent() {
-    return await seag.get(`pages/about`, null);
+    return await seag.get('pages/about', null);
 }
 
 getContent().then((content) => {

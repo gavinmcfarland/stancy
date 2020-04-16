@@ -1,26 +1,18 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.database = database;
 exports.write = write;
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _pluralize = require("pluralize");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var fs = require('fs');
 
@@ -126,6 +118,10 @@ function parseContent(dir, item) {
 }
 
 function createObject(dir, item, index) {
+  if (/^_/.test(item)) {
+    return undefined;
+  }
+
   var object = {};
   object = {
     _id: index,
@@ -181,14 +177,14 @@ function database(dir) {
     var singular = pluralize.isSingular(item);
 
     if (folder && plural) {
-      return _defineProperty({}, folder, createArray(dir, item));
+      return (0, _defineProperty2["default"])({}, folder, createArray(dir, item));
     } else if (folder && singular) {
-      return _defineProperty({}, folder, createObject(dir, folder, index));
+      return (0, _defineProperty2["default"])({}, folder, createObject(dir, folder, index));
     } else {
-      return _defineProperty({}, file, createObject(dir, item, index));
+      return (0, _defineProperty2["default"])({}, file, createObject(dir, item, index));
     }
   });
-  return Object.assign.apply(Object, [{}].concat(_toConsumableArray(database)));
+  return Object.assign.apply(Object, [{}].concat((0, _toConsumableArray2["default"])(database)));
 }
 
 function write(dir) {

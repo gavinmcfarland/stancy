@@ -1,4 +1,4 @@
-const api = require('./index')
+const api = require('./server2')
 
 // api.database('content/')
 
