@@ -66,6 +66,13 @@ You can request the content using the following calls:
 
   Placing an index file inside a folder will turn it into an item. The files contained inside that folder become children of that item.
 
+---
+
+- ### Data Files
+
+  Seag automatically parses data files. Currently supported formats are `text`, `json`, `markdown` and `yaml`.
+
+
 ## Advanced
 
 - ### Create a database

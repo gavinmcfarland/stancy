@@ -2,6 +2,25 @@
 	"config": {
 		"_id": 0,
 		"_file": "config",
+		"colour": {
+			"title": "Technopastoral",
+			"date": "January 19, 2038",
+			"tags": [
+				"garden",
+				"engineering"
+			],
+			"text": "To deprogram oneself necessitates keeping to very specific schedules, which are what Foucault, once again, described as techniques of the self, echoing Seneca."
+		},
+		"example": {
+			"YAML": [
+				"A human-readable data serialization language",
+				"https://en.wikipedia.org/wiki/YAML"
+			],
+			"yaml": [
+				"A complete JavaScript implementation",
+				"https://www.npmjs.com/package/yaml"
+			]
+		},
 		"site": {
 			"domain": "mydomain.com",
 			"description": "A cool site"

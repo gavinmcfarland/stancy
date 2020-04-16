@@ -30,7 +30,11 @@ var marked = require('marked');
 
 var matter = require('gray-matter');
 
+var smarkt = require('smarkt');
+
 var pluralize = require('pluralize');
+
+var YAML = require('yaml');
 
 function isFile(item) {
   if (/\..+$/.test(item)) {
@@ -85,8 +89,22 @@ function parseMarkdown(dir, item) {
   }
 }
 
+function parseText(dir, item) {
+  if (getFileExt(item) === "txt") {
+    var object = smarkt.parse(fs.readFileSync(path.join(dir, item), 'utf8'));
+    return object;
+  }
+}
+
+function parseYaml(dir, item) {
+  if (getFileExt(item) === "yml" || getFileExt(item) === "yaml") {
+    var object = YAML.parse(fs.readFileSync(path.join(dir, item), 'utf8'));
+    return object;
+  }
+}
+
 function parseContent(dir, item) {
-  var result = parseJson(dir, item) || parseMarkdown(dir, item);
+  var result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item);
   return result;
 }
 
@@ -160,6 +178,5 @@ function write(dir) {
   var db = JSON.stringify(database(dir), null, '\t');
   fs.writeFile('db.json', db, function (err) {
     if (err) throw err; // console.log('The file has been saved!');
-    // console.log(db)
   });
 }

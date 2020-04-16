@@ -4,7 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
 const matter = require('gray-matter')
+const smarkt = require('smarkt')
 const pluralize = require('pluralize')
+const YAML = require('yaml')
 
 
 function isFile(item) {
@@ -66,8 +68,26 @@ function parseMarkdown(dir, item) {
     }
 }
 
+function parseText(dir, item) {
+    if (getFileExt(item) === "txt") {
+
+        let object = smarkt.parse(fs.readFileSync(path.join(dir, item), 'utf8'))
+
+        return object
+    }
+}
+
+function parseYaml(dir, item) {
+    if (getFileExt(item) === "yml" || getFileExt(item) === "yaml") {
+
+        let object = YAML.parse(fs.readFileSync(path.join(dir, item), 'utf8'))
+
+        return object
+    }
+}
+
 function parseContent(dir, item) {
-    let result = parseJson(dir, item) || parseMarkdown(dir, item)
+    let result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item)
     return result
 }
 
