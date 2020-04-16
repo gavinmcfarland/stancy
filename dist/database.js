@@ -36,6 +36,9 @@ var pluralize = require('pluralize');
 
 var YAML = require('yaml');
 
+var JSON5 = require('json5'); // const csson = require('@csson/csson')
+
+
 function isFile(item) {
   if (/\..+$/.test(item)) {
     return item.split('.')[0];
@@ -80,6 +83,13 @@ function parseJson(dir, item) {
   }
 }
 
+function parseJson5(dir, item) {
+  if (getFileExt(item) === "json5") {
+    var content = fs.readFileSync(path.join(dir, item), 'utf8');
+    return JSON5.parse(content);
+  }
+}
+
 function parseMarkdown(dir, item) {
   if (getFileExt(item) === "md") {
     var object = {
@@ -103,8 +113,15 @@ function parseYaml(dir, item) {
   }
 }
 
+function parseCsson(dir, item) {
+  if (getFileExt(item) === "csson") {
+    var object = csson(fs.readFileSync(path.join(dir, item), 'utf8'));
+    return object;
+  }
+}
+
 function parseContent(dir, item) {
-  var result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item);
+  var result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item) || parseJson5(dir, item) || parseCsson(dir, item);
   return result;
 }
 

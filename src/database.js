@@ -7,6 +7,8 @@ const matter = require('gray-matter')
 const smarkt = require('smarkt')
 const pluralize = require('pluralize')
 const YAML = require('yaml')
+const JSON5 = require('json5')
+// const csson = require('@csson/csson')
 
 
 function isFile(item) {
@@ -58,6 +60,14 @@ function parseJson(dir, item) {
     }
 }
 
+function parseJson5(dir, item) {
+    if (getFileExt(item) === "json5") {
+        let content = fs.readFileSync(path.join(dir, item), 'utf8')
+
+        return JSON5.parse(content)
+    }
+}
+
 function parseMarkdown(dir, item) {
     if (getFileExt(item) === "md") {
         let object = {
@@ -86,14 +96,22 @@ function parseYaml(dir, item) {
     }
 }
 
+function parseCsson(dir, item) {
+    if (getFileExt(item) === "csson") {
+
+        let object = csson(fs.readFileSync(path.join(dir, item), 'utf8'))
+
+        return object
+    }
+}
+
 function parseContent(dir, item) {
-    let result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item)
+    let result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item) || parseJson5(dir, item) || parseCsson(dir, item)
     return result
 }
 
 function createObject(dir, item, index) {
     let object = {}
-
 
     object = {
         _id: index,

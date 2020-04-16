@@ -70,7 +70,7 @@ You can request the content using the following calls:
 
 - ### Data Files
 
-  Seag automatically parses data files. Currently supported formats are `text`, `json`, `markdown` and `yaml`.
+  Seag can parse the following formats `text`, `json`, `markdown` and `yaml`.
 
 
 ## Advanced

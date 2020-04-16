@@ -1,0 +1,35 @@
+{
+  json-number: 1;
+  json-null: null;
+  json-true: true;
+  json-false: false;
+  css-ident: example;
+  css-hash: #example;
+  json-string: "example";
+  css-url: url(example);
+  json-array: [
+    1, 
+    2, 
+    3
+  ];
+  csson-array: [
+    #hash,
+    url(url),
+    ident
+  ];
+  json-object: {
+    "one": 1,
+    "two": 2,
+    "three": 3
+  };
+  csson-object: {
+    one: 1,
+    two: 2,
+    three: 3
+  };
+  css-qualified-rule: example {
+    one: 1;
+    two: 2;
+    three: 3
+  };
+}
