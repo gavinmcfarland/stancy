@@ -1,1 +1,1 @@
-Homepage for blog
+Posts content

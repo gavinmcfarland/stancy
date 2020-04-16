@@ -1,1 +1,1 @@
-Some about content
+About content

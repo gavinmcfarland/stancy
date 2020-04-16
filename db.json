@@ -1,37 +1,7 @@
 {
 	"config": {
-		"_id": 0,
-		"_name": "config",
-		"colour": {
-			"title": "Technopastoral",
-			"date": "January 19, 2038",
-			"tags": [
-				"garden",
-				"engineering"
-			],
-			"text": "To deprogram oneself necessitates keeping to very specific schedules, which are what Foucault, once again, described as techniques of the self, echoing Seneca."
-		},
-		"example": {
-			"YAML": [
-				"A human-readable data serialization language",
-				"https://en.wikipedia.org/wiki/YAML"
-			],
-			"yaml": [
-				"A complete JavaScript implementation",
-				"https://www.npmjs.com/package/yaml"
-			]
-		},
-		"site": {
-			"domain": "mydomain.com",
-			"description": "A cool site"
-		},
-		"user": {
-			"theme": "dark"
-		}
-	},
-	"hidden": {
 		"_id": 1,
-		"_name": "hidden",
+		"_name": "config",
 		"colour": {
 			"title": "Technopastoral",
 			"date": "January 19, 2038",
@@ -63,17 +33,17 @@
 		{
 			"_id": 0,
 			"_name": "about.md",
-			"content": "<p>Some about content</p>\n"
+			"content": "<p>About content</p>\n"
 		},
 		{
 			"_id": 1,
-			"_name": "example.md",
-			"content": "<p>this is some content</p>\n"
+			"_name": "home",
+			"content": "<p>Home content</p>\n"
 		},
 		{
 			"_id": 2,
 			"_name": "posts",
-			"content": "<p>Homepage for blog</p>\n",
+			"content": "<p>Posts content</p>\n",
 			"children": [
 				{
 					"_id": 0,
