@@ -26,34 +26,34 @@ This will let you access to the following database
 
 ```json
 [
-	{
-		"_index": 3,
-		"_file": "site.md",
-		"_type": "item",
-		"_item": "site",
-		"content": "<p>Site config</p>\n"
-	},
-	{
-		"_index": 0,
-		"_file": "jerry.md",
-		"_type": "item",
-		"_item": "jerry",
-		"_collection": "users",
-		"content": "<p>Jerry</p>\n"
-	},
-	{
-		"_index": 1,
-		"_file": "johanna.md",
-		"_type": "item",
-		"_item": "johanna",
-		"_collection": "users",
-		"content": "<p>Johanna</p>\n"
-	},
-	{
-		"_index": 4,
-		"_file": "users",
-		"_type": "collection"
-	}
+    {
+        "_index": 3,
+        "_file": "site.md",
+        "_type": "item",
+        "_item": "site",
+        "content": "<p>Site config</p>\n"
+    },
+    {
+        "_index": 0,
+        "_file": "jerry.md",
+        "_type": "item",
+        "_item": "jerry",
+        "_collection": "users",
+        "content": "<p>Jerry</p>\n"
+    },
+    {
+        "_index": 1,
+        "_file": "johanna.md",
+        "_type": "item",
+        "_item": "johanna",
+        "_collection": "users",
+        "content": "<p>Johanna</p>\n"
+    },
+    {
+        "_index": 4,
+        "_file": "users",
+        "_type": "collection"
+    }
 ]
 ```
 
@@ -82,7 +82,7 @@ You can request the content using the following requests:
   ```
   _hidden/
   ```
-  
+
 - ### Preprocessing
 
   Seag will process the following formats `text`, `json`, `markdown` and `yaml`.
