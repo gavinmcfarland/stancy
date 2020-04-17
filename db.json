@@ -1,7 +1,6 @@
 {
 	"config": {
-		"_id": 1,
-		"_name": "config",
+		"_type": "collection",
 		"colour": {
 			"title": "Technopastoral",
 			"date": "January 19, 2038",
@@ -33,73 +32,81 @@
 		{
 			"_id": 0,
 			"_name": "about.md",
-			"content": "<p>About content</p>\n"
+			"_type": "item",
+			"about": {
+				"content": "<p>About content</p>\n"
+			}
 		},
 		{
 			"_id": 1,
 			"_name": "home",
-			"content": "<p>Home content</p>\n"
+			"_type": "item",
+			"home": {
+				"content": "<p>Home content</p>\n"
+			}
 		},
 		{
 			"_id": 2,
 			"_name": "posts",
-			"content": "<p>Posts content</p>\n",
-			"children": [
-				{
-					"_id": 0,
-					"_name": "another-post",
-					"content": "<hr>\n<p>title: Another Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
-				},
-				{
-					"_id": 1,
-					"_name": "blog-post.md",
-					"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
-				},
-				{
-					"_id": 2,
-					"_name": "hello-world.md",
-					"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
-				}
-			]
+			"_type": "item",
+			"posts": {
+				"content": "<p>Posts content</p>\n",
+				"children": [
+					{
+						"_id": 0,
+						"_name": "another-post",
+						"_type": "item",
+						"another-post": {
+							"content": "<hr>\n<p>title: Another Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+						}
+					},
+					{
+						"_id": 1,
+						"_name": "blog-post.md",
+						"_type": "item",
+						"blog-post": {
+							"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+						}
+					},
+					{
+						"_id": 2,
+						"_name": "hello-world.md",
+						"_type": "item",
+						"hello-world": {
+							"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+						}
+					}
+				]
+			}
 		},
 		{
 			"_id": 3,
 			"_name": "services",
-			"content": "<p>Services content</p>\n"
+			"_type": "item",
+			"services": {
+				"content": "<p>Services content</p>\n"
+			}
 		}
 	],
 	"site": {
-		"_id": 3,
-		"_name": "site.md",
 		"content": "<p>Site config</p>\n"
 	},
-	"things": [
-		{
-			"_id": 0,
-			"_name": "about.md",
-			"content": "<p>Some about content</p>\n"
-		},
-		{
-			"_id": 1,
-			"_name": "example.md",
-			"content": "<p>this is some content</p>\n"
-		},
-		{
-			"_id": 3,
-			"_name": "services",
-			"content": "<p>Services content</p>\n"
-		}
-	],
 	"users": [
 		{
 			"_id": 0,
 			"_name": "jerry.md",
-			"content": "<p>Jerry</p>\n"
+			"_type": "item",
+			"jerry": {
+				"content": "<p>Jerry</p>\n"
+			}
 		},
 		{
 			"_id": 1,
 			"_name": "johanna.md",
-			"content": "<p>Johanna</p>\n"
+			"_type": "item",
+			"johanna": {
+				"content": "<p>Johanna</p>\n"
+			}
 		}
 	]
 }

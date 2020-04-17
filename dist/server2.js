@@ -19,7 +19,7 @@ var _htmlEscape = _interopRequireDefault(require("html-escape"));
 
 var _jsonata = _interopRequireDefault(require("jsonata"));
 
-var _database = require("./database.js");
+var _createDatabase = require("./create-database.js");
 
 // server.js
 // async function getContent(dataset, resource) {
@@ -63,7 +63,7 @@ function _getContent() {
 }
 
 function start(dir) {
-  var db = (0, _database.database)(dir);
+  var db = (0, _createDatabase.database)(dir);
   var app = (0, _express["default"])();
   var port = 3000;
   app.get('/', function (req, res) {
@@ -88,8 +88,8 @@ function start(dir) {
 }
 
 var _default = {
-  database: _database.database,
-  write: _database.write,
+  database: _createDatabase.database,
+  write: _createDatabase.write,
   start: start
 };
 exports["default"] = _default;

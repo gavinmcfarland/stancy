@@ -76,6 +76,14 @@ You can request the content using the following calls:
 
 ---
 
+- ### Search
+
+    ```
+    pages
+    pages.about
+    pages[item="about"]
+    ```
+
 - ### Preprocessing
 
   Seag will process the following formats `text`, `json`, `markdown` and `yaml`.

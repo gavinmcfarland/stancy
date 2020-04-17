@@ -13,7 +13,7 @@ var _singular = _interopRequireDefault(require("./singular.js"));
 
 var _field = _interopRequireDefault(require("./field.js"));
 
-var _database = require("./database.js");
+var _createDatabase = require("./create-database.js");
 
 // server.js
 var base = 'http://localhost:3000';
@@ -47,12 +47,45 @@ function send(_ref) {
       return json;
     }
   });
-}
+} // let testDatabase = {
+// 	"site": {
+// 		"name": "MySite"
+// 	},
+// 	"users": [
+// 		{
+// 			"type": "item",
+// 			"jeffery": {
+// 				"name": "Jeffery",
+// 				"age": 24
+// 			}
+// 		},
+// 		{
+// 			"type": "item",
+// 			"hannah": {
+// 				"name": "Hannah",
+// 				"age": 28
+// 			}
+// 		},
+// 		{
+// 			"type": "collection",
+// 			"repos": [
+// 				{
+// 					"type": "item",
+// 					"karamel": {
+// 						"name": "karamel",
+// 						"images": []
+// 					}
+// 				}
+// 			]
+// 		}
+// 	]
+// }
+
 
 function start(dir) {
   var server = _jsonServer["default"].create();
 
-  var router = _jsonServer["default"].router((0, _database.database)(dir));
+  var router = _jsonServer["default"].router((0, _createDatabase.database)(dir));
 
   var middlewares = _jsonServer["default"].defaults();
 
@@ -79,8 +112,8 @@ function get(path, token) {
 }
 
 var _default = {
-  database: _database.database,
-  write: _database.write,
+  database: _createDatabase.database,
+  write: _createDatabase.write,
   start: start,
   get: get
 };

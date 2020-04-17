@@ -1,0 +1,64 @@
+[
+    {
+        "id": 0,
+        "name": "pages",
+        "type": "collection",
+        "pages": [
+            {
+                "id": 0,
+                "name": "about.md",
+                "type": "item",
+                "about": {
+                    "content": "<p>About content</p>\n"
+                }
+            },
+            {
+                "id": 1,
+                "name": "home",
+                "type": "item",
+                "home": {
+                    "content": "<p>Home content</p>\n"
+                }
+            },
+            {
+            "id": 2,
+            "name": "posts",
+            "type": "collection",
+            "posts": [
+                {
+                    "id": 0,
+                    "name": "another-post",
+                    "type": "item",
+                    "another-post": {
+                        "content": "<hr>\n<p>title: Another Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "blog-post.md",
+                    "type": "item",
+                    "blog-post": {
+                        "content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "hello-world.md",
+                    "type": "item",
+                    "hello-world": {
+                        "content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
+                    }
+                }
+            ]
+            },
+            {
+                "id": 3,
+                "name": "services",
+                "type": "item",
+                "services": {
+                    "content": "<p>Services content</p>\n"
+                }
+            }
+        ]
+    }
+]
