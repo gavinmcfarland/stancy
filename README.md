@@ -90,7 +90,7 @@ You can request the content using the following requests:
 
 ## Fields
 
-- `_name` Came of the resource
+- `_name` Name of the resource
 - `_collection` Collection the resource belongs to
 - `_item` Name of the item
 - `_name` Type of resource
