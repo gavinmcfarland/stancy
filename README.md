@@ -1,7 +1,5 @@
 # Seag
 
-> This is a work in pogress. Please let me know if you encounter any issues.
-
 Uses static content (files and folders) to create a database of collections and items. The database can be accessed as a plain object, outputted as a json file, or served using an express server. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko.
 
 ## Example
