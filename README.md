@@ -105,11 +105,13 @@ You can request the content using the following requests:
 
 ## Fields
 
+Using a query language of your choice you can filter and display the data you need.
+
 - `_name` Name of the resource
 - `_collection` Collection the resource belongs to
 - `_item` Name of the item
-- `_name` Type of resource
-- `_index` The index of the resource in the collection
+- `_index` The index of the resource in the collection or dataset
+- `_type` The type of resource. Named after the folder or file.
 
 ## Advanced
 

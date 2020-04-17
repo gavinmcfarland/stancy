@@ -80,20 +80,23 @@ function createResrouce(dir, value, index, parent, level = 1) {
 
 	let resource = {
 		_index: index,
-		_file: value,
-		_type: "item"
+		// _file: value,
+		_name: value.split('.')[0],
+		_type: value.split('.')[0]
+
+		// _type: "item"
 	}
 
 	if (type.is.singular(value)) {
-		resource._type = "item"
+		// resource._type = "item"
 	}
 
 	if (type.is.folder(value) && !type.has.index(dir, value)) {
-		resource._type = "collection"
+		// resource._type = "collection"
 	}
 
 	if (type.is.item(value, dir)) {
-		resource._item = value.split('.')[0]
+		// resource._item = value.split('.')[0]
 		resource._collection = parent
 	}
 

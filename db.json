@@ -1,30 +1,27 @@
 [
 	{
 		"_index": 3,
-		"_file": "site.md",
-		"_type": "item",
-		"_item": "site",
+		"_name": "site",
+		"_type": "site",
 		"content": "<p>Site config</p>\n"
 	},
 	{
 		"_index": 0,
-		"_file": "hanna.md",
-		"_type": "item",
-		"_item": "hanna",
+		"_name": "hanna",
+		"_type": "hanna",
 		"_collection": "users",
 		"content": "<p>Hanna</p>\n"
 	},
 	{
 		"_index": 1,
-		"_file": "jerry.md",
-		"_type": "item",
-		"_item": "jerry",
+		"_name": "jerry",
+		"_type": "jerry",
 		"_collection": "users",
 		"content": "<p>Jerry</p>\n"
 	},
 	{
 		"_index": 4,
-		"_file": "users",
-		"_type": "collection"
+		"_name": "users",
+		"_type": "users"
 	}
 ]
