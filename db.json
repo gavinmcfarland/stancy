@@ -1,122 +1,29 @@
 [
 	{
-		"_id": 0,
-		"_file": "colour.txt",
-		"_type": "item",
-		"_collection": "config",
-		"title": "Technopastoral",
-		"date": "January 19, 2038",
-		"tags": [
-			"garden",
-			"engineering"
-		],
-		"text": "To deprogram oneself necessitates keeping to very specific schedules, which are what Foucault, once again, described as techniques of the self, echoing Seneca."
-	},
-	{
-		"_id": 1,
-		"_file": "example.yml",
-		"_type": "item",
-		"_collection": "config",
-		"YAML": [
-			"A human-readable data serialization language",
-			"https://en.wikipedia.org/wiki/YAML"
-		],
-		"yaml": [
-			"A complete JavaScript implementation",
-			"https://www.npmjs.com/package/yaml"
-		]
-	},
-	{
-		"_id": 2,
-		"_file": "site.json",
-		"_type": "item",
-		"_collection": "config",
-		"domain": "mydomain.com",
-		"description": "A cool site"
-	},
-	{
-		"_id": 3,
-		"_file": "user.json",
-		"_type": "item",
-		"_collection": "config",
-		"theme": "dark"
-	},
-	{
-		"_id": 1,
-		"_file": "config",
-		"_type": "collection"
-	},
-	{
-		"_id": 0,
-		"_file": "about.md",
-		"_type": "item",
-		"_collection": "pages",
-		"content": "<p>About content</p>\n"
-	},
-	{
-		"_id": 1,
-		"_file": "home",
-		"_type": "item",
-		"_collection": "pages"
-	},
-	{
-		"_id": 1,
-		"_file": "another-post",
-		"_type": "item",
-		"_collection": "posts"
-	},
-	{
-		"_id": 2,
-		"_file": "blog-post.md",
-		"_type": "item",
-		"_collection": "posts",
-		"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
-	},
-	{
-		"_id": 3,
-		"_file": "hello-world.md",
-		"_type": "item",
-		"_collection": "posts",
-		"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
-	},
-	{
-		"_id": 2,
-		"_file": "posts",
-		"_type": "collection"
-	},
-	{
-		"_id": 3,
-		"_file": "services",
-		"_type": "item",
-		"_collection": "pages"
-	},
-	{
-		"_id": 2,
-		"_file": "pages",
-		"_type": "collection"
-	},
-	{
-		"_id": 3,
+		"_index": 3,
 		"_file": "site.md",
 		"_type": "item",
+		"_item": "site",
 		"content": "<p>Site config</p>\n"
 	},
 	{
-		"_id": 0,
+		"_index": 0,
+		"_file": "hanna.md",
+		"_type": "item",
+		"_item": "hanna",
+		"_collection": "users",
+		"content": "<p>Hanna</p>\n"
+	},
+	{
+		"_index": 1,
 		"_file": "jerry.md",
 		"_type": "item",
+		"_item": "jerry",
 		"_collection": "users",
 		"content": "<p>Jerry</p>\n"
 	},
 	{
-		"_id": 1,
-		"_file": "johanna.md",
-		"_type": "item",
-		"_collection": "users",
-		"content": "<p>Johanna</p>\n"
-	},
-	{
-		"_id": 4,
+		"_index": 4,
 		"_file": "users",
 		"_type": "collection"
 	}

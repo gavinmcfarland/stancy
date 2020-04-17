@@ -25,30 +25,39 @@ seag.server('content/')
 This will let you access to the following database
 
 ```json
-{
-  "site": {
-    "_file": "site.md",
-    "domain": "mydomain.com",
-    "description": ""
-  },
-  "users": [
-    {
-      "_id": 0,
-      "_file": "jerry.md",
-      "name": "Jerry",
-      "role": "admin"
-    },
-    {
-      "_id": 1,
-      "_file": "johanna.md",
-      "name": "Johanna",
-      "role": "admin"
-    }
-  ]
-}
+[
+	{
+		"_index": 3,
+		"_file": "site.md",
+		"_type": "item",
+		"_item": "site",
+		"content": "<p>Site config</p>\n"
+	},
+	{
+		"_index": 0,
+		"_file": "jerry.md",
+		"_type": "item",
+		"_item": "jerry",
+		"_collection": "users",
+		"content": "<p>Jerry</p>\n"
+	},
+	{
+		"_index": 1,
+		"_file": "johanna.md",
+		"_type": "item",
+		"_item": "johanna",
+		"_collection": "users",
+		"content": "<p>Johanna</p>\n"
+	},
+	{
+		"_index": 4,
+		"_file": "users",
+		"_type": "collection"
+	}
+]
 ```
 
-You can request the content using the following calls:
+You can request the content using the following requests:
 
 - [localhost:3000/site](http://localhost:3000/site)
 - [localhost:3000/users](http://localhost:3000/users)
@@ -73,21 +82,19 @@ You can request the content using the following calls:
   ```
   _hidden/
   ```
-
----
-
-- ### Search
-
-    ```
-    pages
-    pages.about
-    pages[item="about"]
-    ```
-
+  
 - ### Preprocessing
 
   Seag will process the following formats `text`, `json`, `markdown` and `yaml`.
 
+
+## Fields
+
+- `_name` Came of the resource
+- `_collection` Collection the resource belongs to
+- `_item` Name of the item
+- `_name` Type of resource
+- `_index` The index of the resource in the collection
 
 ## Advanced
 

@@ -85,12 +85,13 @@ var type = {
 function createResrouce(dir, value, index, parent) {
   var level = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
 
+  // If thing is hidden don't return resource
   if (type.is.hidden(value)) {
     return;
   }
 
   var resource = {
-    _id: index,
+    _index: index,
     _file: value,
     _type: "item"
   };
@@ -104,6 +105,7 @@ function createResrouce(dir, value, index, parent) {
   }
 
   if (type.is.item(value, dir)) {
+    resource._item = value.split('.')[0];
     resource._collection = parent;
   }
 

@@ -79,7 +79,7 @@ function createResrouce(dir, value, index, parent, level = 1) {
 	}
 
 	let resource = {
-		_id: index,
+		_index: index,
 		_file: value,
 		_type: "item"
 	}
@@ -93,6 +93,7 @@ function createResrouce(dir, value, index, parent, level = 1) {
 	}
 
 	if (type.is.item(value, dir)) {
+		resource._item = value.split('.')[0]
 		resource._collection = parent
 	}
 
