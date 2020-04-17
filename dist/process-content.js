@@ -21,7 +21,7 @@ var JSON5 = require('json5'); // const csson = require('@csson/csson')
 
 
 function getFileExt(item) {
-  return item.match(/\.([0-9a-z]+)(?:[\?#]|$)/i)[1];
+  if (item.match(/\.([0-9a-z]+)(?:[\?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[\?#]|$)/i)[1];
 }
 
 function parseJson(dir, item) {

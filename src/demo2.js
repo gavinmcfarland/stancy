@@ -4,7 +4,7 @@ const api = require('./server2')
 
 api.write('content/')
 
-api.start('content/')
+// api.start('content/')
 
 // async function getContent() {
 //     return await api.get(`pages/about`, null);

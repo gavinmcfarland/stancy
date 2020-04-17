@@ -19,7 +19,7 @@ var _htmlEscape = _interopRequireDefault(require("html-escape"));
 
 var _jsonata = _interopRequireDefault(require("jsonata"));
 
-var _createDatabase = require("./create-database.js");
+var _createDatabase = require("./create-database2.js");
 
 // server.js
 // async function getContent(dataset, resource) {
