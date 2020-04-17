@@ -67,7 +67,7 @@ You can request the content using the following requests:
 
 - ### Singular Folders
   
-  When a singular name is used for a folder an item will be created (instead of a collection). The files contained in that folder will become fields in that item.
+  When a singular name is used for a folder an item will be created (instead of a collection). The files contained in that folder become fields of that item.
 
 ---
 
@@ -75,13 +75,30 @@ You can request the content using the following requests:
 
   Placing an index file inside a folder will turn it into an item. The files contained inside that folder become children of that item.
 
+  ```bash
+  # Creates a collection of items
+  collection/
+    item-one.md
+    item-two.md
+    item-three.md
+
+  # Creates an item
+  item/
+    index.md
+  ```
+
+---
+
 - ### Hidden
 
   Prepend an underscore to hide a file or folder.
 
   ```
-  _hidden/
+  _file-is-hidden.md
+  _folder-is-hidden/
   ```
+
+---
 
 - ### Preprocessing
 
