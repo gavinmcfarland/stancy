@@ -14,45 +14,10 @@ content/
     johanna.json
 ```
 
-Now start the server
+Now start the server <mark>coming soon</mark>
 
 ```js
 seag.serve('content/')
-```
-
-This will let you access to the following database
-
-```json
-[
-    {
-        "_index": 3,
-        "_file": "site.md",
-        "_type": "item",
-        "_item": "site",
-        "content": "<p>Site config</p>\n"
-    },
-    {
-        "_index": 0,
-        "_file": "jerry.md",
-        "_type": "item",
-        "_item": "jerry",
-        "_collection": "users",
-        "content": "<p>Jerry</p>\n"
-    },
-    {
-        "_index": 1,
-        "_file": "johanna.md",
-        "_type": "item",
-        "_item": "johanna",
-        "_collection": "users",
-        "content": "<p>Johanna</p>\n"
-    },
-    {
-        "_index": 4,
-        "_file": "users",
-        "_type": "collection"
-    }
-]
 ```
 
 You can access the content using the following requests:
@@ -98,13 +63,13 @@ You can access the content using the following requests:
 
 ---
 
-- ### Preprocessing
+- ### Parsing
 
-  Seag will process the following formats `text`, `json`, `markdown` and `yaml`.
+  Seag will parse the following formats `text`, `json`, `markdown` and `yaml`.
 
 ---
 
-- ### File Types
+- ### File Types <mark>coming soon</mark>
 
   Seag supports the following file types.
 
@@ -117,7 +82,7 @@ You can access the content using the following requests:
 
 ---
 
-- ### Meta Data
+- ### Meta Data <mark>coming soon</mark>
 
   You can add meta data to images by creating a data file with a matching name.
 
@@ -151,8 +116,8 @@ Using a query language of your choice you can filter and display the data you ne
 - `_item` Name of the item
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
-- `url` The url to the resource.
-- `source` The path to the folder containing the file.
+- `url` The url to the resource. <mark>coming soon</mark>
+- `source` The path to the folder containing the file. <mark>coming soon</mark>
 
 ## Advanced
 
