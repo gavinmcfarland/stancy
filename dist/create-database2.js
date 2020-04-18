@@ -43,16 +43,17 @@ var type = {
     index: function index(value) {
       return /^index..+$/.test(value);
     },
-    collection: function collection(value, source) {
+    collection: function collection(source, value) {
       var isCollection = false;
 
-      if (type.is.folder(value) && type.has.index(source, value)) {
+      if (type.is.folder(value)) {
         isCollection = true;
-      }
+      } // console.log(value)
+
 
       return isCollection;
     },
-    item: function item(value, source) {
+    item: function item(source, value) {
       var isItem = false;
 
       if (type.is.file(value) || type.has.index(source, value)) {
@@ -78,6 +79,17 @@ var type = {
       }
 
       return hasIndex;
+    },
+    children: function children(source, value) {
+      var hasChildren = false;
+
+      if (type.is.folder(value)) {
+        fs.readdirSync(path.join(source + value)).map(function (value, index) {
+          hasChildren = true;
+        });
+      }
+
+      return hasChildren;
     }
   }
 };
@@ -104,7 +116,7 @@ function createResrouce(dir, value, index, parent) {
   if (type.is.folder(value) && !type.has.index(dir, value)) {// resource._type = "collection"
   }
 
-  if (type.is.item(value, dir)) {
+  if (type.is.item(dir, value)) {
     // resource._item = value.split('.')[0]
     resource._collection = parent;
   }
@@ -124,7 +136,7 @@ function createResrouce(dir, value, index, parent) {
   } // Apply content from index file
 
 
-  if (type.is.folder(value) && type.has.index(dir)) {
+  if (type.is.folder(value) && !type.is.item(dir, value)) {
     var _subDir = path.join(dir + value + '/');
 
     var indexContent = "";
@@ -134,9 +146,22 @@ function createResrouce(dir, value, index, parent) {
       }
     });
     Object.assign(resource, indexContent);
+  } // Add children of folder to resource
+
+
+  if (type.is.folder(value)) {
+    var _subDir2 = path.join(dir + value + '/');
+
+    resource._children = [];
+    fs.readdirSync(path.join(dir + value)).map(function (value, index) {
+      if (!type.is.index(value)) {
+        resource._children.push(value.split('.')[0]);
+      }
+    });
   }
 
   if (!type.is.index(value)) db.push(resource);
+  return resource;
 }
 
 var db = [];

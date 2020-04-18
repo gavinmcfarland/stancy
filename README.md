@@ -1,6 +1,6 @@
 # Seag
 
-Uses static content (files and folders) to create a database of collections and items. The database can be accessed as a plain object, outputted as a json file, or served using an express server. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko.
+Seag uses static content (files and folders) to create a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server. This is useful when building static sites which use frameworks like React, Vue, Svelte or Marko.
 
 ## Example
 
@@ -14,10 +14,10 @@ content/
     johanna.json
 ```
 
-Now to start the server
+Now start the server
 
 ```js
-seag.server('content/')
+seag.serve('content/')
 ```
 
 This will let you access to the following database
@@ -55,7 +55,7 @@ This will let you access to the following database
 ]
 ```
 
-You can request the content using the following requests:
+You can access the content using the following requests:
 
 - [localhost:3000/site](http://localhost:3000/site)
 - [localhost:3000/users](http://localhost:3000/users)
@@ -65,13 +65,13 @@ You can request the content using the following requests:
 
 - ### Singular Folders
   
-  When a singular name is used for a folder an item will be created (instead of a collection). The files contained in that folder become fields of that item.
+  When a singular name is used for a folder it will create an item (instead of a collection). The files contained in that folder become fields of that item.
 
 ---
 
 - ### Index File
 
-  Placing an index file inside a folder will turn it into an item. The files contained inside that folder become children of that item.
+  Placing an index file inside a folder will turn it into an item. The files contained inside that folder become children of that item. This is useful if you prefer to organise using folders or you want to create an index page for a group of related content.
 
   ```bash
   # Creates a collection of items
@@ -102,7 +102,46 @@ You can request the content using the following requests:
 
   Seag will process the following formats `text`, `json`, `markdown` and `yaml`.
 
+---
 
+- ### File Types
+
+  Seag supports the following file types.
+
+  - Archives
+  - Audio
+  - Code
+  - Documents
+  - Images
+  - Videos
+
+---
+
+- ### Meta Data
+
+  You can add meta data to images by creating a data file with a matching name.
+
+  ```
+  my-first-post/
+    my-favourite-image.jpg
+    my-favourite-image.yml
+  ```
+
+  This will create the following image meta data
+
+  ```json
+  {
+    ...
+    "images": [
+      {
+        "src": "/",
+        "alt": "Me playing frisbee"
+      }
+    }
+  }
+  ```
+
+    
 ## Fields
 
 Using a query language of your choice you can filter and display the data you need.
@@ -112,13 +151,15 @@ Using a query language of your choice you can filter and display the data you ne
 - `_item` Name of the item
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
+- `url` The url to the resource.
+- `source` The path to the folder containing the file.
 
 ## Advanced
 
 - ### Create a database
   
   ```js
-  seag.database('content/`)
+  seag.database('content/')
   ```
 
 ---
@@ -126,7 +167,7 @@ Using a query language of your choice you can filter and display the data you ne
 - ### Write a database to file
 
   ```js
-  seag.write('content/`)
+  seag.write('content/')
   ```
 
 ---
@@ -134,7 +175,7 @@ Using a query language of your choice you can filter and display the data you ne
 - ### Start a server
 
   ```js
-  seag.server('content/`)
+  seag.serve('content/')
   ```
 
 ## Installation
@@ -150,7 +191,7 @@ In your application specify where the content lives and start the API server.
 ```js
 import seag from 'seag'
 
-seag.start('content/')
+seag.serve('content/')
 ```
 
 To get content

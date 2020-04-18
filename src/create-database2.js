@@ -32,14 +32,15 @@ const type = {
 		index: function (value) {
 			return /^index..+$/.test(value)
 		},
-		collection: function (value, source) {
+		collection: function (source, value) {
 			let isCollection = false
-			if (type.is.folder(value) && type.has.index(source, value)) {
+			if (type.is.folder(value)) {
 				isCollection = true
 			}
+			// console.log(value)
 			return isCollection
 		},
-		item: function (value, source) {
+		item: function (source, value) {
 			let isItem = false
 			if (type.is.file(value) || type.has.index(source, value)) {
 				isItem = true
@@ -65,6 +66,22 @@ const type = {
 			}
 
 			return hasIndex
+
+		},
+		children: function (source, value) {
+
+			let hasChildren = false
+			if (type.is.folder(value)) {
+				fs.readdirSync(path.join(source + value)).map((value, index) => {
+
+
+					hasChildren = true
+
+				})
+
+			}
+
+			return hasChildren
 
 		}
 	}
@@ -95,7 +112,7 @@ function createResrouce(dir, value, index, parent, level = 1) {
 		// resource._type = "collection"
 	}
 
-	if (type.is.item(value, dir)) {
+	if (type.is.item(dir, value)) {
 		// resource._item = value.split('.')[0]
 		resource._collection = parent
 	}
@@ -118,7 +135,7 @@ function createResrouce(dir, value, index, parent, level = 1) {
 	}
 
 	// Apply content from index file
-	if (type.is.folder(value) && type.has.index(dir)) {
+	if (type.is.folder(value) && !type.is.item(dir, value)) {
 		let subDir = path.join(dir + value + '/')
 		let indexContent = ""
 		fs.readdirSync(dir).map((value, index) => {
@@ -131,7 +148,23 @@ function createResrouce(dir, value, index, parent, level = 1) {
 		Object.assign(resource, indexContent)
 	}
 
+	// Add children of folder to resource
+	if (type.is.folder(value)) {
+		let subDir = path.join(dir + value + '/')
+		resource._children = []
+
+		fs.readdirSync(path.join(dir + value)).map((value, index) => {
+			if (!type.is.index(value)) {
+				resource._children.push(value.split('.')[0])
+			}
+
+		})
+
+	}
+
 	if (!type.is.index(value)) db.push(resource)
+
+	return resource
 }
 
 let db = []
