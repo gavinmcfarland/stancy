@@ -96,13 +96,13 @@ You can access the content using the following requests:
 
   ```json
   {
-    ...
+    // ...
     "images": [
       {
         "src": "/",
         "alt": "Me playing frisbee"
       }
-    }
+    ]
   }
   ```
 
