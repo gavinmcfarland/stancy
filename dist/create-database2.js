@@ -94,9 +94,7 @@ var type = {
   }
 };
 
-function createResrouce(dir, value, index, parent) {
-  var level = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
-
+function createResrouce(dir, value, index, parent, root) {
   // If thing is hidden don't return resource
   if (type.is.hidden(value)) {
     return;
@@ -108,7 +106,20 @@ function createResrouce(dir, value, index, parent) {
     _name: value.split('.')[0],
     _type: value.split('.')[0] // _type: "item"
 
-  };
+  }; // Add slug
+
+  var slug = value.split('.')[0];
+
+  if (value === "home") {
+    slug = "";
+  } // Add url
+
+
+  var newDir = dir.replace(root.replace(path.sep, ""), "");
+  console.log(newDir);
+  resource.url = path.join(newDir + slug); // Add source
+
+  resource.source = path.join(dir + slug);
 
   if (type.is.singular(value)) {// resource._type = "item"
   }
@@ -125,7 +136,7 @@ function createResrouce(dir, value, index, parent) {
     var subDir = path.join(dir + value + '/');
     var _parent = value;
     fs.readdirSync(subDir).map(function (value, index) {
-      createResrouce(subDir, value, index, _parent);
+      createResrouce(subDir, value, index, _parent, root);
     });
   } // Get content
   // Apply content from file
@@ -167,8 +178,9 @@ function createResrouce(dir, value, index, parent) {
 var db = [];
 
 function createDatabase(dir) {
+  var root = dir;
   var database = fs.readdirSync(dir).map(function (value, index) {
-    createResrouce(dir, value, index);
+    createResrouce(dir, value, index, null, root);
   });
   return db;
 }

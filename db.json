@@ -3,6 +3,8 @@
 		"_index": 0,
 		"_name": "about",
 		"_type": "about",
+		"url": "/pages/about",
+		"source": "content/pages/about",
 		"_collection": "pages",
 		"content": "<p>About content</p>\n"
 	},
@@ -10,6 +12,8 @@
 		"_index": 1,
 		"_name": "home",
 		"_type": "home",
+		"url": "/pages/",
+		"source": "content/pages/",
 		"_collection": "pages",
 		"_children": []
 	},
@@ -17,6 +21,8 @@
 		"_index": 0,
 		"_name": "another-post",
 		"_type": "another-post",
+		"url": "/pages/posts/another-post",
+		"source": "content/pages/posts/another-post",
 		"_collection": "posts",
 		"_children": []
 	},
@@ -24,6 +30,8 @@
 		"_index": 1,
 		"_name": "blog-post",
 		"_type": "blog-post",
+		"url": "/pages/posts/blog-post",
+		"source": "content/pages/posts/blog-post",
 		"_collection": "posts",
 		"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
@@ -31,6 +39,8 @@
 		"_index": 2,
 		"_name": "hello-world",
 		"_type": "hello-world",
+		"url": "/pages/posts/hello-world",
+		"source": "content/pages/posts/hello-world",
 		"_collection": "posts",
 		"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
@@ -38,6 +48,8 @@
 		"_index": 2,
 		"_name": "posts",
 		"_type": "posts",
+		"url": "/pages/posts",
+		"source": "content/pages/posts",
 		"_collection": "pages",
 		"_children": [
 			"another-post",
@@ -49,6 +61,8 @@
 		"_index": 3,
 		"_name": "services",
 		"_type": "services",
+		"url": "/pages/services",
+		"source": "content/pages/services",
 		"_collection": "pages",
 		"_children": []
 	},
@@ -56,6 +70,8 @@
 		"_index": 2,
 		"_name": "pages",
 		"_type": "pages",
+		"url": "/pages",
+		"source": "content/pages",
 		"_children": [
 			"about",
 			"home",
@@ -67,12 +83,17 @@
 		"_index": 3,
 		"_name": "site",
 		"_type": "site",
+		"url": "/site",
+		"source": "content/site",
+		"_collection": null,
 		"content": "<p>Site config</p>\n"
 	},
 	{
 		"_index": 0,
 		"_name": "hanna",
 		"_type": "hanna",
+		"url": "/users/hanna",
+		"source": "content/users/hanna",
 		"_collection": "users",
 		"content": "<p>Hanna</p>\n"
 	},
@@ -80,6 +101,8 @@
 		"_index": 1,
 		"_name": "jerry",
 		"_type": "jerry",
+		"url": "/users/jerry",
+		"source": "content/users/jerry",
 		"_collection": "users",
 		"content": "<p>Jerry</p>\n"
 	},
@@ -87,6 +110,8 @@
 		"_index": 4,
 		"_name": "users",
 		"_type": "users",
+		"url": "/users",
+		"source": "content/users",
 		"_children": [
 			"hanna",
 			"jerry"

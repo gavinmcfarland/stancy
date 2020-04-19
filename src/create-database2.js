@@ -88,7 +88,7 @@ const type = {
 }
 
 
-function createResrouce(dir, value, index, parent, level = 1) {
+function createResrouce(dir, value, index, parent, root) {
 
 	// If thing is hidden don't return resource
 	if (type.is.hidden(value)) {
@@ -103,6 +103,19 @@ function createResrouce(dir, value, index, parent, level = 1) {
 
 		// _type: "item"
 	}
+
+	// Add slug
+	let slug = value.split('.')[0]
+	if (value === "home") {
+		slug = ""
+	}
+
+	// Add url
+	let newDir = dir.replace(root.replace(path.sep, ""), "");
+	resource.url = path.join(newDir + slug)
+
+	// Add source
+	resource.source = path.join(dir + slug)
 
 	if (type.is.singular(value)) {
 		// resource._type = "item"
@@ -123,7 +136,7 @@ function createResrouce(dir, value, index, parent, level = 1) {
 		let parent = value
 
 		fs.readdirSync(subDir).map((value, index) => {
-			createResrouce(subDir, value, index, parent)
+			createResrouce(subDir, value, index, parent, root)
 		})
 	}
 
@@ -171,8 +184,10 @@ let db = []
 
 function createDatabase(dir) {
 
+	let root = dir
+
 	let database = fs.readdirSync(dir).map((value, index) => {
-		createResrouce(dir, value, index)
+		createResrouce(dir, value, index, null, root)
 
 	})
 
