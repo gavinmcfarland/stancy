@@ -19,24 +19,36 @@ function isObjectEmpty(obj) {
 }
 
 
-async function getContent(dataset, resource, query) {
+async function getContent(dataset, resource, resource2, query) {
 	var expression = jsonata(`**[_type="${resource}"]`);
-	if (resource) {
-
+	if (resource && !resource2) {
 		if (query) {
 			let array = []
 			for (let [key, value] of Object.entries(query)) {
 				let string = `[${key}=${value}]`
 				array.push(string)
 			}
-
 			expression = jsonata(`**[_type="${resource}"]${array.toString()}`);
 		}
 
 		return expression.evaluate(dataset);
 	}
 
-	else {
+	if (resource && resource2) {
+		if (query) {
+			let array = []
+			for (let [key, value] of Object.entries(query)) {
+				let string = `[${key}=${value}]`
+				array.push(string)
+			}
+			expression = jsonata(`**[_type="${resource}"][_name="${resource2}"]${array.toString()}`);
+		}
+
+		return expression.evaluate(dataset);
+
+	}
+
+	if (!resource || !resource2) {
 		console.log(query)
 		if (query) {
 			if (isObjectEmpty(query)) {
@@ -65,28 +77,22 @@ function serve(dir) {
 	const port = 3000
 
 	app.get('/', (req, res) => {
-		getContent(db, null, req.query).then(value => {
-
-			// console.log(value)
-			// console.log(req.query)
+		getContent(db, null, null, req.query).then(value => {
 			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
 		})
-
-
 	})
 
 
 	app.get('/:resource', (req, res) => {
-		let resource = req.params.resource
-		console.log(req.query)
-		getContent(db, resource, req.query).then(value => {
-
-			// console.log(value)
-
+		getContent(db, req.params.resource, null, req.query).then(value => {
 			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
 		})
+	})
 
-
+	app.get('/:resource/:resource2', (req, res) => {
+		getContent(db, req.params.resource, req.params.resource2, req.query).then(value => {
+			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
+		})
 	})
 
 	app.listen(port, () => {
