@@ -115,7 +115,7 @@ function createResrouce(dir, value, index, parent, root) {
 	resource.url = path.join(newDir + slug)
 
 	// Add source
-	resource.source = path.join(dir + slug)
+	resource._source = path.join(dir + slug)
 
 	if (type.is.singular(value)) {
 		// resource._type = "item"
