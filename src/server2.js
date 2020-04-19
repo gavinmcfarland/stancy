@@ -14,10 +14,15 @@ import { database, write } from './create-database2.js'
 //     return result
 // }
 
+function isObjectEmpty(obj) {
+	return Object.keys(obj).length === 0 && obj.constructor === Object
+}
+
 
 async function getContent(dataset, resource, query) {
+	var expression = jsonata(`**[_type="${resource}"]`);
 	if (resource) {
-		var expression = jsonata(`**[_type="${resource}"]`);
+
 		if (query) {
 			let array = []
 			for (let [key, value] of Object.entries(query)) {
@@ -26,14 +31,29 @@ async function getContent(dataset, resource, query) {
 			}
 
 			expression = jsonata(`**[_type="${resource}"]${array.toString()}`);
-			console.log(`**[_type="${resource}"]${array.toString()}`)
 		}
 
 		return expression.evaluate(dataset);
 	}
 
 	else {
-		return dataset
+		console.log(query)
+		if (query) {
+			if (isObjectEmpty(query)) {
+
+				return dataset
+			}
+			let array = []
+			for (let [key, value] of Object.entries(query)) {
+				let string = `[${key}=${value}]`
+				array.push(string)
+			}
+
+			expression = jsonata(`**${array.toString()}`);
+			return expression.evaluate(dataset);
+		}
+
+
 	}
 
 }
@@ -45,7 +65,7 @@ function serve(dir) {
 	const port = 3000
 
 	app.get('/', (req, res) => {
-		getContent(db).then(value => {
+		getContent(db, null, req.query).then(value => {
 
 			// console.log(value)
 			// console.log(req.query)
