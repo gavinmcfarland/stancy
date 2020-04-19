@@ -14,7 +14,7 @@ content/
     johanna.json
 ```
 
-Now start the server <mark>coming soon</mark>
+Now start the server
 
 ```js
 seag.serve('content/')
@@ -116,8 +116,8 @@ Using a query language of your choice you can filter and display the data you ne
 - `_item` Name of the item
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
+- `_source` The path to the folder containing the file.
 - `url` The url to the resource.
-- `source` The path to the folder containing the file.
 
 ## Advanced
 
