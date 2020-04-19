@@ -94,7 +94,7 @@ You can access the content using the following requests:
 
   This will create the following image meta data
 
-  ```json
+  ```jsonc
   {
     // ...
     "images": [
