@@ -15,27 +15,38 @@ import { database, write } from './create-database2.js'
 // }
 
 
-async function getContent(dataset, resource) {
+async function getContent(dataset, resource, query) {
 	if (resource) {
-		var expression = jsonata(`${resource}`);
-		var result = expression.evaluate(dataset);
-		return result
+		var expression = jsonata(`**[_type="${resource}"]`);
+		if (query) {
+			let array = []
+			for (let [key, value] of Object.entries(query)) {
+				let string = `[${key}=${value}]`
+				array.push(string)
+			}
+
+			expression = jsonata(`**[_type="${resource}"]${array.toString()}`);
+			console.log(`**[_type="${resource}"]${array.toString()}`)
+		}
+
+		return expression.evaluate(dataset);
 	}
+
 	else {
 		return dataset
 	}
 
 }
 
-function start(dir) {
+function serve(dir) {
 	const db = database(dir)
 
 	const app = express()
 	const port = 3000
 
 	app.get('/', (req, res) => {
-		let resource = req.params.resource
 		getContent(db).then(value => {
+
 			// console.log(value)
 			// console.log(req.query)
 			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
@@ -47,9 +58,11 @@ function start(dir) {
 
 	app.get('/:resource', (req, res) => {
 		let resource = req.params.resource
-		getContent(db, resource).then(value => {
+		console.log(req.query)
+		getContent(db, resource, req.query).then(value => {
+
 			// console.log(value)
-			// console.log(req.query)
+
 			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
 		})
 
@@ -66,6 +79,6 @@ function start(dir) {
 export default {
 	database,
 	write,
-	start
+	serve
 }
 

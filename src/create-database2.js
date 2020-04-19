@@ -98,10 +98,7 @@ function createResrouce(dir, value, index, parent, root) {
 	let resource = {
 		_index: index,
 		// _file: value,
-		_name: value.split('.')[0],
-		_type: value.split('.')[0]
-
-		// _type: "item"
+		_name: value.split('.')[0]
 	}
 
 	// Add slug
@@ -125,9 +122,10 @@ function createResrouce(dir, value, index, parent, root) {
 		// resource._type = "collection"
 	}
 
+	// Add name of resource whether it be an item or a collection.
 	if (type.is.item(dir, value)) {
-		// resource._item = value.split('.')[0]
 		resource._collection = parent
+		resource._type = parent || value.split('.')[0]
 	}
 
 	if (type.is.folder(value)) {
@@ -155,7 +153,6 @@ function createResrouce(dir, value, index, parent, root) {
 
 			if ((/\index..+$/.test(value))) {
 				indexContent = preprocess(dir, value)
-				// console.log(subDir)
 			}
 		})
 		Object.assign(resource, indexContent)

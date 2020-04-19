@@ -9,6 +9,8 @@ exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _express = _interopRequireDefault(require("express"));
@@ -29,13 +31,14 @@ var _createDatabase = require("./create-database2.js");
 //     let result = await value.get()
 //     return result
 // }
-function getContent(_x, _x2) {
+function getContent(_x, _x2, _x3) {
   return _getContent.apply(this, arguments);
 }
 
 function _getContent() {
-  _getContent = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(dataset, resource) {
-    var expression, result;
+  _getContent = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(dataset, resource, query) {
+    var expression, array, _i, _Object$entries, _Object$entries$_i, key, value, string;
+
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -45,9 +48,22 @@ function _getContent() {
               break;
             }
 
-            expression = (0, _jsonata["default"])("".concat(resource));
-            result = expression.evaluate(dataset);
-            return _context.abrupt("return", result);
+            expression = (0, _jsonata["default"])("**[_type=\"".concat(resource, "\"]"));
+
+            if (query) {
+              array = [];
+
+              for (_i = 0, _Object$entries = Object.entries(query); _i < _Object$entries.length; _i++) {
+                _Object$entries$_i = (0, _slicedToArray2["default"])(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+                string = "[".concat(key, "=").concat(value, "]");
+                array.push(string);
+              }
+
+              expression = (0, _jsonata["default"])("**[_type=\"".concat(resource, "\"]").concat(array.toString()));
+              console.log("**[_type=\"".concat(resource, "\"]").concat(array.toString()));
+            }
+
+            return _context.abrupt("return", expression.evaluate(dataset));
 
           case 6:
             return _context.abrupt("return", dataset);
@@ -62,12 +78,11 @@ function _getContent() {
   return _getContent.apply(this, arguments);
 }
 
-function start(dir) {
+function serve(dir) {
   var db = (0, _createDatabase.database)(dir);
   var app = (0, _express["default"])();
   var port = 3000;
   app.get('/', function (req, res) {
-    var resource = req.params.resource;
     getContent(db).then(function (value) {
       // console.log(value)
       // console.log(req.query)
@@ -76,9 +91,9 @@ function start(dir) {
   });
   app.get('/:resource', function (req, res) {
     var resource = req.params.resource;
-    getContent(db, resource).then(function (value) {
+    console.log(req.query);
+    getContent(db, resource, req.query).then(function (value) {
       // console.log(value)
-      // console.log(req.query)
       res.send("<pre>".concat((0, _htmlEscape["default"])(JSON.stringify(value, null, '\t')), "</pre>"));
     });
   });
@@ -90,7 +105,7 @@ function start(dir) {
 var _default = {
   database: _createDatabase.database,
   write: _createDatabase.write,
-  start: start
+  serve: serve
 };
 exports["default"] = _default;
 module.exports = exports.default;

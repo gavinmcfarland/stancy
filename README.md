@@ -116,8 +116,8 @@ Using a query language of your choice you can filter and display the data you ne
 - `_item` Name of the item
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
-- `url` The url to the resource. <mark>coming soon</mark>
-- `source` The path to the folder containing the file. <mark>coming soon</mark>
+- `url` The url to the resource.
+- `source` The path to the folder containing the file.
 
 ## Advanced
 

@@ -103,9 +103,7 @@ function createResrouce(dir, value, index, parent, root) {
   var resource = {
     _index: index,
     // _file: value,
-    _name: value.split('.')[0],
-    _type: value.split('.')[0] // _type: "item"
-
+    _name: value.split('.')[0]
   }; // Add slug
 
   var slug = value.split('.')[0];
@@ -116,20 +114,20 @@ function createResrouce(dir, value, index, parent, root) {
 
 
   var newDir = dir.replace(root.replace(path.sep, ""), "");
-  console.log(newDir);
   resource.url = path.join(newDir + slug); // Add source
 
-  resource.source = path.join(dir + slug);
+  resource._source = path.join(dir + slug);
 
   if (type.is.singular(value)) {// resource._type = "item"
   }
 
-  if (type.is.folder(value) && !type.has.index(dir, value)) {// resource._type = "collection"
-  }
+  if (type.is.folder(value) && !type.has.index(dir, value)) {} // resource._type = "collection"
+  // Add name of resource whether it be an item or a collection.
+
 
   if (type.is.item(dir, value)) {
-    // resource._item = value.split('.')[0]
     resource._collection = parent;
+    resource._type = parent || value.split('.')[0];
   }
 
   if (type.is.folder(value)) {
@@ -153,7 +151,7 @@ function createResrouce(dir, value, index, parent, root) {
     var indexContent = "";
     fs.readdirSync(dir).map(function (value, index) {
       if (/\index..+$/.test(value)) {
-        indexContent = (0, _processContent["default"])(dir, value); // console.log(subDir)
+        indexContent = (0, _processContent["default"])(dir, value);
       }
     });
     Object.assign(resource, indexContent);
