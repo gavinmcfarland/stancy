@@ -3,17 +3,18 @@ import commonjs from 'rollup-plugin-commonjs';
 import { uglify } from 'rollup-plugin-uglify';
 
 export default {
-    input: 'index.js',
-    output: {
-        file: 'dist/bundle.js',
-        format: 'cjs',
-        name: 'bundle'
-    },
-    plugins: [
-        babel({
-            exclude: 'node_modules/**'
-        }),
-        commonjs(),
-        uglify()
-    ]
+	input: 'src/index.js',
+	output: {
+		file: 'dist/index.js',
+		format: 'cjs',
+		name: 'bundle'
+	},
+	plugins: [
+		babel({
+			exclude: 'node_modules/**',
+			runtimeHelpers: true
+		}),
+		commonjs(),
+		uglify()
+	]
 };

@@ -1,4 +1,4 @@
-const api = require('./server2')
+const api = require('../dist')
 
 // api.database('content/')
 

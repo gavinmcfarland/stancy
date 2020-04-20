@@ -1,4 +1,4 @@
-# Seag
+# Stolder
 
 Seag uses static content (files and folders) to create a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server. This is useful when building static sites which use frameworks like React, Vue, Svelte or Marko.
 
@@ -11,13 +11,14 @@ content/
   site.json
   users/
     jerry.json
-    johanna.json
+    hanna.json
+    susan.json
 ```
 
 Now start the server
 
 ```js
-seag.serve('content/')
+stolder.serve('content/')
 ```
 
 You can access the content using the following requests:
@@ -132,7 +133,7 @@ Using a query language of your choice you can filter and display the data you ne
 - ### Create a database
   
   ```js
-  seag.database('content/')
+  stolder.database('content/')
   ```
 
 ---
@@ -140,7 +141,7 @@ Using a query language of your choice you can filter and display the data you ne
 - ### Write a database to file
 
   ```js
-  seag.write('content/')
+  stolder.write('content/')
   ```
 
 ---
@@ -148,7 +149,7 @@ Using a query language of your choice you can filter and display the data you ne
 - ### Start a server
 
   ```js
-  seag.serve('content/')
+  stolder.serve('content/')
   ```
 
 ## Installation
@@ -164,14 +165,14 @@ In your application specify where the content lives and start the API server.
 ```js
 import seag from 'seag'
 
-seag.serve('content/')
+stolder.serve('content/')
 ```
 
 To get content
 
 ```js
 async function getContent() {
-    return await seag.get('pages/about', null);
+    return await stolder.get('pages/about', null);
 }
 
 getContent().then((content) => {

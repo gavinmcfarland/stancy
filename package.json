@@ -1,13 +1,13 @@
 {
-    "name": "folder-api",
+    "name": "unch",
     "version": "1.0.0",
     "description": "",
-    "main": "src/index.js",
+    "main": "dist/index.js",
     "scripts": {
         "babel": "babel src -d dist",
         "rollup": "rollup --config",
         "build": "npm run babel",
-        "demo": "npm run build && node dist/demo.js"
+        "demo": "node src/demo.js"
     },
     "keywords": [],
     "author": "",
