@@ -24,7 +24,9 @@ You can access the content using the following requests:
 
 - [localhost:3000/site](http://localhost:3000/site)
 - [localhost:3000/users](http://localhost:3000/users)
+- [localhost:3000/users?role=editor](http://localhost:3000/users?role=editor)
 - [localhost:3000/users/jerry](http://localhost:3000/users/jerry)
+
 
 ## Features
 
@@ -111,13 +113,18 @@ You can access the content using the following requests:
 
 Using a query language of your choice you can filter and display the data you need.
 
+### Private
+
 - `_name` Name of the resource
 - `_collection` Collection the resource belongs to
-- `_item` Name of the item
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
 - `_source` The path to the folder containing the file.
+
+### Public
+
 - `url` The url to the resource.
+- `children` Children related to that resource.
 
 ## Advanced
 

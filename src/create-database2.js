@@ -161,11 +161,11 @@ function createResrouce(dir, value, index, parent, root) {
 	// Add children of folder to resource
 	if (type.is.folder(value)) {
 		let subDir = path.join(dir + value + '/')
-		resource._children = []
+		resource.children = []
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
 			if (!type.is.index(value)) {
-				resource._children.push(value.split('.')[0])
+				resource.children.push(createResrouce(subDir, value, index, parent, root))
 			}
 
 		})

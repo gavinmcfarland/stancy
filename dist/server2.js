@@ -70,11 +70,9 @@ function _getContent() {
 
           case 4:
             if (!(resource && resource2)) {
-              _context.next = 8;
+              _context.next = 7;
               break;
             }
-
-            console.log(resource2);
 
             if (query) {
               _array = [];
@@ -91,27 +89,27 @@ function _getContent() {
 
             return _context.abrupt("return", expression.evaluate(dataset));
 
-          case 8:
+          case 7:
             if (!(!resource || !resource2)) {
-              _context.next = 17;
+              _context.next = 16;
               break;
             }
 
             console.log(query);
 
             if (!query) {
-              _context.next = 17;
+              _context.next = 16;
               break;
             }
 
             if (!isObjectEmpty(query)) {
-              _context.next = 13;
+              _context.next = 12;
               break;
             }
 
             return _context.abrupt("return", dataset);
 
-          case 13:
+          case 12:
             _array2 = [];
 
             for (_i3 = 0, _Object$entries3 = Object.entries(query); _i3 < _Object$entries3.length; _i3++) {
@@ -124,7 +122,7 @@ function _getContent() {
             expression = (0, _jsonata["default"])("**".concat(_array2.toString()));
             return _context.abrupt("return", expression.evaluate(dataset));
 
-          case 17:
+          case 16:
           case "end":
             return _context.stop();
         }

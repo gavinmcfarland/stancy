@@ -161,10 +161,10 @@ function createResrouce(dir, value, index, parent, root) {
   if (type.is.folder(value)) {
     var _subDir2 = path.join(dir + value + '/');
 
-    resource._children = [];
+    resource.children = [];
     fs.readdirSync(path.join(dir + value)).map(function (value, index) {
       if (!type.is.index(value)) {
-        resource._children.push(value.split('.')[0]);
+        resource.children.push(createResrouce(_subDir2, value, index, parent, root));
       }
     });
   }
