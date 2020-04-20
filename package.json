@@ -7,8 +7,7 @@
         "babel": "babel src -d dist",
         "rollup": "rollup --config",
         "build": "npm run babel",
-        "demo": "npm run build && node dist/demo.js --experimental-modules",
-        "test": "npm run build && node dist/demo2.js"
+        "demo": "npm run build && node dist/demo.js"
     },
     "keywords": [],
     "author": "",
@@ -24,7 +23,6 @@
         "babel-plugin-add-module-exports": "^1.0.2",
         "express": "^4.17.1",
         "gray-matter": "^4.0.2",
-        "groq-js": "^0.1.5",
         "html-escape": "^2.0.0",
         "json-server": "^0.16.1",
         "json5": "^2.1.3",

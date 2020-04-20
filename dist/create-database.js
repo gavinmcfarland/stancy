@@ -8,12 +8,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.database = database;
 exports.write = write;
 
-var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
-var _pluralize = require("pluralize");
-
 var _processContent = _interopRequireDefault(require("./process-content"));
 
 var fs = require('fs');
@@ -22,122 +16,167 @@ var path = require('path');
 
 var pluralize = require('pluralize');
 
-function isFile(item) {
-  if (/\..+$/.test(item)) {
-    return item.split('.')[0];
-  } else {
-    return false;
-  }
-}
-
-function isFolder(item) {
-  if (!/\..+$/.test(item)) {
-    return item;
-  } else {
-    return false;
-  }
-}
-
-function createArray(dir, item) {
-  if (isFolder(item)) {
-    var array = [];
-    dir = path.join(dir, item);
-    fs.readdirSync(dir).map(function (item, index) {
-      if (!/\index..+$/.test(item)) {
-        var object = createObject(dir, item, index);
-
-        if (object !== undefined) {
-          array.push(object);
-        }
-      }
-    });
-    return array;
-  }
-}
-
-function createObject(dir, item, index) {
-  var level = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-
-  if (/^_/.test(item)) {
-    return undefined;
-  }
-
-  var object = {};
-  var newObject = {};
-  var resourceContent = {};
-  var resourceMeta = {
-    _id: index,
-    _name: item,
-    _type: "item"
-  };
-  Object.assign(newObject, resourceMeta);
-
-  if (isFile(item)) {
-    Object.assign(object, (0, _processContent["default"])(dir, item));
-  } else {
-    var containsChildren = false;
-    var hasIndex = false;
-    var subDir = path.join(dir, item);
-    fs.readdirSync(subDir).map(function (item) {
-      if (!/\index..+$/.test(item)) {
-        containsChildren = true;
+var type = {
+  is: {
+    file: function file(item) {
+      if (/\..+$/.test(item)) {
+        return item.split('.')[0];
       } else {
-        hasIndex = true;
-        resourceContent = (0, _processContent["default"])(subDir, item);
-        Object.assign(object, resourceContent);
+        return false;
       }
-    });
-
-    if (pluralize.isSingular(item) && !hasIndex) {
-      var childObject = {};
-      object._type = "collection";
-      fs.readdirSync(subDir).map(function (item, index) {
-        var name = item.split('.')[0];
-        resourceContent = (0, _processContent["default"])(subDir, item);
-        childObject[name] = resourceContent;
-      });
-      Object.assign(object, childObject);
-    } else {
-      if (containsChildren) {
-        object.children = createArray(dir, item, index);
-      } // if (hasIndex) {
-      //     object.content = hasIndex
-      // }
-
-
-      if (!hasIndex) {
-        object = undefined;
+    },
+    folder: function folder(item) {
+      if (!/\..+$/.test(item)) {
+        return item;
+      } else {
+        return false;
       }
+    },
+    singular: function singular(item) {
+      return pluralize.isSingular(item);
+    },
+    plural: function plural(item) {
+      return pluralize.isPlural(item);
+    },
+    index: function index(value) {
+      return /^index..+$/.test(value);
+    },
+    collection: function collection(source, value) {
+      var isCollection = false;
+
+      if (type.is.folder(value)) {
+        isCollection = true;
+      } // console.log(value)
+
+
+      return isCollection;
+    },
+    item: function item(source, value) {
+      var isItem = false;
+
+      if (type.is.file(value) || type.has.index(source, value)) {
+        isItem = true;
+      }
+
+      return isItem;
+    },
+    hidden: function hidden(value) {
+      return /^_/.test(value);
+    }
+  },
+  has: {
+    index: function index(source, value) {
+      var hasIndex = false;
+
+      if (type.is.folder(value)) {
+        fs.readdirSync(path.join(source + value)).map(function (value, index) {
+          if (type.is.index(value)) {
+            hasIndex = true;
+          }
+        });
+      }
+
+      return hasIndex;
+    },
+    children: function children(source, value) {
+      var hasChildren = false;
+
+      if (type.is.folder(value)) {
+        fs.readdirSync(path.join(source + value)).map(function (value, index) {
+          hasChildren = true;
+        });
+      }
+
+      return hasChildren;
     }
   }
+};
 
-  if (level > 0) {
-    newObject[item.split('.')[0]] = object;
-    object = newObject;
+function createResrouce(dir, value, index, parent, root) {
+  // If thing is hidden don't return resource
+  if (type.is.hidden(value)) {
+    return;
   }
 
-  level++;
-  return object;
+  var resource = {
+    _index: index,
+    // _file: value,
+    _name: value.split('.')[0]
+  }; // Add slug
+
+  var slug = value.split('.')[0];
+
+  if (value === "home") {
+    slug = "";
+  } // Add url
+
+
+  var newDir = dir.replace(root.replace(path.sep, ""), "");
+  resource.url = path.join(newDir + slug); // Add source
+
+  resource._source = path.join(dir + slug);
+
+  if (type.is.singular(value)) {// resource._type = "item"
+  }
+
+  if (type.is.folder(value) && !type.has.index(dir, value)) {} // resource._type = "collection"
+  // Add name of resource whether it be an item or a collection.
+
+
+  if (type.is.item(dir, value)) {
+    resource._collection = parent;
+    resource._type = parent || value.split('.')[0];
+  }
+
+  if (type.is.folder(value)) {
+    var subDir = path.join(dir + value + '/');
+    var _parent = value;
+    fs.readdirSync(subDir).map(function (value, index) {
+      createResrouce(subDir, value, index, _parent, root);
+    });
+  } // Get content
+  // Apply content from file
+
+
+  if (type.is.file(value)) {
+    Object.assign(resource, (0, _processContent["default"])(dir, value));
+  } // Apply content from index file
+
+
+  if (type.is.folder(value) && !type.is.item(dir, value)) {
+    var _subDir = path.join(dir + value + '/');
+
+    var indexContent = "";
+    fs.readdirSync(dir).map(function (value, index) {
+      if (/\index..+$/.test(value)) {
+        indexContent = (0, _processContent["default"])(dir, value);
+      }
+    });
+    Object.assign(resource, indexContent);
+  } // Add children of folder to resource
+
+
+  if (type.is.folder(value)) {
+    var _subDir2 = path.join(dir + value + '/');
+
+    var _parent2 = value;
+    resource._children = [];
+    fs.readdirSync(path.join(dir + value)).map(function (value, index) {
+      if (!type.is.index(value)) {
+        resource._children.push(createResrouce(_subDir2, value, index, _parent2, root));
+      }
+    });
+  }
+
+  return resource;
 }
 
 function createDatabase(dir) {
-  // For each item in array
-  var database = fs.readdirSync(dir).map(function (item, index) {
-    // Create an collection
-    var folder = isFolder(item);
-    var file = isFile(item);
-    var plural = pluralize.isPlural(item);
-    var singular = pluralize.isSingular(item);
-
-    if (folder && plural) {
-      return (0, _defineProperty2["default"])({}, folder, createArray(dir, item));
-    } else if (folder && singular) {
-      return (0, _defineProperty2["default"])({}, folder, createObject(dir, folder, index, 0));
-    } else {
-      return (0, _defineProperty2["default"])({}, file, createObject(dir, item, index, 0));
-    }
+  var root = dir;
+  var database = fs.readdirSync(dir).map(function (value, index) {
+    return createResrouce(dir, value, index, null, root);
   });
-  return Object.assign.apply(Object, [{}].concat((0, _toConsumableArray2["default"])(database)));
+  return database;
 }
 
 function database(dir) {

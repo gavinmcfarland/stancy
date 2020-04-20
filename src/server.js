@@ -1,9 +1,8 @@
 // server.js
 import express from 'express'
-import { parse, evaluate } from 'groq-js'
 import escape from 'html-escape'
 import jsonata from "jsonata";
-import { database, write } from './create-database2.js'
+import { database, write } from './create-database.js'
 
 // async function getContent(dataset, resource) {
 //     let input = `*.${resource}[_id == 0]{_file}`
