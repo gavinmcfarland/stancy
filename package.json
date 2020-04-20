@@ -16,9 +16,12 @@
     "devDependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.5",
         "@babel/runtime": "^7.9.2",
-        "@csson/csson": "^0.3.0",
         "@rollup/plugin-json": "^4.0.2",
+        "babel-plugin-add-module-exports": "^1.0.2",
         "express": "^4.17.1",
         "gray-matter": "^4.0.2",
         "groq-js": "^0.1.5",
@@ -37,10 +40,6 @@
         "yaml": "^1.9.2"
     },
     "dependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-transform-runtime": "^7.9.0",
-        "@babel/preset-env": "^7.9.5",
-        "babel-plugin-add-module-exports": "^1.0.2",
         "node-fetch": "^2.6.0"
     }
 }

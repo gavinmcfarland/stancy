@@ -91,25 +91,23 @@ function _getContent() {
 
           case 7:
             if (!(!resource || !resource2)) {
-              _context.next = 16;
+              _context.next = 15;
               break;
             }
 
-            console.log(query);
-
             if (!query) {
-              _context.next = 16;
+              _context.next = 15;
               break;
             }
 
             if (!isObjectEmpty(query)) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
 
             return _context.abrupt("return", dataset);
 
-          case 12:
+          case 11:
             _array2 = [];
 
             for (_i3 = 0, _Object$entries3 = Object.entries(query); _i3 < _Object$entries3.length; _i3++) {
@@ -122,7 +120,7 @@ function _getContent() {
             expression = (0, _jsonata["default"])("**".concat(_array2.toString()));
             return _context.abrupt("return", expression.evaluate(dataset));
 
-          case 16:
+          case 15:
           case "end":
             return _context.stop();
         }
