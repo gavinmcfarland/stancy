@@ -131,10 +131,9 @@ function createResrouce(dir, value, index, parent, root) {
 	if (type.is.folder(value)) {
 
 		let subDir = path.join(dir + value + '/')
-		let parent = value
 
 		fs.readdirSync(subDir).map((value, index) => {
-			createResrouce(subDir, value, index, parent, root)
+			createResrouce(subDir, value, index, value, root)
 		})
 	}
 
@@ -161,11 +160,11 @@ function createResrouce(dir, value, index, parent, root) {
 	// Add children of folder to resource
 	if (type.is.folder(value)) {
 		let subDir = path.join(dir + value + '/')
-		resource.children = []
+		resource._children = []
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
 			if (!type.is.index(value)) {
-				resource.children.push(createResrouce(subDir, value, index, parent, root))
+				resource._children.push(createResrouce(subDir, value, index, parent, root))
 			}
 
 		})

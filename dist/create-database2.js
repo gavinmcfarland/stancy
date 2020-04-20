@@ -132,9 +132,8 @@ function createResrouce(dir, value, index, parent, root) {
 
   if (type.is.folder(value)) {
     var subDir = path.join(dir + value + '/');
-    var _parent = value;
     fs.readdirSync(subDir).map(function (value, index) {
-      createResrouce(subDir, value, index, _parent, root);
+      createResrouce(subDir, value, index, value, root);
     });
   } // Get content
   // Apply content from file
@@ -161,10 +160,10 @@ function createResrouce(dir, value, index, parent, root) {
   if (type.is.folder(value)) {
     var _subDir2 = path.join(dir + value + '/');
 
-    resource.children = [];
+    resource._children = [];
     fs.readdirSync(path.join(dir + value)).map(function (value, index) {
       if (!type.is.index(value)) {
-        resource.children.push(createResrouce(_subDir2, value, index, parent, root));
+        resource._children.push(createResrouce(_subDir2, value, index, parent, root));
       }
     });
   }

@@ -120,11 +120,12 @@ Using a query language of your choice you can filter and display the data you ne
 - `_index` The index of the resource in the collection or dataset
 - `_type` The type of resource. Named after the folder or file.
 - `_source` The path to the folder containing the file.
+- `_children` Children related to that resource.
 
 ### Public
 
 - `url` The url to the resource.
-- `children` Children related to that resource.
+
 
 ## Advanced
 

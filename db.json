@@ -4,8 +4,8 @@
 		"_name": "about",
 		"url": "/pages/about",
 		"_source": "content/pages/about",
-		"_collection": "pages",
-		"_type": "pages",
+		"_collection": "about.md",
+		"_type": "about.md",
 		"content": "<p>About content</p>\n"
 	},
 	{
@@ -13,26 +13,26 @@
 		"_name": "home",
 		"url": "/pages/",
 		"_source": "content/pages/",
-		"_collection": "pages",
-		"_type": "pages",
-		"children": []
+		"_collection": "home",
+		"_type": "home",
+		"_children": []
 	},
 	{
 		"_index": 0,
 		"_name": "another-post",
 		"url": "/pages/posts/another-post",
 		"_source": "content/pages/posts/another-post",
-		"_collection": "posts",
-		"_type": "posts",
-		"children": []
+		"_collection": "another-post",
+		"_type": "another-post",
+		"_children": []
 	},
 	{
 		"_index": 1,
 		"_name": "blog-post",
 		"url": "/pages/posts/blog-post",
 		"_source": "content/pages/posts/blog-post",
-		"_collection": "posts",
-		"_type": "posts",
+		"_collection": "blog-post.md",
+		"_type": "blog-post.md",
 		"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -40,8 +40,8 @@
 		"_name": "hello-world",
 		"url": "/pages/posts/hello-world",
 		"_source": "content/pages/posts/hello-world",
-		"_collection": "posts",
-		"_type": "posts",
+		"_collection": "hello-world.md",
+		"_type": "hello-world.md",
 		"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -49,17 +49,17 @@
 		"_name": "another-post",
 		"url": "/pages/posts/another-post",
 		"_source": "content/pages/posts/another-post",
-		"_collection": "pages",
-		"_type": "pages",
-		"children": []
+		"_collection": "posts",
+		"_type": "posts",
+		"_children": []
 	},
 	{
 		"_index": 1,
 		"_name": "blog-post",
 		"url": "/pages/posts/blog-post",
 		"_source": "content/pages/posts/blog-post",
-		"_collection": "pages",
-		"_type": "pages",
+		"_collection": "posts",
+		"_type": "posts",
 		"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -67,8 +67,8 @@
 		"_name": "hello-world",
 		"url": "/pages/posts/hello-world",
 		"_source": "content/pages/posts/hello-world",
-		"_collection": "pages",
-		"_type": "pages",
+		"_collection": "posts",
+		"_type": "posts",
 		"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -76,25 +76,25 @@
 		"_name": "posts",
 		"url": "/pages/posts",
 		"_source": "content/pages/posts",
-		"_collection": "pages",
-		"_type": "pages",
-		"children": [
+		"_collection": "posts",
+		"_type": "posts",
+		"_children": [
 			{
 				"_index": 0,
 				"_name": "another-post",
 				"url": "/pages/posts/another-post",
 				"_source": "content/pages/posts/another-post",
-				"_collection": "pages",
-				"_type": "pages",
-				"children": []
+				"_collection": "posts",
+				"_type": "posts",
+				"_children": []
 			},
 			{
 				"_index": 1,
 				"_name": "blog-post",
 				"url": "/pages/posts/blog-post",
 				"_source": "content/pages/posts/blog-post",
-				"_collection": "pages",
-				"_type": "pages",
+				"_collection": "posts",
+				"_type": "posts",
 				"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 			},
 			{
@@ -102,8 +102,8 @@
 				"_name": "hello-world",
 				"url": "/pages/posts/hello-world",
 				"_source": "content/pages/posts/hello-world",
-				"_collection": "pages",
-				"_type": "pages",
+				"_collection": "posts",
+				"_type": "posts",
 				"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 			}
 		]
@@ -113,9 +113,9 @@
 		"_name": "services",
 		"url": "/pages/services",
 		"_source": "content/pages/services",
-		"_collection": "pages",
-		"_type": "pages",
-		"children": []
+		"_collection": "services",
+		"_type": "services",
+		"_children": []
 	},
 	{
 		"_index": 0,
@@ -133,24 +133,24 @@
 		"_source": "content/pages/",
 		"_collection": null,
 		"_type": "home",
-		"children": []
+		"_children": []
 	},
 	{
 		"_index": 0,
 		"_name": "another-post",
 		"url": "/pages/posts/another-post",
 		"_source": "content/pages/posts/another-post",
-		"_collection": "posts",
-		"_type": "posts",
-		"children": []
+		"_collection": "another-post",
+		"_type": "another-post",
+		"_children": []
 	},
 	{
 		"_index": 1,
 		"_name": "blog-post",
 		"url": "/pages/posts/blog-post",
 		"_source": "content/pages/posts/blog-post",
-		"_collection": "posts",
-		"_type": "posts",
+		"_collection": "blog-post.md",
+		"_type": "blog-post.md",
 		"content": "<hr>\n<p>title: Blog Post\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -158,8 +158,8 @@
 		"_name": "hello-world",
 		"url": "/pages/posts/hello-world",
 		"_source": "content/pages/posts/hello-world",
-		"_collection": "posts",
-		"_type": "posts",
+		"_collection": "hello-world.md",
+		"_type": "hello-world.md",
 		"content": "<hr>\n<p>title: Hello World\ndate: &quot;2019-06-11T08:38:00.000Z&quot;</p>\n<hr>\n<p>Every blog starts with a single post. This is yours. Make it great.</p>\n<!-- more -->\n\n<p>This post intentionally left blank.</p>\n<p>Write what you want.</p>\n"
 	},
 	{
@@ -169,7 +169,7 @@
 		"_source": "content/pages/posts/another-post",
 		"_collection": null,
 		"_type": "another-post",
-		"children": []
+		"_children": []
 	},
 	{
 		"_index": 1,
@@ -196,7 +196,7 @@
 		"_source": "content/pages/posts",
 		"_collection": null,
 		"_type": "posts",
-		"children": [
+		"_children": [
 			{
 				"_index": 0,
 				"_name": "another-post",
@@ -204,7 +204,7 @@
 				"_source": "content/pages/posts/another-post",
 				"_collection": null,
 				"_type": "another-post",
-				"children": []
+				"_children": []
 			},
 			{
 				"_index": 1,
@@ -233,14 +233,14 @@
 		"_source": "content/pages/services",
 		"_collection": null,
 		"_type": "services",
-		"children": []
+		"_children": []
 	},
 	{
 		"_index": 2,
 		"_name": "pages",
 		"url": "/pages",
 		"_source": "content/pages",
-		"children": [
+		"_children": [
 			{
 				"_index": 0,
 				"_name": "about",
@@ -257,7 +257,7 @@
 				"_source": "content/pages/",
 				"_collection": null,
 				"_type": "home",
-				"children": []
+				"_children": []
 			},
 			{
 				"_index": 2,
@@ -266,7 +266,7 @@
 				"_source": "content/pages/posts",
 				"_collection": null,
 				"_type": "posts",
-				"children": [
+				"_children": [
 					{
 						"_index": 0,
 						"_name": "another-post",
@@ -274,7 +274,7 @@
 						"_source": "content/pages/posts/another-post",
 						"_collection": null,
 						"_type": "another-post",
-						"children": []
+						"_children": []
 					},
 					{
 						"_index": 1,
@@ -303,7 +303,7 @@
 				"_source": "content/pages/services",
 				"_collection": null,
 				"_type": "services",
-				"children": []
+				"_children": []
 			}
 		]
 	},
@@ -321,8 +321,8 @@
 		"_name": "hanna",
 		"url": "/users/hanna",
 		"_source": "content/users/hanna",
-		"_collection": "users",
-		"_type": "users",
+		"_collection": "hanna.md",
+		"_type": "hanna.md",
 		"content": "<p>Hanna</p>\n"
 	},
 	{
@@ -330,8 +330,8 @@
 		"_name": "jerry",
 		"url": "/users/jerry",
 		"_source": "content/users/jerry",
-		"_collection": "users",
-		"_type": "users",
+		"_collection": "jerry.md",
+		"_type": "jerry.md",
 		"content": "<p>Jerry</p>\n"
 	},
 	{
@@ -357,7 +357,7 @@
 		"_name": "users",
 		"url": "/users",
 		"_source": "content/users",
-		"children": [
+		"_children": [
 			{
 				"_index": 0,
 				"_name": "hanna",
