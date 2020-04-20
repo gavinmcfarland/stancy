@@ -1,5 +1,0 @@
-{
-    "/pages/:page": "/pages?slug=:page&singular=1",
-    "/pages/:parent/children": "/pages?parentId=:parent",
-    "/pages/:page/images": "/images?pageId=:page"
-}

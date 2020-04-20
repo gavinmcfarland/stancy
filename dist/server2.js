@@ -156,10 +156,52 @@ function serve(dir) {
   });
 }
 
+var base = 'http://localhost:3000';
+
+function send(_ref) {
+  var method = _ref.method,
+      path = _ref.path,
+      data = _ref.data,
+      token = _ref.token;
+  var fetch = process.browser ? window.fetch : require('node-fetch')["default"];
+  var opts = {
+    method: method,
+    headers: {}
+  };
+
+  if (data) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(data);
+  }
+
+  if (token) {
+    opts.headers['Authorization'] = "Token ".concat(token);
+  }
+
+  return fetch("".concat(base, "/").concat(path), opts).then(function (r) {
+    return r.text();
+  }).then(function (json) {
+    try {
+      return JSON.parse(json);
+    } catch (err) {
+      return json;
+    }
+  });
+}
+
+function get(path, token) {
+  return send({
+    method: 'GET',
+    path: path,
+    token: token
+  });
+}
+
 var _default = {
   database: _createDatabase.database,
   write: _createDatabase.write,
-  serve: serve
+  serve: serve,
+  get: get
 };
 exports["default"] = _default;
 module.exports = exports.default;

@@ -1,4 +1,3 @@
-import { singular } from 'pluralize'
 import preprocess from './process-content'
 const fs = require('fs')
 const path = require('path')
@@ -131,9 +130,9 @@ function createResrouce(dir, value, index, parent, root) {
 	if (type.is.folder(value)) {
 
 		let subDir = path.join(dir + value + '/')
-
+		let parent = value
 		fs.readdirSync(subDir).map((value, index) => {
-			createResrouce(subDir, value, index, value, root)
+			createResrouce(subDir, value, index, parent, root)
 		})
 	}
 
@@ -160,6 +159,7 @@ function createResrouce(dir, value, index, parent, root) {
 	// Add children of folder to resource
 	if (type.is.folder(value)) {
 		let subDir = path.join(dir + value + '/')
+		let parent = value
 		resource._children = []
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
@@ -171,23 +171,19 @@ function createResrouce(dir, value, index, parent, root) {
 
 	}
 
-	if (!type.is.index(value)) db.push(resource)
-
 	return resource
 }
-
-let db = []
 
 function createDatabase(dir) {
 
 	let root = dir
 
 	let database = fs.readdirSync(dir).map((value, index) => {
-		createResrouce(dir, value, index, null, root)
+		return createResrouce(dir, value, index, null, root)
 
 	})
 
-	return db
+	return database
 
 }
 

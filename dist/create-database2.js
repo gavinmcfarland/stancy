@@ -8,8 +8,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.database = database;
 exports.write = write;
 
-var _pluralize = require("pluralize");
-
 var _processContent = _interopRequireDefault(require("./process-content"));
 
 var fs = require('fs');
@@ -132,8 +130,9 @@ function createResrouce(dir, value, index, parent, root) {
 
   if (type.is.folder(value)) {
     var subDir = path.join(dir + value + '/');
+    var _parent = value;
     fs.readdirSync(subDir).map(function (value, index) {
-      createResrouce(subDir, value, index, value, root);
+      createResrouce(subDir, value, index, _parent, root);
     });
   } // Get content
   // Apply content from file
@@ -160,26 +159,24 @@ function createResrouce(dir, value, index, parent, root) {
   if (type.is.folder(value)) {
     var _subDir2 = path.join(dir + value + '/');
 
+    var _parent2 = value;
     resource._children = [];
     fs.readdirSync(path.join(dir + value)).map(function (value, index) {
       if (!type.is.index(value)) {
-        resource._children.push(createResrouce(_subDir2, value, index, parent, root));
+        resource._children.push(createResrouce(_subDir2, value, index, _parent2, root));
       }
     });
   }
 
-  if (!type.is.index(value)) db.push(resource);
   return resource;
 }
-
-var db = [];
 
 function createDatabase(dir) {
   var root = dir;
   var database = fs.readdirSync(dir).map(function (value, index) {
-    createResrouce(dir, value, index, null, root);
+    return createResrouce(dir, value, index, null, root);
   });
-  return db;
+  return database;
 }
 
 function database(dir) {
