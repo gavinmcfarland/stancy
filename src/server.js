@@ -76,20 +76,20 @@ function serve(dir) {
 
 	app.get('/', (req, res) => {
 		getContent(db, null, null, req.query).then(value => {
-			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
+			res.json(value)
 		})
 	})
 
 
 	app.get('/:resource', (req, res) => {
 		getContent(db, req.params.resource, null, req.query).then(value => {
-			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
+			res.json(value)
 		})
 	})
 
 	app.get('/:resource/:resource2', (req, res) => {
 		getContent(db, req.params.resource, req.params.resource2, req.query).then(value => {
-			res.send(`<pre>${escape(JSON.stringify(value, null, '\t'))}</pre>`)
+			res.json(value)
 		})
 	})
 
