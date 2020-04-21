@@ -1,6 +1,5 @@
 // server.js
 import express from 'express'
-import escape from 'html-escape'
 import jsonata from "jsonata";
 import { database, write } from './create-database.js'
 
