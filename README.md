@@ -1,6 +1,6 @@
 # Stancy
 
-Stancy uses static content (files and folders) to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server as an API. This is useful when building static sites which use frameworks like React, Vue, Svelte or Marko.
+Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server as an API. This is useful when building static sites which use frameworks like React, Vue, Svelte or Marko.
 
 ## Example
 

@@ -1,7 +1,7 @@
 {
-    "name": "unch",
-    "version": "1.0.0",
-    "description": "",
+    "name": "stancy",
+    "version": "10.0.0-alpha.1",
+    "description": "Generate a database of collections and items from static files and folders",
     "main": "dist/index.js",
     "scripts": {
         "babel": "babel src -d dist",
@@ -9,7 +9,14 @@
         "build": "npm run babel",
         "demo": "node src/demo.js"
     },
-    "keywords": [],
+    "keywords": [
+        "static",
+        "static file",
+        "generator",
+        "database",
+        "data store",
+        "flat file"
+    ],
     "author": "",
     "license": "ISC",
     "devDependencies": {
