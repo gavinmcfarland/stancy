@@ -11,10 +11,14 @@ Start by creating a folder with some content, below is an example. Each top leve
 ```bash
 content/
   site.json
-  users/
-    jerry.json
-    hanna.json
-    susan.json
+  pages/
+    home.md
+    about.md
+    services.md
+    posts/
+        index.md
+        my-first-post.md
+        another-post.md
 ```
 
 Now start the server.
@@ -23,7 +27,7 @@ Now start the server.
 stancy.serve('content/')
 ```
 
-The API will generate endpoints, ussing the folder structure for both collections and items.
+The API generates endpoints for collections and items following the structure of the directory.
 
 ```
 /:item
@@ -37,10 +41,14 @@ We can access the content using the following requests:
 - [localhost:3000/users?role=editor](http://localhost:3000/users?role=editor)
 - [localhost:3000/users/jerry](http://localhost:3000/users/jerry)
 
-Items in collections can be filtered by querying by _field_. For example the query `?role=editor` will list all users who are editors.
+Items in collections can be filtered by querying their _fields_. For example the query `?role=editor` will list all users who are editors.
 
 
 ## Features
+
+- ### Collections and Items
+
+  Create collections by grouping files with a folder. Create items by adding a file.
 
 - ### Singular Folders
   
