@@ -128,7 +128,7 @@ Items in collections can be filtered by querying their _fields_. For example the
     // ...
     "images": [
       {
-        "src": "/",
+        "src": "/static/playing-frisbee.jpg",
         "alt": "Me playing frisbee"
       }
     ]
