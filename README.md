@@ -117,8 +117,8 @@ Items in collections can be filtered by querying their _fields_. For example the
 
   ```
   my-first-post/
-    my-favourite-image.jpg
-    my-favourite-image.yml
+    play-frisbee.jpg
+    play-frisbee.yml
   ```
 
   This will create the following image meta data
