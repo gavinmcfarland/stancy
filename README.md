@@ -6,7 +6,7 @@ Stancy uses static files and folders to generate a database of collections and i
 
 ## Example
 
-In this example, we'll look at how we can create a database from static files and folders which can be accessed using a REST api for a website.
+In this example, we'll look at how we can create a database from static files and folders which can be accessed using an API for a website.
 
 Start by creating a folder with some content, below is an example. Each top level file or folder creates a root endpoint.
 
@@ -52,8 +52,8 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 - ### Collections and Items
 
-  Create collections by grouping files with a folder.\
-  Create items by adding a file.
+  Collections are created by grouping files with a folder.\
+  Items are created by files.
 
 ---
 
