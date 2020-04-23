@@ -100,7 +100,7 @@ function createResrouce(dir, value, index, parent, root) {
 		_name: value.split('.')[0]
 	}
 
-	// Add slug
+	// Create slug
 	let slug = value.split('.')[0]
 	if (value === "home") {
 		slug = ""
@@ -138,6 +138,12 @@ function createResrouce(dir, value, index, parent, root) {
 
 	// Get content
 
+
+
+	// if (type.is.singular(value)) {
+	// 	Object.assign(resource, preprocess(dir, value))
+	// }
+
 	// Apply content from file
 	if (type.is.file(value)) {
 		Object.assign(resource, preprocess(dir, value))
@@ -160,6 +166,8 @@ function createResrouce(dir, value, index, parent, root) {
 	if (type.is.folder(value)) {
 		let subDir = path.join(dir + value + '/')
 		let parent = value
+
+		console.log(!type.has.index(dir, value))
 		resource._children = []
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
@@ -168,6 +176,7 @@ function createResrouce(dir, value, index, parent, root) {
 			}
 
 		})
+
 
 	}
 
