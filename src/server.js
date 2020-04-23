@@ -71,6 +71,10 @@ function serve(dir) {
 	const db = database(dir)
 
 	const app = express()
+
+	// Format repsonse to have spaces and indentation
+	app.set('json spaces', 4)
+
 	const port = 3000
 
 	app.get('/', (req, res) => {
