@@ -1,10 +1,12 @@
 # Stancy
 
-Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server as an API. This is useful when building static sites which use frameworks like React, Vue, Svelte or Marko.
+![npm](https://img.shields.io/npm/v/stancy)
+
+Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server as an API. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko. Stancy is unbiased about how you use it and can be customised to suit different use-cases.
 
 ## Example
 
-In this example, we'll look at how we can create a database from static files and folders which can be accessed using a REST api.
+In this example, we'll look at how we can create a database from static files and folders which can be accessed using a REST api for a website.
 
 Start by creating a folder with some content, below is an example. Each top level file or folder creates a root endpoint.
 
@@ -15,11 +17,13 @@ content/
     home.md
     about.md
     services.md
-    posts/
+    blog/
         index.md
         my-first-post.md
         another-post.md
 ```
+
+In this example we've created a file `site.json` which stores key information about our site, some `pages`, and a `blog`.
 
 Now start the server.
 
@@ -37,18 +41,21 @@ The API generates endpoints for collections and items following the structure of
 We can access the content using the following requests:
 
 - [localhost:3000/site](http://localhost:3000/site)
-- [localhost:3000/users](http://localhost:3000/users)
-- [localhost:3000/users?role=editor](http://localhost:3000/users?role=editor)
-- [localhost:3000/users/jerry](http://localhost:3000/users/jerry)
+- [localhost:3000/pages](http://localhost:3000/pages)
+- [localhost:3000/pages?status=draft](http://localhost:3000/pages?status=draft)
+- [localhost:3000/pages/about](http://localhost:3000/pages/about)
 
-Items in collections can be filtered by querying their _fields_. For example the query `?role=editor` will list all users who are editors.
+Items in collections can be filtered by querying their _fields_. For example the query `?status=draft` will list all draft pages .
 
 
 ## Features
 
 - ### Collections and Items
 
-  Create collections by grouping files with a folder. Create items by adding a file.
+  Create collections by grouping files with a folder.\
+  Create items by adding a file.
+
+---
 
 - ### Singular Folders
   
