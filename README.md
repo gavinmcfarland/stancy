@@ -141,7 +141,7 @@ Items in collections can be filtered by querying their _fields_. For example the
 To create a database.
 
 ```js
-stancy.database(content)
+stancy('/content').database
 ```
 
 - `content`: a _String_ which points to the directory of your static content.
@@ -187,7 +187,7 @@ import stancy from 'stancy'
     Specify where the content lives and create a database in memory.
   
     ```js
-    const database = stancy.database('content/')
+    const database = stancy('/content').database
     ```
 
 - ### Start a server
@@ -195,13 +195,19 @@ import stancy from 'stancy'
     Specify where the content lives and start the API server.
 
     ```js
-    stancy.serve('content/')
+    stancy('/content').serve()
     ```
 
 - ### Write a database to file
 
     ```js
-    stancy.write('content/')
+    stancy('/content').write('db.json')
+    ```
+
+- ### Filter data by request
+
+    ```js
+    query(database, req)
     ```
 
 - ### Get content

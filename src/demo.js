@@ -1,10 +1,10 @@
-const api = require('../dist')
+const sanity = require('../dist')
 
-// api.database('content/')
+sanity.database('content/')
 
 // api.write('content/')
 
-api.serve('content/')
+// sanity.serve('content/', 3001)
 
 // async function getContent() {
 //     return await api.get(`pages/about`, null);

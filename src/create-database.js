@@ -167,7 +167,6 @@ function createResrouce(dir, value, index, parent, root) {
 		let subDir = path.join(dir + value + '/')
 		let parent = value
 
-		console.log(!type.has.index(dir, value))
 		resource._children = []
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
@@ -184,6 +183,8 @@ function createResrouce(dir, value, index, parent, root) {
 }
 
 function createDatabase(dir) {
+
+
 
 	let root = dir
 

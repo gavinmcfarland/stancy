@@ -1,97 +1,50 @@
 // server.js
 import express from 'express'
-import jsonata from "jsonata";
 import { database, write } from './create-database.js'
+import getContent from './get-content.js'
 
-// async function getContent(dataset, resource) {
-//     let input = `*.${resource}[_id == 0]{_file}`
-//     let tree = parse(input)
-//     let value = await evaluate(tree, { dataset })
-//     let result = await value.get()
+function serve(dir, port) {
 
-//     return result
-// }
+	port = port || 3000
 
-function isObjectEmpty(obj) {
-	return Object.keys(obj).length === 0 && obj.constructor === Object
-}
-
-
-async function getContent(dataset, resource, resource2, query) {
-	var expression = jsonata(`**[_type="${resource}"]`);
-	if (resource && !resource2) {
-		if (query) {
-			let array = []
-			for (let [key, value] of Object.entries(query)) {
-				let string = `[${key}=${value}]`
-				array.push(string)
-			}
-			expression = jsonata(`**[_type="${resource}"]${array.toString()}`);
-		}
-
-		return expression.evaluate(dataset);
-	}
-
-	if (resource && resource2) {
-		if (query) {
-			let array = []
-			for (let [key, value] of Object.entries(query)) {
-				let string = `[${key}=${value}]`
-				array.push(string)
-			}
-			expression = jsonata(`**[_type="${resource}"][_name="${resource2}"]${array.toString()}`);
-		}
-
-		return expression.evaluate(dataset);
-
-	}
-
-	if (!resource || !resource2) {
-		if (query) {
-			if (isObjectEmpty(query)) {
-
-				return dataset
-			}
-			let array = []
-			for (let [key, value] of Object.entries(query)) {
-				let string = `[${key}=${value}]`
-				array.push(string)
-			}
-
-			expression = jsonata(`**${array.toString()}`);
-			return expression.evaluate(dataset);
-		}
-
-
-	}
-
-}
-
-function serve(dir) {
 	const db = database(dir)
-
 	const app = express()
 
 	// Format repsonse to have spaces and indentation
 	app.set('json spaces', 4)
 
-	const port = 3000
+
 
 	app.get('/', (req, res) => {
-		getContent(db, null, null, req.query).then(value => {
+
+		getContent(db, {
+			resource1: null,
+			resource2: null,
+			query: req.query
+		}).then(value => {
 			res.json(value)
 		})
 	})
 
 
-	app.get('/:resource', (req, res) => {
-		getContent(db, req.params.resource, null, req.query).then(value => {
+	app.get('/:resource1', (req, res) => {
+
+		getContent(db, {
+			resource1: req.params.resource1,
+			resource2: null,
+			query: req.query
+		}).then(value => {
 			res.json(value)
 		})
 	})
 
-	app.get('/:resource/:resource2', (req, res) => {
-		getContent(db, req.params.resource, req.params.resource2, req.query).then(value => {
+	app.get('/:resource1/:resource2', (req, res) => {
+
+		getContent(db, {
+			resource1: req.params.resource1,
+			resource2: req.params.resource2,
+			query: req.query
+		}).then(value => {
 			res.json(value)
 		})
 	})
@@ -135,6 +88,7 @@ function get(path, token) {
 
 
 export default {
+	grab: getContent,
 	database,
 	write,
 	serve,
