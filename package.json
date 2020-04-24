@@ -17,6 +17,10 @@
         "data store",
         "flat file"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/limitlessloop/stancy.git"
+    },
     "author": "",
     "license": "ISC",
     "devDependencies": {
