@@ -1,57 +1,50 @@
 // server.js
-import express from 'express'
-import { database, write } from './create-database.js'
-import getContent from './get-content.js'
+import express from 'express';
+import { database, write } from './create-database.js';
+import getContent from './get-content.js';
 
 function serve(dir, port) {
+	port = port || 3000;
 
-	port = port || 3000
-
-	const db = database(dir)
-	const app = express()
+	const db = database(dir);
+	const app = express();
 
 	// Format repsonse to have spaces and indentation
-	app.set('json spaces', 4)
-
-
+	app.set('json spaces', 4);
 
 	app.get('/', (req, res) => {
-
 		getContent(db, {
 			resource1: null,
 			resource2: null,
 			query: req.query
-		}).then(value => {
-			res.json(value)
-		})
-	})
-
+		}).then((value) => {
+			res.json(value);
+		});
+	});
 
 	app.get('/:resource1', (req, res) => {
-
 		getContent(db, {
 			resource1: req.params.resource1,
 			resource2: null,
 			query: req.query
-		}).then(value => {
-			res.json(value)
-		})
-	})
+		}).then((value) => {
+			res.json(value);
+		});
+	});
 
 	app.get('/:resource1/:resource2', (req, res) => {
-
 		getContent(db, {
 			resource1: req.params.resource1,
 			resource2: req.params.resource2,
 			query: req.query
-		}).then(value => {
-			res.json(value)
-		})
-	})
+		}).then((value) => {
+			res.json(value);
+		});
+	});
 
 	app.listen(port, () => {
-		console.log(`Server listening at http://localhost:${port}`)
-	})
+		console.log(`Server listening at http://localhost:${port}`);
+	});
 }
 
 const base = 'http://localhost:3000';
@@ -70,28 +63,38 @@ function send({ method, path, data, token }) {
 		opts.headers['Authorization'] = `Token ${token}`;
 	}
 
-	return fetch(`${base}/${path}`, opts)
-		.then(r => r.text())
-		.then(json => {
-			try {
-				return JSON.parse(json);
-			} catch (err) {
-				return json;
-			}
-		});
+	return fetch(`${base}/${path}`, opts).then((r) => r.text()).then((json) => {
+		try {
+			return JSON.parse(json);
+		} catch (err) {
+			console.log(`${base}/${path}`);
+			return json;
+		}
+	});
 }
 
 function get(path, token) {
 	return send({ method: 'GET', path, token });
 }
 
-
-
-export default {
-	grab: getContent,
-	database,
-	write,
-	serve,
-	get
+export default function(source) {
+	return {
+		serve: function(port) {
+			return serve(source, port);
+		},
+		get: function(path, token) {
+			return get(path, token);
+		},
+		database: function() {
+			return database(source);
+		}
+	};
 }
 
+// export default {
+// 	grab: getContent,
+// 	database,
+// 	write,
+// 	serve,
+// 	get
+// }

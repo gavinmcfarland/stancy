@@ -28,7 +28,7 @@ In this example we've created a file `site.json` which stores key information ab
 Now start the server.
 
 ```js
-stancy.serve('content/')
+stancy('content/').serve()
 ```
 
 The API generates endpoints for collections and items following the structure of the directory.
@@ -141,7 +141,7 @@ Items in collections can be filtered by querying their _fields_. For example the
 To create a database.
 
 ```js
-stancy('/content').database
+stancy('/content').database()
 ```
 
 - `content`: a _String_ which points to the directory of your static content.
@@ -181,15 +181,6 @@ import stancy from 'stancy'
 
 ## Usage
 
-
-- ### Create a database
-
-    Specify where the content lives and create a database in memory.
-  
-    ```js
-    const database = stancy('/content').database
-    ```
-
 - ### Start a server
 
     Specify where the content lives and start the API server.
@@ -197,17 +188,12 @@ import stancy from 'stancy'
     ```js
     stancy('/content').serve()
     ```
+- ### Create a database
 
-- ### Write a database to file
-
+    Specify where the content lives and create a database in memory.
+  
     ```js
-    stancy('/content').write('db.json')
-    ```
-
-- ### Filter data by request
-
-    ```js
-    query(database, req)
+    const database = stancy('/content').database()
     ```
 
 - ### Get content
@@ -215,12 +201,12 @@ import stancy from 'stancy'
     To get content from a server
 
     ```js
-    async function fetch() {
-        return await stancy.get('users/jerry');
+    async function get() {
+        return await stancy().get('users/jerry');
     }
 
-    fetch().then((content) => {
-    console.log(content)
+    get().then((content) => {
+        console.log(content)
     })
 
     // => {
@@ -243,4 +229,10 @@ To run the demo
 
 ```
 npm run demo
+```
+
+To build and test demo
+
+```
+npm run test
 ```

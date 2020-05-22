@@ -1,5 +1,4 @@
-module.exports = require('./server')
-
+module.exports = require('./server');
 
 // var stancy = function (source) {
 // 	return {
@@ -20,5 +19,3 @@ module.exports = require('./server')
 // 		}
 // 	}
 // }
-
-// console.log(stancy('/content').database)

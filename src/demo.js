@@ -1,15 +1,13 @@
-const sanity = require('../dist')
+const stancy = require('../dist');
 
-sanity.database('content/')
+// stancy('content/').serve();
 
-// api.write('content/')
+// console.log(stancy('content/').database());
 
-// sanity.serve('content/', 3001)
-
-// async function getContent() {
-//     return await api.get(`pages/about`, null);
+// async function grab() {
+// 	return await stancy().get('pages/about', null);
 // }
 
-// getContent().then((content) => {
-//     console.log(content)
-// })
+// grab().then((content) => {
+// 	console.log(content);
+// });

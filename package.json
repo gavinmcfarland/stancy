@@ -1,53 +1,53 @@
 {
-    "name": "stancy",
-    "version": "1.0.0-alpha.0",
-    "description": "Generate a database of collections and items from static files and folders",
-    "main": "dist/index.js",
-    "scripts": {
-        "babel": "babel src -d dist",
-        "rollup": "rollup --config",
-        "build": "npm run babel",
-        "demo": "node src/demo.js",
-        "test": "npm run rollup && node src/demo.js"
-    },
-    "keywords": [
-        "static file",
-        "generator",
-        "database",
-        "data store",
-        "flat file"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/limitlessloop/stancy.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@babel/cli": "^7.8.4",
-        "@babel/core": "^7.9.0",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-transform-runtime": "^7.9.0",
-        "@babel/preset-env": "^7.9.5",
-        "@babel/runtime": "^7.9.2",
-        "@rollup/plugin-json": "^4.0.2",
-        "babel-plugin-add-module-exports": "^1.0.2",
-        "express": "^4.17.1",
-        "gray-matter": "^4.0.2",
-        "json-server": "^0.16.1",
-        "json5": "^2.1.3",
-        "jsonata": "^1.8.2",
-        "marked": "^0.8.2",
-        "pluralize": "^8.0.0",
-        "rollup": "^2.6.1",
-        "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-node-resolve": "^5.2.0",
-        "rollup-plugin-uglify": "^6.0.4",
-        "smarkt": "0.0.6",
-        "yaml": "^1.9.2"
-    },
-    "dependencies": {
-        "node-fetch": "^2.6.0"
-    }
+	"name": "stancy",
+	"version": "1.0.0-alpha.0",
+	"description": "Generate a database of collections and items from static files and folders",
+	"main": "dist/index.js",
+	"scripts": {
+		"babel": "babel src -d dist",
+		"rollup": "rollup --config",
+		"build": "npm run babel",
+		"demo": "node src/demo.js",
+		"test": "npm run rollup && node src/demo.js"
+	},
+	"keywords": [
+		"static file",
+		"generator",
+		"database",
+		"data store",
+		"flat file"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/limitlessloop/stancy.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.6",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
+		"@babel/plugin-transform-runtime": "^7.9.6",
+		"@babel/preset-env": "^7.9.6",
+		"@babel/runtime": "^7.9.6",
+		"@rollup/plugin-json": "^4.0.3",
+		"babel-plugin-add-module-exports": "^1.0.2",
+		"rollup": "^2.10.7",
+		"rollup-plugin-babel": "^4.4.0",
+		"rollup-plugin-commonjs": "^10.1.0",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-uglify": "^6.0.4"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"gray-matter": "^4.0.2",
+		"json-server": "^0.16.1",
+		"json5": "^2.1.3",
+		"jsonata": "^1.8.3",
+		"marked": "^0.8.2",
+		"node-fetch": "^2.6.0",
+		"pluralize": "^8.0.0",
+		"smarkt": "0.0.6",
+		"yaml": "^1.10.0"
+	}
 }
