@@ -5,7 +5,7 @@ const stancy = require('../dist');
 // console.log(stancy('content/').database());
 
 // async function grab() {
-// 	return await stancy().get('pages/about', null);
+// 	return await stancy().get('http://localhost:3000', 'pages/about', null);
 // }
 
 // grab().then((content) => {

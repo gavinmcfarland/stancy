@@ -195,7 +195,7 @@ import stancy from 'stancy'
 
     ```js
     async function get() {
-        return await stancy().get('users/jerry');
+        return await stancy().get('http://localhost:3000', 'users/jerry');
     }
 
     get().then((content) => {

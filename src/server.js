@@ -47,9 +47,7 @@ function serve(dir, port) {
 	});
 }
 
-const base = 'http://localhost:3000';
-
-function send({ method, path, data, token }) {
+function send({ base, method, path, data, token }) {
 	const fetch = process.browser ? window.fetch : require('node-fetch').default;
 
 	const opts = { method, headers: {} };
@@ -73,8 +71,8 @@ function send({ method, path, data, token }) {
 	});
 }
 
-function get(path, token) {
-	return send({ method: 'GET', path, token });
+function get(base, path, token) {
+	return send({ method: 'GET', path, token, base });
 }
 
 export default function(source) {
