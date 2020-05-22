@@ -188,13 +188,6 @@ import stancy from 'stancy'
     ```js
     stancy('content/').serve()
     ```
-- ### Create a database
-
-    Specify where the content lives and create a database in memory.
-  
-    ```js
-    const database = stancy('content/').database()
-    ```
 
 - ### Get content
 
@@ -215,6 +208,14 @@ import stancy from 'stancy'
     //   "age": "24",
     //   "role": "admin"
     // }
+    ```
+
+- ### Create a database
+
+    Specify where the content lives and create a database in memory.
+  
+    ```js
+    const database = stancy('content/').database()
     ```
 
 ## Development
