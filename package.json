@@ -10,7 +10,13 @@
 		"demo": "node src/demo.js",
 		"test": "npm run rollup && node src/demo.js"
 	},
-	"keywords": [ "static file", "generator", "database", "data store", "flat file" ],
+	"keywords": [
+		"static file",
+		"generator",
+		"database",
+		"data store",
+		"flat file"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/limitlessloop/stancy.git"
@@ -25,6 +31,7 @@
 		"@babel/preset-env": "^7.9.6",
 		"@babel/runtime": "^7.9.6",
 		"@rollup/plugin-json": "^4.0.3",
+		"@rollup/plugin-node-resolve": "^8.0.0",
 		"babel-plugin-add-module-exports": "^1.0.2",
 		"rollup": "^2.10.7",
 		"rollup-plugin-babel": "^4.4.0",

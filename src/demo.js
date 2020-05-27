@@ -1,6 +1,6 @@
 const stancy = require('../dist');
 
-// stancy('content/').serve();
+stancy('content/').serve('api');
 
 // console.log(stancy('content/').database());
 

@@ -3,16 +3,16 @@ import express from 'express';
 import { database, write } from './create-database.js';
 import getContent from './get-content.js';
 
-function serve(dir, port) {
+function serve(dir, base, port) {
 	port = port || 3000;
-
+	base = '/' + base || '/';
 	const db = database(dir);
 	const app = express();
 
 	// Format repsonse to have spaces and indentation
 	app.set('json spaces', 4);
 
-	app.get('/', (req, res) => {
+	app.get(base, (req, res) => {
 		getContent(db, {
 			resource1: null,
 			resource2: null,
@@ -22,7 +22,7 @@ function serve(dir, port) {
 		});
 	});
 
-	app.get('/:resource1', (req, res) => {
+	app.get(base + ':resource1', (req, res) => {
 		getContent(db, {
 			resource1: req.params.resource1,
 			resource2: null,
@@ -32,7 +32,7 @@ function serve(dir, port) {
 		});
 	});
 
-	app.get('/:resource1/:resource2', (req, res) => {
+	app.get(base + ':resource1/:resource2', (req, res) => {
 		getContent(db, {
 			resource1: req.params.resource1,
 			resource2: req.params.resource2,
@@ -43,7 +43,7 @@ function serve(dir, port) {
 	});
 
 	app.listen(port, () => {
-		console.log(`Server listening at http://localhost:${port}`);
+		console.log(`Server listening at http://localhost:${port}${base}`);
 	});
 }
 
@@ -77,8 +77,8 @@ function get(base, path, token) {
 
 export default function(source) {
 	return {
-		serve: function(port) {
-			return serve(source, port);
+		serve: function(base, port) {
+			return serve(source, base, port);
 		},
 		get: function(path, token) {
 			return get(path, token);
