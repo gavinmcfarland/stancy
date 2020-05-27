@@ -23,7 +23,11 @@ function serve(dir, port, base) {
 			resource2: null,
 			query: req.query
 		}).then((value) => {
-			res.json(value);
+			if (value) {
+				res.json(value);
+			} else {
+				res.send(`No value that matches query \n ${req.url}`);
+			}
 		});
 	});
 
@@ -33,7 +37,11 @@ function serve(dir, port, base) {
 			resource2: null,
 			query: req.query
 		}).then((value) => {
-			res.json(value);
+			if (value) {
+				res.json(value);
+			} else {
+				res.send(`No value that matches query \n ${req.url}`);
+			}
 		});
 	});
 
@@ -43,7 +51,11 @@ function serve(dir, port, base) {
 			resource2: req.params.resource2,
 			query: req.query
 		}).then((value) => {
-			res.json(value);
+			if (value) {
+				res.json(value);
+			} else {
+				res.send(`No value that matches query \n ${req.url}`);
+			}
 		});
 	});
 
