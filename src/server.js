@@ -3,9 +3,14 @@ import express from 'express';
 import { database, write } from './create-database.js';
 import getContent from './get-content.js';
 
-function serve(dir, base, port) {
+function serve(dir, port, base) {
 	port = port || 3000;
-	base = '/' + base || '/';
+	if (!base) {
+		base = '/';
+	} else {
+		base = '/' + base + '/';
+	}
+
 	const db = database(dir);
 	const app = express();
 
@@ -77,8 +82,8 @@ function get(base, path, token) {
 
 export default function(source) {
 	return {
-		serve: function(base, port) {
-			return serve(source, base, port);
+		serve: function(port, base) {
+			return serve(source, port, base);
 		},
 		get: function(path, token) {
 			return get(path, token);
