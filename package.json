@@ -1,6 +1,6 @@
 {
 	"name": "stancy",
-	"version": "1.0.0-alpha.4",
+	"version": "1.0.0-alpha.5",
 	"description": "Generate a database of collections and items from static files and folders",
 	"main": "dist/index.js",
 	"scripts": {
