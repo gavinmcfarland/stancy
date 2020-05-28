@@ -7,8 +7,6 @@ function serve(dir, port, base) {
 	port = port || 3000;
 	if (!base) {
 		base = '/';
-	} else {
-		base = '/' + base + '/';
 	}
 
 	const db = database(dir);
