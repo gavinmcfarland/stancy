@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/stancy)
 
-Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server as an API. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko. Stancy is unbiased about how you use it and can be customised to suit different use-cases.
+Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server for a RESTlike API. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko. Stancy is unbiased about how you use it and can be customised to suit different use-cases.
 
 ## Example
 
@@ -23,12 +23,12 @@ content/
         another-post.md
 ```
 
-In this example we've created a file `site.json` which stores key information about our site, some `pages`, and a `blog`.
+Here we've created a file `site.json` which stores key information about our site, some `pages`, and a `blog`.
 
 Now start the server.
 
 ```js
-stancy('content/').serve(3000, '/api/`)
+stancy('content/').serve(3000, '/api/')
 ```
 
 The API generates endpoints for collections and items following the structure of the directory.
@@ -98,7 +98,7 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 ---
 
-- ### File Types <mark>coming soon</mark>
+- ### File Types <mark>(coming soon)</mark>
 
   The following file types are supported.
 
@@ -111,7 +111,7 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 ---
 
-- ### Meta Data <mark>coming soon</mark>
+- ### Meta Data <mark>(coming soon)</mark>
 
   You can add meta data to images by creating a data file with a matching name.
 
@@ -163,13 +163,13 @@ import stancy from 'stancy'
     - `port`: a _Number_. Default port is _3000_
     - `subpath`: a _String_. For example `"/api/"` to create the url http://localhost:3000/api/
 
-- ### Get content
+- ### Get content <mark>(work in progress)</mark>
 
     To get content from a server
 
     ```js
     async function get() {
-        return await stancy().get('http://localhost:3000', 'users/jerry');
+        return await stancy().get('http://localhost:3000/api/', 'users/jerry');
     }
 
     get().then((content) => {
