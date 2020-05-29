@@ -28,7 +28,7 @@ In this example we've created a file `site.json` which stores key information ab
 Now start the server.
 
 ```js
-stancy('content/').serve()
+stancy('content/').serve(3000, '/api/`)
 ```
 
 The API generates endpoints for collections and items following the structure of the directory.
@@ -40,10 +40,10 @@ The API generates endpoints for collections and items following the structure of
 
 We can access the content using the following requests:
 
-- [localhost:3000/site](http://localhost:3000/site)
-- [localhost:3000/pages](http://localhost:3000/pages)
-- [localhost:3000/pages?status=draft](http://localhost:3000/pages?status=draft)
-- [localhost:3000/pages/about](http://localhost:3000/pages/about)
+- [localhost:3000/site](http://localhost:3000/api/site)
+- [localhost:3000/pages](http://localhost:3000/api/pages)
+- [localhost:3000/pages?status=draft](http://localhost:3000/api/pages?status=draft)
+- [localhost:3000/pages/about](http://localhost:3000/api/pages/about)
 
 Items in collections can be filtered by querying their _fields_. For example the query `?status=draft` will list all draft pages .
 
@@ -135,36 +135,6 @@ Items in collections can be filtered by querying their _fields_. For example the
   }
   ```
 
-    
-## Databases
-
-To create a database.
-
-```js
-stancy(content).database()
-```
-
-- `content`: a _String_ which points to the directory of your static content, eg `content/`.
-
-
-
-### Fields
-
-Using a query language of your choice you can filter and show data using the following field names.
-
-#### Private
-
-- `_name` Name of the resource
-- `_collection` Collection the resource belongs to
-- `_index` The index of the resource in the collection or dataset
-- `_type` The type of resource. Named after the folder or file.
-- `_source` The path to the folder containing the file.
-
-
-#### Public
-
-- `url` The url to the resource.
-
 ## Installation
 
 Add the npm package to your project.
@@ -221,6 +191,23 @@ import stancy from 'stancy'
     ```js
     const database = stancy('content/').database()
     ```
+- ### Querying data
+
+    If you create a database you can filter and show data using a query language of your choice using the following field names.
+
+    #### Private
+
+    - `_name` Name of the resource
+    - `_collection` Collection the resource belongs to
+    - `_index` The index of the resource in the collection or dataset
+    - `_type` The type of resource. Named after the folder or file.
+    - `_source` The path to the folder containing the file.
+
+
+    #### Public
+
+    - `url` The url to the resource.
+
 
 ## Development
 

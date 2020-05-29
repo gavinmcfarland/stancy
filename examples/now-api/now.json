@@ -10,5 +10,5 @@
 			}
 		}
 	],
-	"rewrites": [ { "source": "/api/(.*)", "destination": "/server.js" } ]
+	"rewrites": [ { "source": "/api/(.*)", "destination": "/api.js" } ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "now",
+  "version": "1.0.0",
+  "description": "This is an example of using Now to deploy a static site which fetches content from flat files.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
