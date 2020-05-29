@@ -1,6 +1,6 @@
 {
 	"name": "stancy",
-	"version": "1.0.0-alpha.6",
+	"version": "1.0.0-alpha.7",
 	"description": "Generate a database of collections and items from static files and folders",
 	"main": "dist/index.js",
 	"scripts": {
@@ -23,7 +23,6 @@
 		"@babel/plugin-proposal-class-properties": "^7.8.3",
 		"@babel/plugin-transform-runtime": "^7.9.6",
 		"@babel/preset-env": "^7.9.6",
-		"@babel/runtime": "^7.9.6",
 		"@rollup/plugin-json": "^4.0.3",
 		"@rollup/plugin-node-resolve": "^8.0.0",
 		"babel-plugin-add-module-exports": "^1.0.2",
@@ -34,6 +33,7 @@
 		"rollup-plugin-uglify": "^6.0.4"
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.9.6",
 		"express": "^4.17.1",
 		"gray-matter": "^4.0.2",
 		"json-server": "^0.16.1",
