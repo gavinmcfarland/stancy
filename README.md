@@ -45,7 +45,9 @@ We can access the content using the following requests:
 - [localhost:3000/api/pages?status=draft](http://localhost:3000/api/pages?status=draft)
 - [localhost:3000/api/pages/about](http://localhost:3000/api/pages/about)
 
-Items in collections can be filtered by querying their _fields_. For example the query `?status=draft` will list all draft pages .
+Items in collections can be filtered by querying their _fields_. For example the query `?status=draft` will list all draft pages.
+
+Check out the [examples](/examples).
 
 
 ## Features
