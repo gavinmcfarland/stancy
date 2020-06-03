@@ -2,6 +2,12 @@
 import express from 'express';
 import { database, write } from './create-database.js';
 import getContent from './get-content.js';
+const chokidar = require('chokidar');
+
+const watcher = chokidar.watch('content/', {
+	ignored: /(^|[\/\\])\../, // ignore dotfiles
+	persistent: true
+});
 
 function serve(dir, port, base) {
 	port = port || 3000;
@@ -9,56 +15,84 @@ function serve(dir, port, base) {
 		base = '/';
 	}
 
-	const db = database(dir);
-	const app = express();
+	var server = '';
 
-	// Format repsonse to have spaces and indentation
-	app.set('json spaces', 4);
+	var db;
 
-	app.get(base, (req, res) => {
-		getContent(db, {
-			resource1: null,
-			resource2: null,
-			query: req.query
-		}).then((value) => {
-			if (value) {
-				res.json(value);
-			} else {
-				res.send(`No value that matches query \n ${req.url}`);
-			}
+	function createApp() {
+		var app = express();
+		db = database(dir);
+
+		// Format repsonse to have spaces and indentation
+		app.set('json spaces', 4);
+
+		app.get(base, (req, res) => {
+			getContent(db, {
+				resource1: null,
+				resource2: null,
+				query: req.query
+			}).then((value) => {
+				if (value) {
+					res.json(value);
+				} else {
+					res.send(`No value that matches query \n ${req.url}`);
+				}
+			});
 		});
-	});
 
-	app.get(base + ':resource1', (req, res) => {
-		getContent(db, {
-			resource1: req.params.resource1,
-			resource2: null,
-			query: req.query
-		}).then((value) => {
-			if (value) {
-				res.json(value);
-			} else {
-				res.send(`No value that matches query \n ${req.url}`);
-			}
+		app.get(base + ':resource1', (req, res) => {
+			getContent(db, {
+				resource1: req.params.resource1,
+				resource2: null,
+				query: req.query
+			}).then((value) => {
+				if (value) {
+					res.json(value);
+				} else {
+					res.send(`No value that matches query \n ${req.url}`);
+				}
+			});
 		});
-	});
 
-	app.get(base + ':resource1/:resource2', (req, res) => {
-		getContent(db, {
-			resource1: req.params.resource1,
-			resource2: req.params.resource2,
-			query: req.query
-		}).then((value) => {
-			if (value) {
-				res.json(value);
-			} else {
-				res.send(`No value that matches query \n ${req.url}`);
-			}
+		app.get(base + ':resource1/:resource2', (req, res) => {
+			getContent(db, {
+				resource1: req.params.resource1,
+				resource2: req.params.resource2,
+				query: req.query
+			}).then((value) => {
+				if (value) {
+					res.json(value);
+				} else {
+					res.send(`No value that matches query \n ${req.url}`);
+				}
+			});
 		});
-	});
 
-	app.listen(port, () => {
-		console.log(`Server listening at http://localhost:${port}${base}`);
+		return app;
+	}
+
+	function start() {
+		server = require('http').createServer(createApp());
+		server.listen(port, () => {
+			console.log(`Server listening at http://localhost:${port}${base}`);
+		});
+
+		// app.listen(port, () => {
+		// 	console.log(`Server listening at http://localhost:${port}${base}`);
+		// });
+	}
+
+	function restart() {
+		console.log('restart');
+		server.close();
+		console.log('start');
+		start();
+	}
+
+	start();
+
+	watcher.on('change', (path) => {
+		restart();
 	});
 }
 

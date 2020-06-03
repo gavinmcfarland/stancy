@@ -1,0 +1,14 @@
+{
+	"version": 2,
+	"public": true,
+	"builds": [
+		{
+			"src": "api.js",
+			"use": "@now/node-server",
+			"config": {
+				"includeFiles": [ "content/**" ]
+			}
+		}
+	],
+	"rewrites": [ { "source": "/api/(.*)", "destination": "/api.js" } ]
+}
