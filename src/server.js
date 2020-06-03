@@ -1,11 +1,11 @@
 // server.js
 import express from 'express';
-import { database, write } from './create-database.js';
+import { database } from './create-database.js';
 import getContent from './get-content.js';
 const chokidar = require('chokidar');
 const http = require('http');
 const watcher = chokidar.watch('content/', {
-	ignored: /(^|[\/\\])\../, // ignore dotfiles
+	ignored: /(^|[/\\])\../, // ignore dotfiles
 	persistent: true
 });
 
@@ -91,7 +91,7 @@ function serve(dir, port, base) {
 
 	start();
 
-	watcher.on('change', (path) => {
+	watcher.on('change', () => {
 		restart();
 	});
 }

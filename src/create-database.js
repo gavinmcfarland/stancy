@@ -51,7 +51,7 @@ const type = {
 		index: function(source, value) {
 			let hasIndex = false;
 			if (type.is.folder(value)) {
-				fs.readdirSync(path.join(source + value)).map((value, index) => {
+				fs.readdirSync(path.join(source + value)).map((value) => {
 					if (type.is.index(value)) {
 						hasIndex = true;
 					}
@@ -63,7 +63,7 @@ const type = {
 		children: function(source, value) {
 			let hasChildren = false;
 			if (type.is.folder(value)) {
-				fs.readdirSync(path.join(source + value)).map((value, index) => {
+				fs.readdirSync(path.join(source + value)).map(() => {
 					hasChildren = true;
 				});
 			}
@@ -133,10 +133,10 @@ function createResrouce(dir, value, index, parent, root) {
 
 	// Apply content from index file
 	if (type.is.folder(value) && !type.is.item(dir, value)) {
-		let subDir = path.join(dir + value + '/');
+		// let subDir = path.join(dir + value + '/');
 		let indexContent = '';
-		fs.readdirSync(dir).map((value, index) => {
-			if (/\index..+$/.test(value)) {
+		fs.readdirSync(dir).map((value) => {
+			if (/index..+$/.test(value)) {
 				indexContent = preprocess(dir, value);
 			}
 		});
