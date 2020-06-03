@@ -3,7 +3,7 @@ import express from 'express';
 import { database, write } from './create-database.js';
 import getContent from './get-content.js';
 const chokidar = require('chokidar');
-
+const http = require('http');
 const watcher = chokidar.watch('content/', {
 	ignored: /(^|[\/\\])\../, // ignore dotfiles
 	persistent: true
@@ -72,7 +72,7 @@ function serve(dir, port, base) {
 	}
 
 	function start() {
-		server = require('http').createServer(createApp());
+		server = http.createServer(createApp());
 		server.listen(port, () => {
 			console.log(`Server listening at http://localhost:${port}${base}`);
 		});
