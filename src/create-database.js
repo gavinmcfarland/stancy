@@ -148,11 +148,11 @@ function createResrouce(dir, value, index, parent, root) {
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 
-		resource._children = [];
+		resource[parent] = [];
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
 			if (!type.is.index(value)) {
-				resource._children.push(createResrouce(subDir, value, index, parent, root));
+				resource[parent].push(createResrouce(subDir, value, index, parent, root));
 			}
 		});
 	}
