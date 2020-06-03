@@ -10,7 +10,13 @@
 		"demo": "node src/demo.js",
 		"test": "npm run rollup && node src/demo.js"
 	},
-	"keywords": [ "static file", "generator", "database", "data store", "flat file" ],
+	"keywords": [
+		"static file",
+		"generator",
+		"database",
+		"data store",
+		"flat file"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/limitlessloop/stancy.git"
@@ -18,22 +24,22 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@babel/cli": "^7.8.4",
-		"@babel/core": "^7.9.6",
-		"@babel/plugin-proposal-class-properties": "^7.8.3",
-		"@babel/plugin-transform-runtime": "^7.9.6",
-		"@babel/preset-env": "^7.9.6",
+		"@babel/cli": "^7.10.1",
+		"@babel/core": "^7.10.2",
+		"@babel/plugin-proposal-class-properties": "^7.10.1",
+		"@babel/plugin-transform-runtime": "^7.10.1",
+		"@babel/preset-env": "^7.10.2",
 		"@rollup/plugin-json": "^4.0.3",
 		"@rollup/plugin-node-resolve": "^8.0.0",
 		"babel-plugin-add-module-exports": "^1.0.2",
-		"rollup": "^2.10.7",
+		"rollup": "^2.13.0",
 		"rollup-plugin-babel": "^4.4.0",
 		"rollup-plugin-commonjs": "^10.1.0",
 		"rollup-plugin-node-resolve": "^5.2.0",
 		"rollup-plugin-uglify": "^6.0.4"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.9.6",
+		"@babel/runtime": "^7.10.2",
 		"chokidar": "^3.4.0",
 		"express": "^4.17.1",
 		"gray-matter": "^4.0.2",
