@@ -2,15 +2,15 @@
 
 This is an example of integrating Stancy with Sapper to support both local editing and production.
 
-1. Install Sapper dependencies
+1. Install Sapper dependencies.
     ```bash
     npm install
     ```
-2. Install Stancy as a dependency
+2. Install Stancy as a dependency.
     ```bash
     npm install stancy --save-dev
     ```
-3. Add code to tell to start server for the API, you can add this to _rollup.config.js__
+3. Add code to start server for the API, you can add this to _rollup.config.js_.
 
     __src/rollup.config.js__
     ```js
@@ -58,7 +58,7 @@ This is an example of integrating Stancy with Sapper to support both local editi
         });
     }
     ```
-5. Display data on page
+5. Display data on page.
 
     __src/routes/about.svelt__
     ```html
