@@ -16,4 +16,4 @@
 </svelte:head>
 
 <h1>About</h1>
-{page.content}
+{@html page.content}

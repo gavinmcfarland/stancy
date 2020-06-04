@@ -8,6 +8,7 @@ const watcher = chokidar.watch('content/', {
 	ignored: /(^|[/\\])\../, // ignore dotfiles
 	persistent: true
 });
+import cors from 'cors';
 
 function serve(dir, port, base) {
 	port = port || 3000;
@@ -23,6 +24,15 @@ function serve(dir, port, base) {
 		var app = express();
 		db = database(dir);
 
+		var corsOptions = {
+			origin: '*',
+			methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+			preflightContinue: false,
+			optionsSuccessStatus: 204
+		};
+
+		app.use(cors(corsOptions));
+
 		// Format repsonse to have spaces and indentation
 		app.set('json spaces', 4);
 
@@ -34,6 +44,7 @@ function serve(dir, port, base) {
 			}).then((value) => {
 				if (value) {
 					res.json(value);
+					console.log('0');
 				} else {
 					res.send(`No value that matches query \n ${req.url}`);
 				}
@@ -48,6 +59,7 @@ function serve(dir, port, base) {
 			}).then((value) => {
 				if (value) {
 					res.json(value);
+					console.log('1');
 				} else {
 					res.send(`No value that matches query \n ${req.url}`);
 				}
@@ -62,6 +74,7 @@ function serve(dir, port, base) {
 			}).then((value) => {
 				if (value) {
 					res.json(value);
+					// console.log(value);
 				} else {
 					res.send(`No value that matches query \n ${req.url}`);
 				}
