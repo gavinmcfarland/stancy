@@ -1,29 +1,31 @@
 # Sapper
 
-This is an example of integrating Stancy with sapper to support both local editing and production.
+This is an example of integrating Stancy with Sapper to support both local editing and production.
 
-1. Install Stancy as a dependency
+1. Install Sapper dependencies
     ```bash
-    npm install stancy
+    npm install
     ```
-1. Add code to tell sapper to start server for the API.
+2. Install Stancy as a dependency
+    ```bash
+    npm install stancy --save-dev
+    ```
+3. Add code to tell to start server for the API, you can add this to _rollup.config.js__
 
-    __src/server.js__
+    __src/rollup.config.js__
     ```js
+    // ...
     import stancy from 'stancy';
-
-    const { PORT, NODE_ENV } = process.env;
-    const dev = NODE_ENV === 'development';
 
     if (dev) {
         stancy('content/').serve('4000', '/api/');
     }
+    // ...
     ```
-2. Create a function to get data from API
+4. Create a function to get data from the API and customise the local and remot API server addresses.
 
     __src/node_modules/api.js__
     ```js
-
     var base = '';
 
     if (process.env.NODE_ENV === 'development') {
@@ -56,26 +58,9 @@ This is an example of integrating Stancy with sapper to support both local editi
         });
     }
     ```
-3. Enable importing JSON files in sapper
+5. Display data on page
 
-    __rollup.config.js__
-    ```js
-    // ...
-    import json from 'rollup-plugin-json';
-    // ...
-    export default {
-        // ...
-        server: {
-            plugins: [
-                json({
-                    exclude: [ 'node_modules/**' ]
-                }),
-            ]
-        }
-    }
-    ```
-3. Display data on page
-
+    __src/routes/about.svelt__
     ```html
     <script context="module">
     import * as api from "api.js";
@@ -97,4 +82,9 @@ This is an example of integrating Stancy with sapper to support both local editi
     <h1>About</h1>
 
     {@html page.content}
+    ```
+6. Test it by starting Sapper and viewing http://localhost:3000/about. When you make changes to the content you'll need to refresh the browser. 
+
+    ```bash
+    npm run dev
     ```
