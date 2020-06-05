@@ -1,9 +1,8 @@
 <script context="module">
   import * as api from "api.js";
   export async function preload({ params }) {
-    const { slug } = params;
     const page = await api.get(`pages/about`, null);
-    return { page, slug };
+    return { page };
   }
 </script>
 
