@@ -5,6 +5,7 @@ const marked = require('marked');
 const smarkt = require('smarkt');
 const YAML = require('yaml');
 const JSON5 = require('json5');
+const matter = require('gray-matter');
 // const csson = require('@csson/csson')
 
 function getFileExt(item) {
@@ -29,8 +30,12 @@ function parseJson5(dir, item) {
 
 function parseMarkdown(dir, item) {
 	if (getFileExt(item) === 'md') {
+		var file = fs.readFileSync(path.join(dir, item), 'utf8');
+		const { data, content } = matter(file);
+
 		let object = {
-			content: marked(fs.readFileSync(path.join(dir, item), 'utf8'))
+			...data,
+			content: marked(content)
 		};
 
 		return object;
