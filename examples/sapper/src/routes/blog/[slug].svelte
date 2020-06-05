@@ -52,4 +52,6 @@
 
 <h1>{post.title}</h1>
 
-<div class="content">{post.html}</div>
+<div class="content">
+  {@html post.content}
+</div>
