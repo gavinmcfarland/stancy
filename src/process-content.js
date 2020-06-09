@@ -1,12 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const marked = require('marked');
-// const matter = require('gray-matter')
 const smarkt = require('smarkt');
 const YAML = require('yaml');
 const JSON5 = require('json5');
 const matter = require('gray-matter');
-// const csson = require('@csson/csson')
 
 function getFileExt(item) {
 	if (item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)[1];
@@ -29,13 +26,14 @@ function parseJson5(dir, item) {
 }
 
 function parseMarkdown(dir, item) {
+	// Removed automatic parsing of markdown, so that this can be done per domain
 	if (getFileExt(item) === 'md') {
 		var file = fs.readFileSync(path.join(dir, item), 'utf8');
 		const { data, content } = matter(file);
 
 		let object = {
 			...data,
-			content: marked(content)
+			content: content
 		};
 
 		return object;
