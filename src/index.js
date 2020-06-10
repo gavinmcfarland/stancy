@@ -1,21 +1,5 @@
-module.exports = require('./server');
+import { stancy } from './server';
+import { client } from './client';
 
-// var stancy = function (source) {
-// 	return {
-// 		database: {},
-// 		generate: function (source) {
-// 			this.database = {
-// 				test: "test"
-// 			};
-// 			return this;
-// 		},
-
-// 		serve: function () {
-// 			return {};
-// 		},
-
-// 		write: function () {
-// 			return {};
-// 		}
-// 	}
-// }
+const myModule = (module.exports = stancy);
+myModule.client = client;

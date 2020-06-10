@@ -17,8 +17,6 @@ var fs = require('fs');
 
 var path = require('path');
 
-var marked = require('marked');
-
 var smarkt = require('smarkt');
 
 var YAML = require('yaml');
@@ -46,6 +44,7 @@ function parseJson5(dir, item) {
 }
 
 function parseMarkdown(dir, item) {
+  // Removed automatic parsing of markdown, so that this can be done per domain
   if (getFileExt(item) === 'md') {
     var file = fs.readFileSync(path.join(dir, item), 'utf8');
 
@@ -54,7 +53,7 @@ function parseMarkdown(dir, item) {
         content = _matter.content;
 
     var object = _objectSpread(_objectSpread({}, data), {}, {
-      content: marked(content)
+      content: content
     });
 
     return object;
@@ -82,7 +81,7 @@ function parseYaml(dir, item) {
 
 
 function parseContent(dir, item) {
-  var result = parseJson(dir, item) || parseText(dir, item) || parseYaml(dir, item) || parseJson5(dir, item); // parseCsson(dir, item);
+  var result = parseJson(dir, item) || parseMarkdown(dir, item) || parseText(dir, item) || parseYaml(dir, item) || parseJson5(dir, item); // parseCsson(dir, item);
 
   return result;
 }

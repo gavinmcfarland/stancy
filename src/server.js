@@ -2,6 +2,7 @@
 import express from 'express';
 import { database } from './create-database.js';
 import getContent from './get-content.js';
+
 const chokidar = require('chokidar');
 const http = require('http');
 const watcher = chokidar.watch('content/', {
@@ -137,7 +138,7 @@ function get(base, path, token) {
 	return send({ method: 'GET', path, token, base });
 }
 
-export default function(source) {
+export function stancy(source) {
 	return {
 		serve: function(port, base) {
 			return serve(source, port, base);
