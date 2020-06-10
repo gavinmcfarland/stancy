@@ -175,8 +175,11 @@ import stancy from 'stancy'
     stancy.config({
         local: "http://localhost:4000/api/",
         remote: "https://now-restlike-api.now.sh/api/",
-        preprocess: (content) => {
-            marked(content)
+        process: ({ item }) => {
+            if (item.content) {
+                item.content = marked(item.content);
+            }
+            return item;
         }
     })
 

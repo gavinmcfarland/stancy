@@ -1,7 +1,8 @@
 <script context="module">
-  import stancy from "api";
+  import client from "stancy";
+
   export async function preload({ params }) {
-    const posts = await stancy.fetch(`posts`, null);
+    const posts = await client.fetch(`posts`);
     return { posts };
   }
 </script>
