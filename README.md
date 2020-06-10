@@ -167,16 +167,17 @@ import stancy from 'stancy'
 
 - ### Get content <mark>(work in progress)</mark>
 
-    To get content from a server
+    To get content from a server using the provided client (Alternatively it can be fetched like any other RESTlike API).
 
     ```js
-    import stancy from 'stancy';
+    import { client } from 'stancy';
+    import marked from 'marked';
 
-    stancy.config({
-        local: "http://localhost:4000/api/",
-        remote: "https://now-restlike-api.now.sh/api/",
-        process: ({ item }) => {
-            if (item.content) {
+    client.config({
+        local: "http://localhost:4000/api/", // The address of the development server
+        remote: "https://now-restlike-api.now.sh/api/", // The address of the production server
+        preprocess: ({ item }) => { // An example of parsing markdown content
+            if (item.content) { // Only on content fields
                 item.content = marked(item.content);
             }
             return item;
@@ -184,7 +185,7 @@ import stancy from 'stancy'
     })
 
     async function fetch() {
-        return await stancy.fetch('users/jerry');
+        return await client.fetch('users/jerry');
     }
 
     fetch().then((content) => {
@@ -195,7 +196,8 @@ import stancy from 'stancy'
     //   _url: 'users/jerry',
     //   "name": "Jerry",
     //   "age": "24",
-    //   "role": "admin"
+    //   "role": "admin",
+    //   "content": "<h1>Jerry</h1>"
     // }
     ```
 
