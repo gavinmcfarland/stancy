@@ -1,7 +1,7 @@
 <script context="module">
-  import * as stancy from "api";
+  import stancy from "api";
   export async function preload({ params }) {
-    const page = await stancy.get(`pages/about`);
+    const page = await stancy.fetch(`pages/about`, null);
     return { page };
   }
 </script>

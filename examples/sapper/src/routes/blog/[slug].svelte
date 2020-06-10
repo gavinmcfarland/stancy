@@ -1,7 +1,8 @@
 <script context="module">
-  import * as api from "api.js";
+  import stancy from "api";
+
   export async function preload({ params }) {
-    const post = await api.get(`posts/${params.slug}`, null);
+    const post = await stancy.fetch(`posts/${params.slug}`, null);
     return { post };
   }
 </script>

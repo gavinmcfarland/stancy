@@ -170,11 +170,21 @@ import stancy from 'stancy'
     To get content from a server
 
     ```js
-    async function get() {
-        return await stancy().get('http://localhost:3000/api/', 'users/jerry');
+    import stancy from 'stancy';
+
+    stancy.config({
+        local: "http://localhost:4000/api/",
+        remote: "https://now-restlike-api.now.sh/api/",
+        preprocess: (content) => {
+            marked(content)
+        }
+    })
+
+    async function fetch() {
+        return await stancy.fetch('users/jerry');
     }
 
-    get().then((content) => {
+    fetch().then((content) => {
         console.log(content)
     })
 
