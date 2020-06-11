@@ -2,8 +2,9 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import { uglify } from 'rollup-plugin-uglify';
 import { eslint } from 'rollup-plugin-eslint';
-import json from 'rollup-plugin-json';
-// import resolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
+import image from '@rollup/plugin-image';
+import resolve from '@rollup/plugin-node-resolve';
 
 export default {
 	input: 'src/index.js',
@@ -12,11 +13,15 @@ export default {
 		format: 'cjs',
 		name: 'bundle'
 	},
+	external: [ 'express', 'cors', 'jsonata' ],
 	plugins: [
 		eslint(),
+		resolve(),
 		json({
-			exclude: [ 'node_modules/**' ]
+			exclude: [ 'node_modules/**' ],
+			compact: true
 		}),
+		image(),
 		babel({
 			exclude: [ 'node_modules/**' ],
 			runtimeHelpers: true

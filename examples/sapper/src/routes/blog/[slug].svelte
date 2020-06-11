@@ -1,5 +1,5 @@
 <script context="module">
-  import client from "stancy";
+  import client from "api";
 
   export async function preload({ params }) {
     const post = await client.fetch(`posts/${params.slug}`);
