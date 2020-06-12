@@ -18,8 +18,7 @@ export default {
 		eslint(),
 		resolve(),
 		json({
-			exclude: [ 'node_modules/**' ],
-			compact: true
+			exclude: [ 'node_modules/**' ]
 		}),
 		image(),
 		babel({

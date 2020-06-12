@@ -165,23 +165,15 @@ import stancy from 'stancy'
     - `port`: a _Number_. Default port is _3000_
     - `subpath`: a _String_. For example `"/api/"` to create the url http://localhost:3000/api/
 
-- ### Get content <mark>(work in progress)</mark>
+- ### Fetch content <mark>(work in progress)</mark>
 
-    To get content from a server using the provided client (Alternatively it can be fetched like any other RESTlike API).
+    You can get content from a server using the client (Alternatively data can be fetched like any other REST API).
 
     ```js
     import { client } from 'stancy';
-    import marked from 'marked';
 
     client.config({
-        local: "http://localhost:4000/api/", // The address of the development server
-        remote: "https://now-restlike-api.now.sh/api/", // The address of the production server
-        preprocess: ({ item }) => { // An example of parsing markdown content
-            if (item.content) { // Only on content fields
-                item.content = marked(item.content);
-            }
-            return item;
-        }
+        production: "https://now-restlike-api.now.sh/api/" // The address of the production server/api
     })
 
     async function fetch() {
@@ -199,6 +191,21 @@ import stancy from 'stancy'
     //   "role": "admin",
     //   "content": "<h1>Jerry</h1>"
     // }
+    ```
+
+    #### Configure the client
+
+    ```js
+    client.config({
+        preview: "http://localhost:4000/api/", // The address of the development server
+        production: "https://now-restlike-api.now.sh/api/", // The address of the production server
+        preprocess: ({ item }) => { // An example of parsing markdown content
+            if (item.content) { // Only on content fields
+                item.content = marked(item.content);
+            }
+            return item;
+        }
+    })
     ```
 
 - ### Create a database

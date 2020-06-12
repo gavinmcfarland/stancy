@@ -29,12 +29,15 @@ class Client {
 
 		const fetch = process.browser ? window.fetch : require('node-fetch').default;
 
-		var base = config.local || 'http://localhost:3000/api/';
+		var base = config.preview || 'http://localhost:3000/api/';
 
 		if (process.env.NODE_ENV === 'development') {
-			base = config.local;
+			if (config.preview) {
+				base = config.preview;
+			}
+			base = config.production;
 		} else {
-			base = config.remote;
+			base = config.production;
 		}
 
 		return fetch(`${base}${path}`).then((r) => r.text()).then((json) => {

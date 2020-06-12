@@ -89,6 +89,7 @@ function serve(dir, port, base) {
 		server = http.createServer(createApp());
 		server.listen(port, () => {
 			console.log(`Server listening at http://localhost:${port}${base}`);
+			console.log('test');
 		});
 
 		// app.listen(port, () => {
