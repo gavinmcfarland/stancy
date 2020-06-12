@@ -1,6 +1,10 @@
 class Client {
-	constructor() {
-		this._config = {};
+	constructor(options, local) {
+		this._options = options;
+		if (local) {
+			Object.assign(this._options, { preview: local });
+		}
+		console.log(this._options);
 	}
 	_process(data, callback) {
 		data = JSON.parse(data);
@@ -21,23 +25,20 @@ class Client {
 			return data;
 		}
 	}
-	config(value) {
-		this._config = value;
-	}
 	fetch(path) {
-		var config = this._config;
+		var options = this._options;
 
 		const fetch = process.browser ? window.fetch : require('node-fetch').default;
 
-		var base = config.preview || 'http://localhost:3000/api/';
+		var base = options.preview || 'http://localhost:3000/api/';
 
 		if (process.env.NODE_ENV === 'development') {
-			if (config.preview) {
-				base = config.preview;
+			if (options.preview) {
+				base = options.preview;
 			}
-			base = config.production;
+			base = options.production;
 		} else {
-			base = config.production;
+			base = options.production;
 		}
 
 		return fetch(`${base}${path}`).then((r) => r.text()).then((json) => {
@@ -51,8 +52,4 @@ class Client {
 	}
 }
 
-var client = new Client();
-
-export { client };
-
-export default client;
+export default Client;

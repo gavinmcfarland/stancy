@@ -5,9 +5,7 @@
 ```js
 import stancy from 'stancy'
 
-var stancy = stancy('content/')
-
-stancy.server({
+stancy('content/').server({
     port: 3000,
     subpath: '/api/'
 })

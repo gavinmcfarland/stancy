@@ -1,6 +1,12 @@
 const stancy = require('../dist');
 
-stancy;
+var app = stancy('content/');
+
+app.server();
+
+stancy('content/').client({
+	production: 'https://now-restlike-api.now.sh/api/'
+});
 
 // const client = require('../dist').client;
 

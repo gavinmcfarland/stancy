@@ -170,10 +170,10 @@ export function createDatabase(dir) {
 	return database;
 }
 
-export function write(dir) {
-	let db = JSON.stringify(createDatabase(dir), null, '\t');
-	fs.writeFile('db.json', db, (err) => {
-		if (err) throw err;
-		// console.log('The file has been saved!');
-	});
-}
+// export function write(dir) {
+// 	let db = JSON.stringify(createDatabase(dir), null, '\t');
+// 	fs.writeFile('db.json', db, (err) => {
+// 		if (err) throw err;
+// 		// console.log('The file has been saved!');
+// 	});
+// }
