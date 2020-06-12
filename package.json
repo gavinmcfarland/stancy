@@ -5,18 +5,13 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"babel": "babel src -d dist",
+		"webpack": "webpack --config webpack.config.js",
 		"rollup": "rollup --config",
-		"build": "npm run rollup",
+		"build": "npm run rollup && eslint",
 		"demo": "node src/demo.js",
-		"dev": "npm run rollup && node src/demo.js"
+		"dev": "./node_modules/.bin/eslint src/ && npm run rollup && node src/demo.js"
 	},
-	"keywords": [
-		"static file",
-		"generator",
-		"database",
-		"data store",
-		"flat file"
-	],
+	"keywords": [ "static file", "generator", "database", "data store", "flat file" ],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/limitlessloop/stancy.git"
@@ -29,25 +24,32 @@
 		"@babel/plugin-proposal-class-properties": "^7.10.1",
 		"@babel/plugin-transform-runtime": "^7.10.1",
 		"@babel/preset-env": "^7.10.2",
+		"@rollup/plugin-babel": "^5.0.3",
 		"@rollup/plugin-image": "^2.0.5",
 		"@rollup/plugin-json": "^4.0.3",
 		"@rollup/plugin-node-resolve": "^8.0.1",
 		"babel-plugin-add-module-exports": "^1.0.2",
-		"eslint": "^7.1.0",
+		"chokidar": "^3.4.0",
+		"eslint": "^7.2.0",
 		"eslint-plugin-babel": "^5.3.0",
+		"front-matter": "^4.0.2",
 		"node-fetch": "^2.6.0",
 		"rollup": "^2.13.0",
 		"rollup-plugin-babel": "^4.4.0",
 		"rollup-plugin-commonjs": "^10.1.0",
 		"rollup-plugin-eslint": "^7.0.0",
 		"rollup-plugin-json": "^4.0.0",
+		"rollup-plugin-node-builtins": "^2.1.2",
+		"rollup-plugin-node-globals": "^1.4.0",
 		"rollup-plugin-node-polyfills": "^0.2.1",
 		"rollup-plugin-node-resolve": "^5.2.0",
-		"rollup-plugin-uglify": "^6.0.4"
+		"rollup-plugin-terser": "^6.1.0",
+		"rollup-plugin-uglify": "^6.0.4",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.10.2",
-		"chokidar": "^3.4.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.1",
 		"gray-matter": "^4.0.2",

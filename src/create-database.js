@@ -160,7 +160,7 @@ function createResrouce(dir, value, index, parent, root) {
 	return resource;
 }
 
-function createDatabase(dir) {
+export function createDatabase(dir) {
 	let root = dir;
 
 	let database = fs.readdirSync(dir).map((value, index) => {
@@ -168,10 +168,6 @@ function createDatabase(dir) {
 	});
 
 	return database;
-}
-
-export function database(dir) {
-	return createDatabase(dir);
 }
 
 export function write(dir) {

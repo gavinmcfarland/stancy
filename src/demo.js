@@ -1,8 +1,10 @@
 const stancy = require('../dist');
 
-const client = require('../dist').client;
+stancy;
 
-stancy('content/').serve(3000, '/api/');
+// const client = require('../dist').client;
+
+// stancy('content/').serve(3000, '/api/');
 
 // client.config({
 // 	local: 'http://localhost:4000/api/',

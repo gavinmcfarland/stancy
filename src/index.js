@@ -1,5 +1,7 @@
-import { stancy } from './server';
-import { client } from './client';
+import stancy from './server';
+// import { client } from './client';
 
-const myModule = (module.exports = stancy);
-myModule.client = client;
+// export { client}
+export default stancy;
+// const myModule = (module.exports = stancy);
+// myModule.client = client;

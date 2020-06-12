@@ -1,31 +1,31 @@
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
-import { uglify } from 'rollup-plugin-uglify';
-import { eslint } from 'rollup-plugin-eslint';
-import json from '@rollup/plugin-json';
-import image from '@rollup/plugin-image';
 import resolve from '@rollup/plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
+import builtins from 'builtin-modules';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
+import json from '@rollup/plugin-json';
 
 export default {
 	input: 'src/index.js',
 	output: {
 		file: 'dist/index.js',
-		format: 'cjs',
-		name: 'bundle'
+		format: 'cjs'
+		// exports: 'named'
 	},
-	external: [ 'express', 'cors', 'jsonata' ],
+	external: [ ...builtins ],
 	plugins: [
-		eslint(),
 		resolve(),
-		json({
-			exclude: [ 'node_modules/**' ]
-		}),
-		image(),
-		babel({
-			exclude: [ 'node_modules/**' ],
-			runtimeHelpers: true
-		}),
+		// nodePolyfills(),
+
 		commonjs(),
-		uglify()
+		json(),
+
+		// babel({
+		// 	babelHelpers: 'runtime',
+		// 	skipPreflightCheck: true
+		// }),
+
+		terser()
 	]
 };

@@ -7,17 +7,17 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import json from '@rollup/plugin-json';
-import image from '@rollup/plugin-image';
+import builtins from 'builtin-modules';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-import stancy from 'stancy';
+// import stancy from 'stancy';
 
-if (dev) {
-	stancy('content/').serve('4000', '/api/');
-}
+// if (dev) {
+// 	stancy('content/').serve('4000', '/api/');
+// }
 
 const onwarn = (warning, onwarn) =>
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
@@ -26,11 +26,12 @@ export default {
 	client: {
 		input: config.client.input(),
 		output: config.client.output(),
+		// external: ['fs', 'path', 'assert'], // To ignore warning about external dependencies (annoying)
+		external: [ ...builtins, 'express', 'chokidar', 'cors', 'smarkt', 'yaml', 'json5' ],
 		plugins: [
 			json({
 				exclude: [ 'node_modules/**' ]
 			}),
-			image(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -42,7 +43,8 @@ export default {
 			}),
 			resolve({
 				browser: true,
-				dedupe: [ 'svelte' ]
+				dedupe: [ 'svelte' ],
+				exclude: [ 'node_modules/**' ]
 			}),
 			commonjs(),
 
@@ -83,6 +85,7 @@ export default {
 	server: {
 		input: config.server.input(),
 		output: config.server.output(),
+		external: [ ...builtins, 'express', 'chokidar', 'cors', 'smarkt', 'yaml', 'json5' ],
 		plugins: [
 			json({
 				exclude: [ 'node_modules/**' ]
