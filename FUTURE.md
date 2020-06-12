@@ -5,11 +5,11 @@
 ```js
 import stancy from 'stancy'
 
-var stancy = stancy("content/")
+var stancy = stancy('content/')
 
 stancy.server({
     port: 3000,
-    subpath: "/api/"
+    subpath: '/api/'
 })
 ```
 
@@ -18,14 +18,14 @@ stancy.server({
 ```js
 import stancy from 'stancy'
 
-var client = stancy("content/").client({
-    production: "http://domain.com/api/"
+var client = stancy('content/').client({
+    production: 'http://domain.com/api/'
 })
 ```
 
 To preprocess data before being consumed by the frontend. This can be useful for formatting dates, parsing markdown or sorting collections.
 
-```
+```js
 client.preprocess(({collection, item, content}) => {
     content = marked(content)
 })
@@ -57,10 +57,48 @@ client.get('users/jerry').then(res => {
 ### To create a database
 
 ```js
-var database = stancy("content/").database()
+var database = stancy('content/').database()
 ```
 
+### Configure using config file
 
+__stancy.config.js__
 
+```json
+{
+    source: "content/",
+    server: {
+        port: 3000,
+        subpath: "/API/"
+    },
+    client: {
+        preview: "",
+        production: "",
+        preprocess: ({content}) => {
+            content = marked(content)
+        }
+    }
+}
+```
+
+The bare minimum for a client.
+
+```json
+{
+    source: "content/",
+    client: {
+        production: "",
+        preprocess: ({content}) => {
+            content = marked(content)
+        }
+    }
+}
+```
+
+### To specify custom configuration
+
+```js
+stancy().config('src/stancy.config.js')
+```
 
 
