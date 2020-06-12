@@ -56,6 +56,7 @@
 		"jsonata": "^1.8.3",
 		"marked": "^0.8.2",
 		"pluralize": "^8.0.0",
+		"rollup-plugin-terser": "^6.1.0",
 		"smarkt": "0.0.6",
 		"yaml": "^1.10.0"
 	}

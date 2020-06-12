@@ -17,7 +17,8 @@
 		"polka": "next",
 		"postcss": "^7.0.32",
 		"sirv": "^0.4.0",
-		"svelte-preprocess-postcss": "^1.1.1"
+		"svelte-preprocess-postcss": "^1.1.1",
+		"stancy": "^1.0.0-alpha.15"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
@@ -37,7 +38,7 @@
 		"rollup-plugin-svelte": "^5.0.1",
 		"rollup-plugin-terser": "^5.3.0",
 		"sapper": "^0.27.0",
-		"stancy": "^1.0.0-alpha.15",
+
 		"svelte": "^3.0.0"
 	}
 }
