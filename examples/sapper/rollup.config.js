@@ -27,11 +27,8 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		// external: ['fs', 'path', 'assert'], // To ignore warning about external dependencies (annoying)
-		external: [ ...builtins, 'express', 'chokidar', 'cors', 'smarkt', 'yaml', 'json5' ],
 		plugins: [
-			json({
-				exclude: [ 'node_modules/**' ]
-			}),
+			json(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -77,6 +74,9 @@ export default {
 					module: true
 				})
 		],
+		// external: Object.keys(pkg.dependencies).concat(
+		// 	require('module').builtinModules || Object.keys(process.binding('natives'))
+		// ),
 
 		preserveEntrySignatures: false,
 		onwarn
@@ -87,9 +87,7 @@ export default {
 		output: config.server.output(),
 		external: [ ...builtins, 'express', 'chokidar', 'cors', 'smarkt', 'yaml', 'json5' ],
 		plugins: [
-			json({
-				exclude: [ 'node_modules/**' ]
-			}),
+			json(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
