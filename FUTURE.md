@@ -1,97 +1,101 @@
-## Future
+# Future
 
-### To start a server
+## Usage
 
-```js
-import stancy from 'stancy'
+- ### Starting a server
 
-stancy('content/').server(3000, '/api/)
-```
+    ```js
+    import stancy from 'stancy'
 
-### To start the client
+    stancy('content/').server(3000, '/api/)
+    ```
 
-```js
-import stancy from 'stancy'
+- ### Starting a client
 
-var client = stancy('content/').client('http://domain.com/api/')
-```
+    ```js
+    import stancy from 'stancy'
 
-To preprocess data before being consumed by the frontend. This can be useful for formatting dates, parsing markdown or sorting collections.
+    var client = stancy('content/').client('http://domain.com/api/')
+    ```
 
-```js
-client.preprocess(({collection, item, content}) => {
-    content = marked(content)
-})
-```
+- ### Preprocessing data
 
-- __`collection`__ returns every collection as an object with an array of _items_ (objects).
-- __`item`__ returns every item as an object with _fields_ (key value pairs).
-- __`content`__ returns the value of every field name _content_.
+    This can be useful for formatting dates, parsing markdown or sorting collections.
 
-To get data.
+    ```js
+    client.preprocess(({collection, item, content}) {
+        content = marked(content)
+    })
+    ```
 
-```js
-client.get('users/jerry').then(res => {
-    console.log(res)
-}).catch(err => { 
-    console.log(err)
-})
+    - __`collection`__ returns every collection as an object with an array of _items_ (objects).
+    - __`item`__ returns every item as an object with _fields_ (key value pairs).
+    - __`content`__ returns the value of every field name _content_.
 
-// => {
-//   "_extension": ".json",
-//   "url": 'users/jerry',
-//   "name": "Jerry",
-//   "age": "24",
-//   "role": "admin",
-//   "content": "<h1>Jerry</h1>"
-// }
-```
+- ### Getting data
 
-### To create a database
+    ```js
+    client.get('users/jerry').then(res => {
+        console.log(res)
+    }).catch(err => { 
+        console.log(err)
+    })
 
-```js
-var database = stancy('content/').database()
-```
+    // => {
+    //   "_extension": ".json",
+    //   "url": 'users/jerry',
+    //   "name": "Jerry",
+    //   "age": "24",
+    //   "role": "admin",
+    //   "content": "<h1>Jerry</h1>"
+    // }
+    ```
 
-### Configure using config file
+- ### Creating a database
 
-__stancy.config.js__
+    ```js
+    var database = stancy('content/').database()
+    ```
 
-```json
-{
-    source: "content/",
-    server: {
-        port: 3000,
-        subpath: "/API/"
-    },
-    client: {
-        preview: "",
-        production: "",
-        preprocess: ({content}) => {
-            content = marked(content)
+- ### Configure using config file
+
+    __stancy.config.js__
+
+    ```json
+    {
+        source: "content/",
+        server: {
+            port: 3000,
+            subpath: "/API/"
+        },
+        client: {
+            preview: "",
+            production: "",
+            preprocess: ({content}) => {
+                content = marked(content)
+            }
         }
     }
-}
-```
+    ```
 
-The bare minimum for a client.
+    The bare minimum for a client.
 
-```json
-{
-    source: "content/",
-    client: {
-        production: "",
-        preprocess: ({content}) => {
-            content = marked(content)
+    ```json
+    {
+        source: "content/",
+        client: {
+            production: "",
+            preprocess: ({content}) => {
+                content = marked(content)
+            }
         }
     }
-}
-```
+    ```
 
-### To specify custom configuration
+- ### To specify custom configuration
 
-```js
-stancy().config('src/stancy.config.js')
-```
+    ```js
+    stancy().config('src/stancy.config.js')
+    ```
 
 
