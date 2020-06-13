@@ -5,10 +5,7 @@
 ```js
 import stancy from 'stancy'
 
-stancy('content/').server({
-    port: 3000,
-    subpath: '/api/'
-})
+stancy('content/').server(3000, '/api/)
 ```
 
 ### To start the client
@@ -16,9 +13,7 @@ stancy('content/').server({
 ```js
 import stancy from 'stancy'
 
-var client = stancy('content/').client({
-    production: 'http://domain.com/api/'
-})
+var client = stancy('content/').client('http://domain.com/api/')
 ```
 
 To preprocess data before being consumed by the frontend. This can be useful for formatting dates, parsing markdown or sorting collections.
