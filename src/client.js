@@ -24,7 +24,7 @@ class Client {
 			return data;
 		}
 	}
-	fetch(path) {
+	get(path) {
 		var options = this._options;
 
 		const fetch = process.browser ? window.fetch : require('node-fetch').default;

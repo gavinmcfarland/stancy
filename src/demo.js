@@ -8,7 +8,7 @@ var client = stancy('content/').client({
 	production: 'https://now-restlike-api.now.sh/api/'
 });
 
-client.fetch('users/jerry').then((res) => console.log(res));
+client.get('users/jerry').then((res) => console.log(res));
 
 // const client = require('../dist').client;
 
