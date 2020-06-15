@@ -4,7 +4,6 @@ class Client {
 		if (local) {
 			Object.assign(this._options, { preview: local });
 		}
-		console.log(this._options);
 	}
 	_process(data, callback) {
 		data = JSON.parse(data);
@@ -43,7 +42,7 @@ class Client {
 
 		return fetch(`${base}${path}`).then((r) => r.text()).then((json) => {
 			try {
-				var result = this._process(json, config);
+				var result = this._process(json, options);
 				return result;
 			} catch (err) {
 				return json;

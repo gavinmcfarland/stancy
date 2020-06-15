@@ -49,6 +49,99 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 Check out the [examples](/examples).
 
+## Installation
+
+Add the npm package to your project.
+
+```bash
+npm install stancy --save-dev
+```
+
+Import stancy in your application.
+
+```js
+import stancy from 'stancy'
+```
+
+## Usage
+
+### Starting a server
+
+```js
+stancy('content/').server(3000, '/api/')
+```
+
+### Starting a client
+
+```js
+var client = stancy('content/').client('http://domain.com/api/')
+```
+
+### Preprocessing data
+
+This can be useful for formatting dates, parsing markdown or sorting collections.
+
+```js
+client.preprocess(({collection, item, content, database}) {
+    content = marked(content)
+})
+```
+
+- __`collection`__ returns every collection as an object with an array of _items_ (objects).
+- __`item`__ returns every item as an object with _fields_ (key value pairs).
+- __`content`__ returns the value of every field name _content_.
+
+### Getting data
+
+```js
+client.get('users/jerry').then(res => {
+    console.log(res)
+}).catch(err => { 
+    console.log(err)
+})
+```
+
+Example response
+
+```json
+{
+    "_extension": ".json",
+    "url": "users/jerry",
+    "name": "Jerry",
+    "age": "24",
+    "role": "admin",
+    "content": "<h1>Jerry</h1>"
+}
+```
+
+### Creating a database
+
+```js
+var database = stancy('content/').database()
+```
+
+### Configure using config file
+
+__stancy.config.js__
+
+```js
+{
+    source: 'content/',
+    client: {
+        production: 'https://stancy.now.sh/api/',
+        token: 'T89ALS90',
+        preprocess: ({content}) => {
+            content = marked(content)
+        }
+    }
+}
+```
+
+### Specify custom configuration
+
+```js
+stancy().config('src/stancy.config.js')
+```
 
 ## Features
 
@@ -137,85 +230,9 @@ Check out the [examples](/examples).
   }
   ```
 
-## Installation
+---
 
-Add the npm package to your project.
-
-```bash
-npm install stancy --save-dev
-```
-
-Import stancy in your application.
-
-```js
-import stancy from 'stancy'
-```
-
-## Usage
-
-- ### Start a server
-
-    Specify where the content lives and start the API server.
-
-    ```js
-    stancy(content).serve(port, subpath)
-    ```
-
-    - `content`: a _String_ which points to the directory of your static content, eg `"content/"`
-    - `port`: a _Number_. Default port is _3000_
-    - `subpath`: a _String_. For example `"/api/"` to create the url http://localhost:3000/api/
-
-- ### Fetch content <mark>(work in progress)</mark>
-
-    You can get content from a server using the client (Alternatively data can be fetched like any other REST API).
-
-    ```js
-    import { client } from 'stancy';
-
-    client.config({
-        production: "https://now-restlike-api.now.sh/api/" // The address of the production server/api
-    })
-
-    async function fetch() {
-        return await client.fetch('users/jerry');
-    }
-
-    fetch().then((content) => {
-        console.log(content)
-    })
-
-    // => {
-    //   _url: 'users/jerry',
-    //   "name": "Jerry",
-    //   "age": "24",
-    //   "role": "admin",
-    //   "content": "<h1>Jerry</h1>"
-    // }
-    ```
-
-    #### Configure the client
-
-    ```js
-    client.config({
-        preview: "http://localhost:4000/api/", // The address of the development server
-        production: "https://now-restlike-api.now.sh/api/", // The address of the production server
-        preprocess: ({ item }) => { // An example of parsing markdown content
-            if (item.content) { // Only on content fields
-                item.content = marked(item.content);
-            }
-            return item;
-        }
-    })
-    ```
-
-- ### Create a database
-
-    Specify where the content lives and create a database in memory.
-  
-    ```js
-    const database = stancy('content/').database()
-    ```
-- ### Querying data
+- ### Built in Fields
 
     If you create a database you can filter and show data using a query language of your choice using the following field names.
 
@@ -241,13 +258,13 @@ To install the dependencies
 npm install
 ```
 
-To run the demo
+To run the demo server
 
 ```
 npm run demo
 ```
 
-To build and test demo
+To run tests
 
 ```
 npm run test
