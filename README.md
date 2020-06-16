@@ -82,14 +82,18 @@ var client = stancy('content/').client('http://domain.com/api/')
 This can be useful for formatting dates, parsing markdown or sorting collections.
 
 ```js
-client.preprocess(({collection, item, content, database}) {
-    content = marked(content)
-})
+client.preprocess(({ item, collection }) => {
+	if (item.content) {
+		item.content = marked('## hello\n ' + item.content);
+	}
+	if (collection) {
+		collection.push({ test: '1' });
+	}
+});
 ```
 
-- __`collection`__ returns every collection as an object with an array of _items_ (objects).
+- __`collection`__ returns every collection as an array of _items_ (objects).
 - __`item`__ returns every item as an object with _fields_ (key value pairs).
-- __`content`__ returns the value of every field name _content_.
 
 ### Getting data
 
