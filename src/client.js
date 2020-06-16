@@ -8,22 +8,23 @@ class Client {
 	_process(data, callback) {
 		data = JSON.parse(data);
 		if (callback.preprocess) {
-			if (Array.isArray(data)) {
-				data.map((item) => {
+			var collection = data;
+			if (Array.isArray(collection)) {
+				collection.map((item) => {
 					if (item) {
-						callback.preprocess(item);
-						// console.log(item);
+						callback.preprocess({ item: item });
 					}
 				});
-				callback.preprocess({}, data);
-				console.log(data);
+				callback.preprocess({ item: {}, collection: collection });
+				data = collection;
 			} else {
-				if (data) {
-					callback.preprocess(data);
-
-					// console.log(data);
+				var item = data;
+				if (item) {
+					callback.preprocess({ item: item });
+					data = item;
 				}
 			}
+
 			return data;
 		} else {
 			return data;
