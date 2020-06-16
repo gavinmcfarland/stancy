@@ -8,9 +8,9 @@
 		"webpack": "webpack --config webpack.config.js",
 		"rollup": "rollup --config",
 		"build": "npm run rollup && eslint",
-		"demo": "node src/demo.js",
+		"demo": "NODE_ENV=development node src/demo.js",
 		"test": "./node_modules/.bin/eslint src/ && npm run build",
-		"dev": "npm run rollup && node src/demo.js"
+		"dev": "npm run rollup && npm run demo"
 	},
 	"keywords": [ "static file", "generator", "database", "data store", "flat file" ],
 	"repository": {

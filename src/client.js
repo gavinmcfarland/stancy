@@ -1,5 +1,6 @@
 class Client {
-	constructor(options, local) {
+	constructor(options, local, source) {
+		this._source = source;
 		this._options = options;
 		if (local) {
 			Object.assign(this._options, { preview: local });
@@ -35,18 +36,21 @@ class Client {
 
 		const fetch = process.browser ? window.fetch : require('node-fetch').default;
 
-		var base = options.preview || 'http://localhost:3000/api/';
-
+		var base;
+		console.log(this._source);
 		if (process.env.NODE_ENV === 'development') {
-			if (options.preview) {
+			if (options.preview && this._source !== undefined) {
 				base = options.preview;
+			} else {
+				base = options.production;
 			}
-			base = options.production;
 		} else {
 			base = options.production;
 		}
 
-		return fetch(`${base}${path}`).then((r) => r.text()).then((json) => {
+		console.log(base);
+
+		return fetch(`${base}${path}`).then((res) => res.text()).then((json) => {
 			try {
 				var result = this._process(json, options);
 

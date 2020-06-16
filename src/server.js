@@ -13,9 +13,13 @@ export default function stancy(source) {
 			this._source = source;
 		}
 		server(port, base) {
-			port = port || 3000;
+			if (!this._source) {
+				return console.log('please provide a source');
+			}
+			port = port || 4000;
 			base = base || '/';
 
+			// The default local server
 			this._local = `http://localhost:${port}${base}`;
 
 			var source = this._source;
@@ -119,9 +123,10 @@ export default function stancy(source) {
 		}
 		client(options) {
 			if (this._local) {
-				return new Client(options, this._local);
+				return new Client(options, this._local, this._source);
 			} else {
-				return new Client(options);
+				this.server();
+				return new Client(options, this._local, this._source);
 			}
 		}
 		database() {
