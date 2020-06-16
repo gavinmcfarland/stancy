@@ -7,16 +7,21 @@ class Client {
 	}
 	_process(data, callback) {
 		data = JSON.parse(data);
-		if (callback.process) {
+		if (callback.preprocess) {
 			if (Array.isArray(data)) {
 				data.map((item) => {
 					if (item) {
-						item = callback.process({ item: item });
+						callback.preprocess(item);
+						// console.log(item);
 					}
 				});
+				callback.preprocess({}, data);
+				console.log(data);
 			} else {
 				if (data) {
-					data = callback.process({ item: data });
+					callback.preprocess(data);
+
+					// console.log(data);
 				}
 			}
 			return data;
@@ -43,11 +48,15 @@ class Client {
 		return fetch(`${base}${path}`).then((r) => r.text()).then((json) => {
 			try {
 				var result = this._process(json, options);
+
 				return result;
 			} catch (err) {
 				return json;
 			}
 		});
+	}
+	preprocess(func) {
+		Object.assign(this._options, { preprocess: func });
 	}
 }
 

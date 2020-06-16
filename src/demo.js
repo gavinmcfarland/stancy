@@ -1,3 +1,4 @@
+const marked = require('marked');
 const stancy = require('../dist');
 
 var app = stancy('content/');
@@ -8,7 +9,18 @@ var client = stancy('content/').client({
 	production: 'https://now-restlike-api.now.sh/api/'
 });
 
-client.get('users/jerry').then((res) => console.log(res));
+client.preprocess((item, data) => {
+	if (item.content) {
+		item.content = marked('## hello\n ' + item.content);
+	}
+	if (data) {
+		data.push({ test: '1' });
+	}
+});
+
+client.get('users/jerry').then((res) => res);
+
+client.get('users/').then((res) => res);
 
 // const client = require('../dist').client;
 
