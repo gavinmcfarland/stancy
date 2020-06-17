@@ -160,7 +160,7 @@ function createResrouce(dir, value, index, parent, root) {
 	return resource;
 }
 
-function createDatabase(dir) {
+export default function createDatabase(dir) {
 	let root = dir;
 
 	let database = fs.readdirSync(dir).map((value, index) => {
@@ -170,14 +170,10 @@ function createDatabase(dir) {
 	return database;
 }
 
-export function database(dir) {
-	return createDatabase(dir);
-}
-
-export function write(dir) {
-	let db = JSON.stringify(createDatabase(dir), null, '\t');
-	fs.writeFile('db.json', db, (err) => {
-		if (err) throw err;
-		// console.log('The file has been saved!');
-	});
-}
+// export function write(dir) {
+// 	let db = JSON.stringify(createDatabase(dir), null, '\t');
+// 	fs.writeFile('db.json', db, (err) => {
+// 		if (err) throw err;
+// 		// console.log('The file has been saved!');
+// 	});
+// }
