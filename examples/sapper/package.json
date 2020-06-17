@@ -14,7 +14,8 @@
   "dependencies": {
     "compression": "^1.7.1",
     "polka": "next",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "stancy": "^1.0.0-alpha.16"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
