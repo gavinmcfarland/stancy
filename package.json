@@ -1,6 +1,6 @@
 {
 	"name": "stancy",
-	"version": "1.0.0-alpha.16",
+	"version": "1.0.0-alpha.17",
 	"description": "Generate a database of collections and items from static files and folders",
 	"main": "dist/index.js",
 	"scripts": {
@@ -12,13 +12,7 @@
 		"test": "./node_modules/.bin/eslint src/ && npm run build",
 		"dev": "npm run rollup && npm run demo"
 	},
-	"keywords": [
-		"static file",
-		"generator",
-		"database",
-		"data store",
-		"flat file"
-	],
+	"keywords": [ "static file", "generator", "database", "data store", "flat file" ],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/limitlessloop/stancy.git"
