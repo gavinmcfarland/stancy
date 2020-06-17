@@ -5,8 +5,8 @@
 Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server for a RESTlike API. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko. Stancy is unbiased about how you use it and can be customised to suit different use-cases.
 
 - [Example](#example)
-- [Features](#features)
 - [Installation](#installation)
+- [Features](#features)
 - [Docs](#docs)
 - [Development](#development)
 
@@ -56,11 +56,25 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 Check out the [examples](/examples).
 
+## Installation
+
+Add the npm package to your project.
+
+```bash
+npm install stancy --save-dev
+```
+
+Import stancy in your application.
+
+```js
+import stancy from 'stancy'
+```
+
 ## Features
 
 - ### Server and client
     
-    Easily serve and fetch content from static folders and files.
+    Easily serve content from static folders and files, and fetch content.
 
 ---
 
@@ -166,20 +180,7 @@ Check out the [examples](/examples).
     #### Public
 
     - `url` The url to the resource.
-
-## Installation
-
-Add the npm package to your project.
-
-```bash
-npm install stancy --save-dev
-```
-
-Import stancy in your application.
-
-```js
-import stancy from 'stancy'
-```
+    
 
 ## Docs
 
@@ -229,7 +230,7 @@ import stancy from 'stancy'
         - __`collection`__ returns every collection as an array of objects.
         - __`item`__ returns every item as an object with key value pairs.
         - __`content`__ returns value of every item with a property of _content_.
-    - __`callback`__ { function } gives access to one of the types of `data` above, being fetched.
+    - __`callback`__ { function } gives access to one of the types of `data` above.
 
     #### Examples
 

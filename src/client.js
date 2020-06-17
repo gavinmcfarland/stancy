@@ -1,7 +1,9 @@
 class Client {
-	constructor(options, local, source) {
+	constructor(production, local, source) {
 		this._source = source;
-		this._options = options;
+		this._options = {
+			production: production
+		};
 		if (local) {
 			Object.assign(this._options, { preview: local });
 		}
@@ -9,25 +11,33 @@ class Client {
 	_process(data, callback) {
 		data = JSON.parse(data);
 		if (callback.preprocess) {
-			var collection = data;
-			// When res is a collection/array
-			if (Array.isArray(collection)) {
-				collection.map((item) => {
-					// Lets user change each item of collection
-					if (item) {
-						callback.preprocess({ item: item, collection: [] });
+			if (callback.preprocess[0] === 'content') {
+				if (Array.isArray(data)) {
+					data.map((item) => {
+						if (item.content) {
+							item.content = callback.preprocess[1](item.content);
+						}
+					});
+				} else {
+					if (data.content) {
+						data.content = callback.preprocess[1](data.content);
 					}
-				});
-				// Lets user change whole collection
-				callback.preprocess({ item: {}, collection: collection });
-				data = collection;
-			} else {
-				// When res is an item
-				var item = data;
-				// Lets user change item
-				if (item) {
-					callback.preprocess({ item: item, collection: [] });
-					data = item;
+				}
+			}
+
+			if (callback.preprocess[0] === 'item') {
+				if (Array.isArray(data)) {
+					data.map((item) => {
+						item = callback.preprocess[1](item);
+					});
+				} else {
+					data = callback.preprocess[1](data);
+				}
+			}
+
+			if (callback.preprocess[0] === 'collection') {
+				if (Array.isArray(data)) {
+					data = callback.preprocess[1](data);
 				}
 			}
 
@@ -63,8 +73,8 @@ class Client {
 			}
 		});
 	}
-	preprocess(func) {
-		Object.assign(this._options, { preprocess: func });
+	preprocess(type, callback) {
+		Object.assign(this._options, { preprocess: [ type, callback ] });
 	}
 }
 
