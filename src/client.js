@@ -2,7 +2,7 @@ class Client {
 	constructor(production, local, source) {
 		this._source = source;
 		this._options = {
-			production: production
+			production
 		};
 		if (local) {
 			Object.assign(this._options, { preview: local });
@@ -28,7 +28,7 @@ class Client {
 			if (callback.preprocess[0] === 'item') {
 				if (Array.isArray(data)) {
 					data.map((item) => {
-						item = callback.preprocess[1](item);
+						return callback.preprocess[1](item);
 					});
 				} else {
 					data = callback.preprocess[1](data);

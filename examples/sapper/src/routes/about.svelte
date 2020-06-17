@@ -1,22 +1,7 @@
-<script context="module">
-  import stancy from "stancy";
-
-  const client = stancy("content/").client("https://stancy.now.sh/api/");
-
-  export async function preload({ params }) {
-    const page = await client.get(`pages/about`);
-    console.log(page);
-    return { page };
-  }
-</script>
-
-<script>
-  export let page;
-</script>
-
 <svelte:head>
-  <title>About</title>
+	<title>About</title>
 </svelte:head>
 
-<h1>About</h1>
-{@html page.content}
+<h1>About this site</h1>
+
+<p>This is the 'about' page. There's not much here.</p>

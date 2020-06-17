@@ -1,9 +1,0 @@
-title: Technopastoral
-----
-date: January 19, 2038
-----
-tags:
-  - garden
-  - engineering
-----
-text: To deprogram oneself necessitates keeping to very specific schedules, which are what Foucault, once again, described as techniques of the self, echoing Seneca. 
