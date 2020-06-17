@@ -1,6 +1,11 @@
+import nodeFetch from 'node-fetch';
+
 class Client {
 	constructor(production, local, source) {
-		this._source = source;
+		if (source) {
+			this._source = source;
+		}
+
 		this._options = {
 			production
 		};
@@ -49,12 +54,12 @@ class Client {
 	get(path) {
 		var options = this._options;
 
-		const fetch = process.browser ? window.fetch : require('node-fetch').default;
+		const fetch = process.browser ? window.fetch : nodeFetch;
 
 		var base;
 
 		if (process.env.NODE_ENV === 'development') {
-			if (options.preview && this._source !== undefined) {
+			if (options.preview && this._source !== 'undefined' && !process.browser) {
 				base = options.preview;
 			} else {
 				base = options.production;
