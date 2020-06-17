@@ -1,12 +1,8 @@
 <script context="module">
   import stancy from "stancy";
-<<<<<<< HEAD
-  import client from "api";
-=======
 
   const client = stancy().client("https://stancy.now.sh/api/");
 
->>>>>>> refactored
   export async function preload({ params }) {
     const page = await client.get(`pages/about`);
     // console.log(page);
