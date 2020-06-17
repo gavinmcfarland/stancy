@@ -4,6 +4,13 @@
 
 Stancy uses static files and folders to generate a database of collections and items. The database can be queried as a plain object, outputted as a json file, or served using an express server for a RESTlike API. This is useful for building static sites which use frameworks like React, Vue, Svelte or Marko. Stancy is unbiased about how you use it and can be customised to suit different use-cases.
 
+- [Example](#example)
+- [Features](#features)
+- [Installation](#installation)
+- [Docs](#docs)
+- [Development](#development)
+
+
 ## Example
 
 In this example, we'll look at how we can create a database from static files and folders which can be accessed using an API for a website.
@@ -49,110 +56,23 @@ Items in collections can be filtered by querying their _fields_. For example the
 
 Check out the [examples](/examples).
 
-## Installation
-
-Add the npm package to your project.
-
-```bash
-npm install stancy --save-dev
-```
-
-Import stancy in your application.
-
-```js
-import stancy from 'stancy'
-```
-
-## Usage
-
-### Starting a server
-
-```js
-stancy('content/').server(3000, '/api/')
-```
-
-### Starting a client
-
-```js
-var client = stancy('content/').client('http://domain.com/api/')
-```
-
-### Preprocessing data
-
-This can be useful for formatting dates, parsing markdown or sorting collections.
-
-```js
-client.preprocess(({ item, collection }) => {
-	if (item.content) {
-		item.content = marked('## hello\n ' + item.content);
-	}
-	if (collection) {
-		collection.push({ test: '1' });
-	}
-});
-```
-
-- __`collection`__ returns every collection as an array of _items_ (objects).
-- __`item`__ returns every item as an object with _fields_ (key value pairs).
-
-### Getting data
-
-```js
-client.get('users/jerry').then(res => {
-    console.log(res)
-}).catch(err => { 
-    console.log(err)
-})
-```
-
-Example response
-
-```json
-{
-    "_extension": ".json",
-    "url": "users/jerry",
-    "name": "Jerry",
-    "age": "24",
-    "role": "admin",
-    "content": "<h1>Jerry</h1>"
-}
-```
-
-### Creating a database
-
-```js
-var database = stancy('content/').database()
-```
-
-### Configure using config file
-
-__stancy.config.js__
-
-```js
-{
-    source: 'content/',
-    client: {
-        production: 'https://stancy.now.sh/api/',
-        token: 'T89ALS90',
-        preprocess: ({content}) => {
-            content = marked(content)
-        }
-    }
-}
-```
-
-### Specify custom configuration
-
-```js
-stancy().config('src/stancy.config.js')
-```
-
 ## Features
+
+- ### Server and client
+    
+    Easily serve and fetch content from static folders and files.
+
+---
 
 - ### Collections and Items
 
-  Collections are created by grouping files with a folder.\
-  Items are created by files.
+  Collections are created by grouping files with a folder. Items are created by files.
+
+---
+
+- ### Preprocess data
+
+  Easily sort collections, format dates, and parse content on the client.
 
 ---
 
@@ -188,12 +108,6 @@ stancy().config('src/stancy.config.js')
   _file-is-hidden.md
   _folder-is-hidden/
   ```
-
----
-
-- ### Parsing
-
-  Stancy will parse the following formats `text`, `json`, `markdown` and `yaml`.
 
 ---
 
@@ -253,6 +167,162 @@ stancy().config('src/stancy.config.js')
 
     - `url` The url to the resource.
 
+## Installation
+
+Add the npm package to your project.
+
+```bash
+npm install stancy --save-dev
+```
+
+Import stancy in your application.
+
+```js
+import stancy from 'stancy'
+```
+
+## Docs
+
+- ### Starting a server
+
+    `stancy(source).server([port, path])`
+
+    #### Arguments
+
+    - __`source`__ { String } source of the content directory to be servered
+    - __`port`__ { Number }
+    - __`path`__ { String } subpath where API will be accessible from 
+
+    #### Example
+
+    ```js
+    stancy('content/').server(3000, '/api/')
+    ```
+
+---
+
+- ### Starting a client
+
+    `stancy([source]).client(url)`
+
+    #### Arguments
+
+    - __`url`__ { String } url of the production server
+
+
+    #### Example
+
+    ```js
+    stancy('content/').client('http://domain.com/api/')
+    ```
+---
+
+- ### Preprocessing data
+
+    `client.preprocess([type,] callback)`
+
+    Useful for sorting collections, formatting dates, or parsing markdown.
+
+    #### Arguments
+
+    - __`type`__ { String } can be one of the following:
+        - __`collection`__ returns every collection as an array of objects.
+        - __`item`__ returns every item as an object with key value pairs.
+        - __`content`__ returns value of every item with a property of _content_.
+    - __`callback`__ { function } gives access to one of the types of `data` above, being fetched.
+
+    #### Examples
+
+    An example of sorting collections by date
+
+    ```js
+    client.preprocess('collection', (data) => {
+        return data.sort((a, b) => {
+            if (a.date > b.date) {
+                return 1;
+            } else if (a.date < b.date) {
+                return -1
+            } else {
+                return 0
+            }
+        })
+    })
+    ```
+
+    An example of formatting machine readable dates
+
+    ```js
+    client.preprocess('item', (data) => {
+        return data.date = New Date(data.date)
+    })
+    ```
+
+    An example of parsing markdown
+
+    ```js
+    client.preprocess('content', (data) => {
+        return marked(data)
+    })
+    ```
+---
+
+- ### Getting data
+
+    ```js
+    client.get('users/jerry').then(res => {
+        console.log(res)
+    }).catch(err => { 
+        console.log(err)
+    })
+    ```
+
+    Example response
+
+    ```json
+    {
+        "_extension": ".json",
+        "url": "users/jerry",
+        "name": "Jerry",
+        "age": "24",
+        "role": "admin",
+        "content": "<h1>Jerry</h1>"
+    }
+    ```
+---
+
+- ### Creating a database
+
+    `stancy(source).database()`
+
+    #### Example
+
+    ```js
+    var database = stancy('content/').database()
+    ```
+---
+
+- ### Configure using config file
+
+    __stancy.config.js__
+
+    ```js
+    {
+        source: 'content/',
+        client: {
+            production: 'https://stancy.now.sh/api/',
+            token: 'T89ALS90',
+            preprocess: ({content}) => {
+                content = marked(content)
+            }
+        }
+    }
+    ```
+
+    #### Specify custom config file
+
+    ```js
+    stancy().config('src/stancy.config.js')
+    ```
 
 ## Development
 

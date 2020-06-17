@@ -54,7 +54,6 @@ export default function stancy(source) {
 					}).then((value) => {
 						if (value) {
 							res.json(value);
-							console.log('0');
 						} else {
 							res.send(`No value that matches query \n ${req.url}`);
 						}
@@ -69,7 +68,6 @@ export default function stancy(source) {
 					}).then((value) => {
 						if (value) {
 							res.json(value);
-							console.log('1');
 						} else {
 							res.send(`No value that matches query \n ${req.url}`);
 						}
@@ -84,7 +82,6 @@ export default function stancy(source) {
 					}).then((value) => {
 						if (value) {
 							res.json(value);
-							// console.log(value);
 						} else {
 							res.send(`No value that matches query \n ${req.url}`);
 						}
@@ -97,7 +94,7 @@ export default function stancy(source) {
 			function start() {
 				server = http.createServer(app(base));
 				server.listen(port, () => {
-					console.log(`Server listening at http://localhost:${port}${base}`);
+					console.log(`Content server available at http://localhost:${port}${base}`);
 				});
 			}
 

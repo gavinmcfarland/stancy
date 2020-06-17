@@ -10,18 +10,23 @@ class Client {
 		data = JSON.parse(data);
 		if (callback.preprocess) {
 			var collection = data;
+			// When res is a collection/array
 			if (Array.isArray(collection)) {
 				collection.map((item) => {
+					// Lets user change each item of collection
 					if (item) {
-						callback.preprocess({ item: item });
+						callback.preprocess({ item: item, collection: [] });
 					}
 				});
+				// Lets user change whole collection
 				callback.preprocess({ item: {}, collection: collection });
 				data = collection;
 			} else {
+				// When res is an item
 				var item = data;
+				// Lets user change item
 				if (item) {
-					callback.preprocess({ item: item });
+					callback.preprocess({ item: item, collection: [] });
 					data = item;
 				}
 			}
@@ -37,7 +42,7 @@ class Client {
 		const fetch = process.browser ? window.fetch : require('node-fetch').default;
 
 		var base;
-		console.log(this._source);
+
 		if (process.env.NODE_ENV === 'development') {
 			if (options.preview && this._source !== undefined) {
 				base = options.preview;
@@ -47,8 +52,6 @@ class Client {
 		} else {
 			base = options.production;
 		}
-
-		console.log(base);
 
 		return fetch(`${base}${path}`).then((res) => res.text()).then((json) => {
 			try {
