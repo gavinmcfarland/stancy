@@ -8,6 +8,7 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import json from '@rollup/plugin-json';
 import builtins from 'builtin-modules';
+import fillBuiltins from 'rollup-plugin-node-builtins';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -23,6 +24,7 @@ export default {
 
 		plugins: [
 			json(),
+
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -71,11 +73,11 @@ export default {
 		// external: Object.keys(pkg.dependencies).concat(
 		// 	require('module').builtinModules || Object.keys(process.binding('natives'))
 		// ),
-		external: [ 'chokidar' ],
+		// external: [ 'fs', 'http', 'chokidar' ],
 
-		external: Object.keys(pkg.dependencies).concat(
-			require('module').builtinModules || Object.keys(process.binding('natives'))
-		),
+		// external: Object.keys(pkg.dependencies)
+		// 	.filter((i) => !i.match(/stancy/)) // https://github.com/sveltejs/sapper-template/blob/master/README.md#using-external-components
+		// 	.concat(require('module').builtinModules || Object.keys(process.binding('natives'))),
 
 		preserveEntrySignatures: false,
 		onwarn
@@ -100,9 +102,9 @@ export default {
 			}),
 			commonjs()
 		],
-		external: Object.keys(pkg.dependencies).concat(
-			require('module').builtinModules || Object.keys(process.binding('natives'))
-		),
+		external: Object.keys(pkg.dependencies)
+			// .filter((i) => !i.match(/stancy/)) // https://github.com/sveltejs/sapper-template/blob/master/README.md#using-external-components
+			.concat(require('module').builtinModules || Object.keys(process.binding('natives'))),
 
 		preserveEntrySignatures: 'strict',
 		onwarn

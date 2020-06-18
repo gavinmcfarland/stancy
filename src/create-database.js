@@ -1,7 +1,11 @@
-import preprocess from './process-content';
-const fs = require('fs');
-const path = require('path');
-const pluralize = require('pluralize');
+import preprocess from './process-content.js';
+import fs from 'fs';
+import path from 'path';
+import pluralize from 'pluralize';
+
+// const fs = require('fs');
+// const path = require('path');
+// const pluralize = require('pluralize');
 
 const type = {
 	is: {

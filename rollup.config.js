@@ -2,22 +2,29 @@
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-// import builtins from 'builtin-modules';
+import builtins from 'builtin-modules';
 import json from '@rollup/plugin-json';
 import pkg from './package.json';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 export default {
 	input: 'src/index.js',
 	output: {
 		file: 'dist/index.js',
-		format: 'cjs'
+		format: 'umd',
+		name: 'stancy'
 		// exports: 'named'
+		// globals: builtins
 	},
-	external: Object.keys(pkg.dependencies).concat(
-		require('module').builtinModules || Object.keys(process.binding('natives'))
-	),
+
+	// external: Object.keys(pkg.dependencies).concat(
+	// 	require('module').builtinModules || Object.keys(process.binding('natives'))
+	// ),
 	plugins: [
-		resolve(),
+		// resolve({
+		// 	preferBuiltins: true
+		// }),
+
 		commonjs(),
 		json(),
 		// babel({

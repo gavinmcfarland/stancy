@@ -2,11 +2,15 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 
+// const http = require('http');
+// const express = require('express');
+// const cors = require('cors');
+
 import createDatabase from './create-database.js';
 import getContent from './get-content.js';
 import Client from './client.js';
 
-import chokidar from 'chokidar';
+// import chokidar from 'chokidar';
 
 export default function stancy(source) {
 	class Stancy {
@@ -109,16 +113,16 @@ export default function stancy(source) {
 
 			function watch() {
 				start();
-				if (!process.browser) {
-					chokidar
-						.watch(source, {
-							ignored: /(^|[/\\])\../, // ignore dotfiles
-							persistent: true
-						})
-						.on('change', () => {
-							restart();
-						});
-				}
+
+				// Temporarily disabled due to rollup error
+				// chokidar
+				// 	.watch(source, {
+				// 		ignored: /(^|[/\\])\../, // ignore dotfiles
+				// 		persistent: true
+				// 	})
+				// 	.on('change', () => {
+				// 		restart();
+				// 	});
 			}
 
 			watch();
@@ -141,7 +145,6 @@ export default function stancy(source) {
 			return createDatabase(source);
 		}
 	}
-
 	return new Stancy(source);
 }
 

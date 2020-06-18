@@ -1,4 +1,5 @@
-const jsonata = require('jsonata');
+import jsonata from 'jsonata';
+// const jsonata = require('jsonata');
 
 function isObjectEmpty(obj) {
 	return Object.keys(obj).length === 0 && obj.constructor === Object;

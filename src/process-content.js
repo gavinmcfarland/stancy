@@ -1,11 +1,18 @@
 import smarkt from 'smarkt';
 import YAML from 'yaml';
 import JSON5 from 'json5';
-const fs = process.browser ? undefined : require('fs');
-const path = process.browser ? undefined : require('path');
+import fs from 'fs';
+import path from 'path';
+import frontmatter from 'front-matter';
+
+// const smarkt = require('smarkt');
+// const YAML = require('yaml');
+// const JSON5 = require('json5');
+// const fs = require('fs');
+// const path = require('path');
+// const frontmatter = require('front-matter');
 // import matter from 'gray-matter';
 // import frontmatter from 'front-matter';
-const frontmatter = require('front-matter');
 
 function getFileExt(item) {
 	if (item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)[1];
