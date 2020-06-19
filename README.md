@@ -254,7 +254,7 @@ import stancy from 'stancy'
 
     ```js
     client.preprocess('item', (data) => {
-        return data.date = New Date(data.date)
+        return data.date = new Date(data.date)
     })
     ```
 
@@ -302,7 +302,7 @@ import stancy from 'stancy'
     ```
 ---
 
-- ### Configure using config file
+- ### Configure using config file <mark>(Coming soon)</mark>
 
     __stancy.config.js__
 

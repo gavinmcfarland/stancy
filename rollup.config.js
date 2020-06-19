@@ -10,7 +10,6 @@ export default [
 			file: 'dist/index.js',
 			format: 'cjs'
 		},
-		watch: true,
 		plugins: [
 			commonjs(),
 			json(),

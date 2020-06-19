@@ -103,7 +103,6 @@ export default {
 					var source = 'content/';
 					glob(source + '**/*', null, function(er, files) {
 						files.forEach((file) => {
-							console.log(file);
 							self.addWatchFile(file);
 						});
 					});
