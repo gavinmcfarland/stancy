@@ -8,6 +8,7 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import json from '@rollup/plugin-json';
 import builtins from 'builtin-modules';
+import glob from 'glob';
 // import fillBuiltins from 'rollup-plugin-node-builtins';
 // import globals from 'rollup-plugin-node-globals';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
@@ -81,7 +82,7 @@ export default {
 		// external: Object.keys(pkg.dependencies).concat(
 		// 	require('module').builtinModules || Object.keys(process.binding('natives'))
 		// ),
-		// external: [ 'fs', 'http', 'chokidar' ],
+		external: [ 'fs', 'http', 'chokidar' ],
 
 		// external: Object.keys(pkg.dependencies)
 		// 	.filter((i) => !i.match(/stancy/)) // https://github.com/sveltejs/sapper-template/blob/master/README.md#using-external-components
@@ -96,6 +97,18 @@ export default {
 		output: config.server.output(),
 		// external: [ ...builtins, 'express', 'chokidar', 'cors', 'smarkt', 'yaml', 'json5' ],
 		plugins: [
+			{
+				buildStart() {
+					var self = this;
+					var source = 'content/';
+					glob(source + '**/*', null, function(er, files) {
+						files.forEach((file) => {
+							console.log(file);
+							self.addWatchFile(file);
+						});
+					});
+				}
+			},
 			json(),
 			replace({
 				'process.browser': false,
