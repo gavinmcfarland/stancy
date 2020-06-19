@@ -11,6 +11,6 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"stancy": "^1.0.0-alpha.8"
+		"stancy": "^1.0.0-alpha.20"
 	}
 }
