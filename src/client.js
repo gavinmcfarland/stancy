@@ -59,7 +59,7 @@ class Client {
 		var base;
 
 		if (process.env.NODE_ENV === 'development') {
-			if (options.preview && this._source !== 'undefined' && !process.browser) {
+			if (options.preview && this._source !== 'undefined') {
 				base = options.preview;
 			} else {
 				base = options.production;
@@ -67,6 +67,14 @@ class Client {
 		} else {
 			base = options.production;
 		}
+
+		console.log('browser - ' + !process.browser);
+
+		console.log('source - ' + this._source);
+
+		console.log('preview - ' + options.preview);
+
+		console.log(`${base}${path}`);
 
 		return fetch(`${base}${path}`).then((res) => res.text()).then((json) => {
 			try {

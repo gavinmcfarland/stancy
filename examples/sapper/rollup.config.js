@@ -8,7 +8,9 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import json from '@rollup/plugin-json';
 import builtins from 'builtin-modules';
-import fillBuiltins from 'rollup-plugin-node-builtins';
+// import fillBuiltins from 'rollup-plugin-node-builtins';
+// import globals from 'rollup-plugin-node-globals';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -23,7 +25,11 @@ export default {
 		output: config.client.output(),
 
 		plugins: [
+			// globals(),
+
 			json(),
+
+			// fillBuiltins(),
 
 			replace({
 				'process.browser': true,
@@ -34,11 +40,13 @@ export default {
 				hydratable: true,
 				emitCss: true
 			}),
+
 			resolve({
 				browser: true,
 				dedupe: [ 'svelte' ],
 				exclude: [ 'node_modules/**' ]
 			}),
+
 			commonjs(),
 
 			legacy &&

@@ -1,9 +1,12 @@
 <script context="module">
   import stancy from "stancy";
 
-  const client = stancy().client("https://now-restlike-api.now.sh/api/");
+  const client = stancy("content/").client(
+    "https://now-restlike-api.now.sh/api/"
+  );
 
   export async function preload({ params }) {
+    // console.log("hello");
     const page = await client.get(`pages/about`);
     console.log(page);
     return { page };

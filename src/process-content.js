@@ -11,8 +11,6 @@ import frontmatter from 'front-matter';
 // const fs = require('fs');
 // const path = require('path');
 // const frontmatter = require('front-matter');
-// import matter from 'gray-matter';
-// import frontmatter from 'front-matter';
 
 function getFileExt(item) {
 	if (item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)[1];

@@ -10,7 +10,7 @@ import createDatabase from './create-database.js';
 import getContent from './get-content.js';
 import Client from './client.js';
 
-// import chokidar from 'chokidar';
+import chokidar from 'chokidar';
 
 export default function stancy(source) {
 	class Stancy {
@@ -115,14 +115,14 @@ export default function stancy(source) {
 				start();
 
 				// Temporarily disabled due to rollup error
-				// chokidar
-				// 	.watch(source, {
-				// 		ignored: /(^|[/\\])\../, // ignore dotfiles
-				// 		persistent: true
-				// 	})
-				// 	.on('change', () => {
-				// 		restart();
-				// 	});
+				chokidar
+					.watch(source, {
+						ignored: /(^|[/\\])\../, // ignore dotfiles
+						persistent: true
+					})
+					.on('change', () => {
+						restart();
+					});
 			}
 
 			watch();
