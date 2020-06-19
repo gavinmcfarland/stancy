@@ -7,11 +7,7 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import json from '@rollup/plugin-json';
-import builtins from 'builtin-modules';
 import glob from 'glob';
-// import fillBuiltins from 'rollup-plugin-node-builtins';
-// import globals from 'rollup-plugin-node-globals';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';

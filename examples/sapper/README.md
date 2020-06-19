@@ -8,7 +8,7 @@ This is an example of integrating Stancy with Sapper to support fetching content
     ```
 2. Install Stancy as a dependency.
     ```bash
-    npm install stancy --save-dev
+    npm install stancy
     ```
 3. Copy your content to your project.
 
