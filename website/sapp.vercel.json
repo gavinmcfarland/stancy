@@ -1,0 +1,21 @@
+{
+	"version": 2,
+	"public": true,
+	"builds": [
+		{
+			"src": "package.json",
+			"use": "vercel-sapper",
+			"config": {
+				"includeFiles": [ "content/**" ]
+			}
+		},
+		{
+			"src": "api.js",
+			"use": "@now/node-server",
+			"config": {
+				"includeFiles": [ "content/**" ]
+			}
+		}
+	],
+	"rewrites": [ { "source": "/api/(.*)", "destination": "/api.js" }, { "source": "/(.*)", "destination": "/index" } ]
+}

@@ -1,0 +1,67 @@
+---
+title: Features
+---
+
+### Server and client
+    
+Easily serve content from static folders and files, and fetch content.
+
+
+### Collections and Items
+
+Collections are created by grouping files with a folder. Items are created by files.
+
+
+### Preprocess data
+
+Easily sort collections, format dates, and parse content on the client.
+
+
+### Singular Folders
+  
+When a singular name is used for a folder it will create an item (instead of a collection). The files contained in that folder become fields of that item.
+
+
+### Index File
+
+Placing an index file inside a folder will create an item. The files contained inside that folder become children of that item. This is useful if you prefer to organise using folders or if you want to create an index page for a group of related content.
+
+```bash
+# Creates a collection of items
+collection/
+item-one.md
+item-two.md
+item-three.md
+
+# Creates an item
+item/
+index.md
+```
+
+
+### Hidden
+
+Prepend an underscore to hide a file or folder. In the case of hiding a folder, this will also hide all it's contents.
+
+```
+_file-is-hidden.md
+_folder-is-hidden/
+```
+
+### Built in Fields
+
+If you create a database you can filter and show data using a query language of your choice using the following field names.
+
+#### Private
+
+- `_name` Name of the resource
+- `_collection` Collection the resource belongs to
+- `_index` The index of the resource in the collection or dataset
+- `_type` The type of resource. Named after the folder or file.
+- `_source` The path to the folder containing the file.
+
+
+#### Public
+
+- `url` The url to the resource.
+    

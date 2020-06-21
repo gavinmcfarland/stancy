@@ -1,0 +1,24 @@
+{
+	"version": 2,
+	"public": true,
+	"builds": [
+		{
+			"src": "__sapper__/export/**",
+			"use": "@now/static",
+			"config": {
+				"includeFiles": [ "content/**" ]
+			}
+		},
+		{
+			"src": "api.js",
+			"use": "@now/node-server",
+			"config": {
+				"includeFiles": [ "content/**" ]
+			}
+		}
+	],
+	"rewrites": [
+		{ "source": "/api/(.*)", "destination": "/api.js" },
+		{ "source": "/(.*)", "destination": "/__sapper__/export/$1" }
+	]
+}
