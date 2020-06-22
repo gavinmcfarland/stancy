@@ -6,7 +6,15 @@ import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import processPostCSS from './preprocess.js';
 import glob from 'glob';
+import sveltePreprocess from 'svelte-preprocess';
+
+const preprocess = sveltePreprocess({
+	postcss: true
+});
+
+processPostCSS('src/styles/index.css', 'static/global.css');
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -27,7 +35,8 @@ export default {
 			svelte({
 				dev,
 				hydratable: true,
-				emitCss: true
+				emitCss: true,
+				preprocess
 			}),
 			resolve({
 				browser: true,
@@ -82,6 +91,11 @@ export default {
 							self.addWatchFile(file);
 						});
 					});
+					glob('src/styles/**/*', null, function(er, files) {
+						files.forEach((file) => {
+							self.addWatchFile(file);
+						});
+					});
 				}
 			},
 			replace({
@@ -90,7 +104,8 @@ export default {
 			}),
 			svelte({
 				generate: 'ssr',
-				dev
+				dev,
+				preprocess
 			}),
 			resolve({
 				dedupe: [ 'svelte' ]

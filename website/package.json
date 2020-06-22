@@ -29,10 +29,19 @@
 		"@rollup/plugin-replace": "^2.2.0",
 		"glob": "^7.1.6",
 		"npm-run-all": "^4.1.5",
+		"postcss": "^7.0.32",
+		"postcss-import": "^12.0.1",
+		"postcss-load-config": "^2.1.0",
+		"remark": "^12.0.0",
+		"remark-html": "^11.0.2",
+		"remark-preset-lint-markdown-style-guide": "^3.0.0",
 		"rollup": "^2.3.4",
 		"rollup-plugin-svelte": "^5.0.1",
 		"rollup-plugin-terser": "^5.3.0",
 		"sapper": "^0.27.0",
-		"svelte": "^3.0.0"
+		"svelte": "^3.0.0",
+		"svelte-preprocess": "^3.9.9",
+		"typolize": "^2.0.6",
+		"vfile-reporter": "^6.0.1"
 	}
 }

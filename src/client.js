@@ -1,5 +1,22 @@
 import nodeFetch from 'node-fetch';
 
+function findById(object, key, callback) {
+	var property;
+
+	for (property in object) {
+		if (property === key) {
+			object[key] = callback(object[key]);
+		} else {
+			if (typeof object[property] === 'object') {
+				findById(object[property], key, callback);
+			}
+		}
+		// if (object.hasOwnProperty(property) && typeof object[property] === 'object') {
+
+		// }
+	}
+}
+
 class Client {
 	constructor(production, local, source) {
 		if (source) {
@@ -19,14 +36,13 @@ class Client {
 			if (callback.preprocess[0] === 'content') {
 				if (Array.isArray(data)) {
 					data.map((item) => {
+						// findById(item, 'content');
 						if (item.content) {
-							item.content = callback.preprocess[1](item.content);
+							findById(item, 'content', callback.preprocess[1]);
 						}
 					});
 				} else {
-					if (data.content) {
-						data.content = callback.preprocess[1](data.content);
-					}
+					findById(data, 'content', callback.preprocess[1]);
 				}
 			}
 
