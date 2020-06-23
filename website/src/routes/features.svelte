@@ -16,14 +16,18 @@
     /* font-size: var(--font-size-h3); */
   }
   .container {
-    font-size: var(--font-size-em--1);
+    /* font-size: var(--font-size-em--1); */
     /* display: flex;
     flex-wrap: wrap; */
-    display: flex;
-    flex-wrap: wrap;
   }
-  .container > :first-child {
-    margin-top: unset;
+
+  .wrapper {
+    /* background: silver; */
+    display: table;
+  }
+
+  .feature h2 {
+    /* font-size: var(--font-size-h4); */
   }
 </style>
 
@@ -31,17 +35,19 @@
   <title>Features</title>
 </svelte:head>
 
-<div text-gap="2">
+<div text-gap="0" content>
 
   <h1>Features</h1>
 
-  <div class="container">
+  <div class="wrapper">
+    <div class="container" column-gap="1" flex="wrap" row-gap="1">
 
-    {#each page.features as feature}
-      <div class="feature" width="1\2">
-        {@html feature.content}
-      </div>
-    {/each}
+      {#each page.features as feature}
+        <div class="feature" border padding="1" width="1\2">
+          {@html feature.content}
+        </div>
+      {/each}
+    </div>
   </div>
 
 </div>

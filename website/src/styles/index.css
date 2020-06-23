@@ -1,10 +1,24 @@
 @import 'typolize';
 
+/* Reset */
+
+* {
+	list-style: none;
+}
+
+body {
+	margin: initial;
+}
+
+#sapper {
+	margin: initial;
+}
+
 /* Ratios */
 
 :root {
 	--font-base: 16px;
-	--font-ratio: 1.15;
+	--font-ratio: 1.25;
 	--line-ratio: 1.5;
 	--spacing-ratio: 1;
 }
@@ -20,19 +34,20 @@
 	--font-family-heading: "Helvetica Neue", sans-serif;
 	--font-family-code: "Andale Mono", monospace;
 	--font-weight-heading: bold;
+	--text-gap: var(--em-0);
 }
 
 /* Typsetting */
 
 * {
-	font-size: var(--font-size-0);
+	/* font-size: var(--font-size-0); */
 }
 
 :root {
 	--font-size-body: var(--font-size-0);
-	--font-size-h1: var(--font-size-em-7);
-	--font-size-h2: var(--font-size-em-4);
-	--font-size-h3: var(--font-size-em-3);
+	--font-size-h1: var(--font-size-em-8);
+	--font-size-h2: var(--font-size-em-5);
+	--font-size-h3: var(--font-size-em-1);
 	--font-size-h4: var(--font-size-em-2);
 	--font-size-h5: var(--font-size-em-1);
 	--font-size-h6: var(--font-size-em-0);
@@ -57,7 +72,7 @@ p {
 
 /* Text Spacing */
 
-* + * {
+/* * + * {
 	margin-top: var(--em-0);
 }
 
@@ -68,20 +83,11 @@ div,
 a {
 	margin-top: unset;
 	margin-bottom: unset;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin-bottom: var(--em-0);
-}
+} */
 
 hr {
-	margin-top: var(--rem-5);
-	margin-bottom: var(--rem-5);
+	/* margin-top: var(--rem-5); */
+	/* margin-bottom: var(--rem-5); */
 }
 
 h1,
@@ -89,58 +95,57 @@ h2,
 h3,
 h4,
 h5 {
-	margin-top: var(--em-1);
-	margin-bottom: var(--em-1);
+	margin-top: var(--text-gap);
 }
 
-h6 {
+/* h6 {
 	margin-top: var(--em-2);
-}
+} */
 
-ul {
-	list-style: none;
+[content] ul {
+	list-style: inside;
 }
 
 code {
 	background: #ececec;
-	padding: 1px;
 }
 
-* {
+pre code {
+	padding: var(--em-0);
+}
+
+/* Text Gap */
+
+* + * {
 	margin-top: var(--self-text-gap, var(--text-gap));
-}
-
-.card {
-	--has-bfc: 0;
-	border: 1px solid;
-}
-
-:first-child {
-	margin-top: var(--has-bfc, var(--self-text-gap, var(--text-gap)));
 }
 
 [text-gap="none"] > * {
 	--text-gap: 0;
 }
 
+[text-gap="0"] > * {
+	--text-gap: var(--em-0);
+}
+
 [text-gap="1"] > * {
-	--text-gap: 1rem;
+	--text-gap: var(--em-1);
 }
 
 [text-gap="2"] > * {
-	--text-gap: 3rem;
+	--text-gap: var(--em-2);
 }
 
 [text-gap="3"] > * {
-	--text-gap: 3rem;
+	--text-gap: var(--em-3);
 }
 
 [text-gap="4"] > * {
-	--text-gap: 4rem;
+	--text-gap: var(--em-4);
 }
 
 [text-gap="5"] > * {
-	--text-gap: 5rem;
+	--text-gap: var(--em-5);
 }
 
 [self-text-gap="none"] {
@@ -167,14 +172,253 @@ code {
 	--self-text-gap: 5rem;
 }
 
+[flex] {
+	display: flex;
+	/* margin-top: calc(0px - var(--row-gap, var(--text-gap))); */
+	/* margin-left: calc(0px - var(--parent-column-gap)); */
+}
+
+[flex] > * {
+	flex-grow: 1;
+}
+
+[flex*="shrink"] > * {
+	flex-grow: initial;
+}
+
+[flex*="wrap"] {
+	flex-wrap: wrap;
+}
+
+/* Assumed that when creating layout margin is not wanted */
+/* Can assume the same for elements with a border? */
+[flex] > *,
+[flex] > * > :first-child,
+[flex] > * > * > :first-child,
+[border] > :first-child {
+	margin-top: unset;
+}
+
+/* Width*/
+
 [width="1\\2"] {
-	width: 50%;
+	width: calc(50% - var(--item-column-gap, 0px));
+	flex-shrink: 0;
+	flex-grow: 0;
 }
 
 [width="1\\3"] {
-	width: 33.333%;
+	width: calc(33.333% - var(--item-column-gap, 0px));
+	flex-shrink: 0;
+	flex-grow: 0;
 }
 
 [width="1\\4"] {
-	width: 25%;
+	width: calc(25% - var(--item-column-gap, 0px));
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+
+[column-gap] {
+	margin-left: calc(0px - var(--parent-column-gap, initial));
+}
+
+[column-gap] > * {
+	margin-left: var(--item-column-gap, initial);
+}
+
+[column-gap="1"] {
+	--parent-column-gap: var(--em-1);
+}
+
+[column-gap="1"] > * {
+	--item-column-gap: var(--em-1);
+}
+
+[column-gap="2"] {
+	--parent-column-gap: var(--em-2);
+}
+
+[column-gap="2"] > * {
+	--item-column-gap: var(--em-2);
+}
+
+[column-gap="3"] {
+	--parent-column-gap: var(--em-3);
+}
+
+[column-gap="3"] > * {
+	--item-column-gap: var(--em-3);
+}
+
+[row-gap] {
+	margin-top: calc(var(--self-gap, var(--text-gap, 0px)) - var(--parent-row-gap, initial));
+}
+
+[row-gap] > * {
+	margin-top: var(--item-row-gap, initial);
+}
+
+[row-gap="1"] {
+	--parent-row-gap: var(--em-1);
+}
+
+[row-gap="1"] > * {
+	--item-row-gap: var(--em-1);
+}
+
+[row-gap="2"] {
+	--parent-row-gap: var(--em-2);
+}
+
+[row-gap="2"] > * {
+	--item-row-gap: var(--em-2);
+}
+
+[row-gap="3"] {
+	--parent-row-gap: var(--em-3);
+}
+
+[row-gap="3"] > * {
+	--item-row-gap: var(--em-3);
+}
+
+[padding="1"] {
+	padding: var(--em-1);
+}
+
+[padding-inline="1"] {
+	padding-left: var(--em-1);
+	padding-right: var(--em-1);
+}
+
+[padding-inline="2"] {
+	padding-left: var(--em-2);
+	padding-right: var(--em-2);
+}
+
+[padding-inline="3"] {
+	padding-left: var(--em-3);
+	padding-right: var(--em-3);
+}
+
+[border] {
+	border: 1px solid;
+}
+
+[text="center"] {
+	text-align: center;
+}
+
+/* Layout */
+
+html,
+.App,
+body,
+#sapper {
+	margin-top: 0 !important; /* temp overide */
+}
+
+#sapper,
+.Site {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#sapper {
+	width: 100%;
+}
+
+html {
+	height: 100%;
+}
+body {
+	min-height: 100%;
+}
+
+body {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.App {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: inherit;
+	padding-right: inherit;
+	/* padding-top: inherit; */
+	/* padding-bottom: inherit; */
+	box-sizing: content-box;
+
+	width: 100%;
+	flex-grow: 1;
+	flex-shrink: 0;
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+}
+
+.Content {
+	flex-grow: 1;
+}
+
+.Footer {
+	justify-content: space-between;
+	padding-left: inherit;
+	padding-right: inherit;
+}
+
+[width="viewport"] {
+	max-width: none !important;
+	width: 100vw;
+	box-sizing: border-box;
+	position: relative;
+	left: 50%;
+	transform: translate(-50vw);
+	padding-left: inherit;
+	padding-right: inherit;
+}
+
+.icon-placeholder {
+	background: #ececec;
+	width: 32px;
+	height: 32px;
+	margin: auto;
+}
+
+/* Text Links */
+:not(div) > a {
+	text-decoration: none;
+}
+
+hr {
+	border-bottom: 1px solid;
+	margin-top: var(--em-5);
+	margin-bottom: var(--em-5);
+}
+
+@media (max-width: 900px) {
+	:root {
+		--spacing-ratio: 0.666;
+		--font-ratio: 1.2;
+		--font-base: 16px;
+	}
+}
+
+@media (max-width: 600px) {
+	:root {
+		--spacing-ratio: 0.5;
+	}
+}
+
+@media (max-width: 375px) {
+	:root {
+		--font-base: 14px;
+	}
 }
