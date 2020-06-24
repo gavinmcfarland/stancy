@@ -1,0 +1,7 @@
+[UnitTemplate]
+name = "Tank"
+speed = 0.5
+health = 100
+weapons = [
+	"big cannon",
+	"small turret" ]

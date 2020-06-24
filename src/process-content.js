@@ -4,6 +4,7 @@ import JSON5 from 'json5';
 import fs from 'fs';
 import path from 'path';
 import frontmatter from 'front-matter';
+import toml from 'toml';
 
 // const smarkt = require('smarkt');
 // const YAML = require('yaml');
@@ -14,6 +15,16 @@ import frontmatter from 'front-matter';
 
 function getFileExt(item) {
 	if (item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)[1];
+}
+
+function parseToml(dir, item) {
+	if (!process.browser) {
+		if (getFileExt(item) === 'toml') {
+			let content = fs.readFileSync(path.join(dir, item), 'utf8');
+
+			return toml.parse(content);
+		}
+	}
 }
 
 function parseJson(dir, item) {
@@ -87,7 +98,8 @@ export default function parseContent(dir, item) {
 		parseMarkdown(dir, item) ||
 		parseText(dir, item) ||
 		parseYaml(dir, item) ||
-		parseJson5(dir, item);
+		parseJson5(dir, item) ||
+		parseToml(dir, item);
 	// parseCsson(dir, item);
 	return result;
 }
