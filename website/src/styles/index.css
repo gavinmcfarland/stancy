@@ -46,7 +46,7 @@ body {
 :root {
 	--font-size-body: var(--font-size-0);
 	--font-size-h1: var(--font-size-em-8);
-	--font-size-h2: var(--font-size-em-5);
+	--font-size-h2: var(--font-size-em-4);
 	--font-size-h3: var(--font-size-em-1);
 	--font-size-h4: var(--font-size-em-2);
 	--font-size-h5: var(--font-size-em-1);
@@ -96,6 +96,7 @@ h3,
 h4,
 h5 {
 	margin-top: var(--text-gap);
+	/* margin-bottom: calc(0.5 * var(--text-gap)); */
 }
 
 /* h6 {
@@ -112,6 +113,7 @@ code {
 
 pre code {
 	padding: var(--em-0);
+	border-radius: 8px;
 }
 
 /* Text Gap */
@@ -192,10 +194,10 @@ pre code {
 
 /* Assumed that when creating layout margin is not wanted */
 /* Can assume the same for elements with a border? */
+[flex] > :not([flex]) > :not([flex]) > :first-child,
+[flex] > :not([flex]) > :first-child,
 [flex] > *,
-[flex] > * > :first-child,
-[flex] > * > * > :first-child,
-[border] > :first-child {
+[border] > * {
 	margin-top: unset;
 }
 
@@ -257,6 +259,10 @@ pre code {
 
 [row-gap] > * {
 	margin-top: var(--item-row-gap, initial);
+}
+
+[row-gap] > [row-gap] {
+	margin-top: calc(var(--parent-row-gap, 0px) - var(--item-row-gap, initial));
 }
 
 [row-gap="1"] {
@@ -403,6 +409,16 @@ hr {
 	margin-bottom: var(--em-5);
 }
 
+.Button {
+	display: inline-block;
+	border: 2px solid;
+	padding: var(--em--1) var(--em-0);
+	text-decoration: none;
+	background: none;
+	color: black;
+	border-radius: 8px;
+}
+
 @media (max-width: 900px) {
 	:root {
 		--spacing-ratio: 0.666;
@@ -421,4 +437,8 @@ hr {
 	:root {
 		--font-base: 14px;
 	}
+}
+
+svg {
+	stroke-width: 0.055em;
 }

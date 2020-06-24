@@ -7,16 +7,15 @@
 
 <style>
   .Content {
-    border-top: 1px solid;
     margin-top: 0;
   }
 </style>
 
 <div class="Site" padding-inline="3">
   <div class="App">
-    <Nav {segment} />
+    <!-- <Nav {segment} /> -->
 
-    <main class="Content" width="viewport">
+    <main class="Content">
       <slot />
     </main>
 

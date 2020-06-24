@@ -9,6 +9,7 @@ import pkg from './package.json';
 import processPostCSS from './preprocess.js';
 import glob from 'glob';
 import sveltePreprocess from 'svelte-preprocess';
+import svg from 'rollup-plugin-svg';
 
 const preprocess = sveltePreprocess({
 	postcss: true
@@ -28,6 +29,7 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			svg(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -98,6 +100,7 @@ export default {
 					});
 				}
 			},
+			svg(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)

@@ -23,7 +23,7 @@
 
   .wrapper {
     /* background: silver; */
-    display: table;
+    /* display: table; */
   }
 
   .feature h2 {

@@ -1,5 +1,11 @@
 <script context="module">
   import client from "../../stancyClient.js";
+  import {
+    FileIcon,
+    FolderIcon,
+    BoxIcon,
+    CloudIcon
+  } from "svelte-feather-icons";
 
   export async function preload({ params }) {
     const page = await client.get("pages/home");
@@ -15,41 +21,55 @@
   <title>{page.title}</title>
 </svelte:head>
 
-<div text-gap="1">
-  <h1 text="center">{page.title}</h1>
-  <div text="center">
-    {@html page.content}
+<div>
+  <div row-gap="1" flex="wrap">
+    <h1 text="center">{page.title}</h1>
+
+    <div flex column-gap="2" row-gap="3">
+      <div>
+        <span style="margin: auto; display: table;">
+          <FolderIcon size="64" />
+        </span>
+        <p>
+          Organise your content just using files and folders. Folders create
+          collections and files create items.
+        </p>
+      </div>
+      <div>
+        <span style="margin: auto; display: table;">
+          <FileIcon size="64" />
+        </span>
+        <p>
+          Easily deliver content from static folders and files using JSON, YAML,
+          TEXT and Markdown.
+        </p>
+      </div>
+
+      <div>
+        <span style="margin: auto; display: table;">
+          <BoxIcon size="64" />
+        </span>
+        <p>
+          Easily asbtract content formatting by processing it on the client.
+          Sort collections, format dates, and parse markdown.
+        </p>
+      </div>
+      <div>
+        <span style="margin: auto; display: table;">
+          <CloudIcon size="64" />
+        </span>
+        <p>
+          Get and filter data easily using a simple RESTlike API that follows
+          the sturcture of your folders.
+        </p>
+      </div>
+    </div>
+
+    <div text="center">
+      <a class="Button" href="#">View on Github</a>
+    </div>
   </div>
-  <div flex column-gap="2" row-gap="3">
-    <div>
-      <div class="icon-placeholder" />
-      <p>
-        Easily deliver content from static folders and files using JSON, YAML,
-        TEXT and Markdown.
-      </p>
-    </div>
-    <div>
-      <div class="icon-placeholder" />
-      <p>
-        Organise your content just using files and folders. Folders create
-        collections and files create items.
-      </p>
-    </div>
-    <div>
-      <div class="icon-placeholder" />
-      <p>
-        Easily asbtract content formatting by processing it on the client. Sort
-        collections, format dates, and parse markdown.
-      </p>
-    </div>
-    <div>
-      <div class="icon-placeholder" />
-      <p>
-        Get and filter data easily using a simple RESTlike API that follows the
-        sturcture of your folders.
-      </p>
-    </div>
-  </div>
+
   <hr width="viewport" />
   <div>
     <div flex>
