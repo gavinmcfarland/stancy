@@ -6,14 +6,14 @@
 			"src": "__sapper__/export/**",
 			"use": "@now/static",
 			"config": {
-				"includeFiles": [ "content/**" ]
+				"includeFiles": ["content/**"]
 			}
 		},
 		{
 			"src": "api.js",
-			"use": "@now/node-server",
+			"use": "@now/node",
 			"config": {
-				"includeFiles": [ "content/**" ]
+				"includeFiles": ["content/**"]
 			}
 		}
 	],
