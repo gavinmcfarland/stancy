@@ -5,6 +5,8 @@ import fs from 'fs';
 import path from 'path';
 import frontmatter from 'front-matter';
 import toml from 'toml';
+var CSON = require('cson')
+var Hjson = require('hjson');
 
 // const smarkt = require('smarkt');
 // const YAML = require('yaml');
@@ -33,6 +35,26 @@ function parseJson(dir, item) {
 			let content = fs.readFileSync(path.join(dir, item), 'utf8');
 
 			return JSON.parse(content);
+		}
+	}
+}
+
+function parseHjson(dir, item) {
+	if (!process.browser) {
+		if (getFileExt(item) === 'hjson') {
+			let content = fs.readFileSync(path.join(dir, item), 'utf8');
+
+			return Hjson.parse(content);
+		}
+	}
+}
+
+function parseCson(dir, item) {
+	if (!process.browser) {
+		if (getFileExt(item) === 'cson') {
+			let content = fs.readFileSync(path.join(dir, item), 'utf8');
+
+			return CSON.parse(content);
 		}
 	}
 }
@@ -95,11 +117,13 @@ function parseYaml(dir, item) {
 export default function parseContent(dir, item) {
 	let result =
 		parseJson(dir, item) ||
+		parseHjson(dir, item) ||
 		parseMarkdown(dir, item) ||
 		parseText(dir, item) ||
 		parseYaml(dir, item) ||
 		parseJson5(dir, item) ||
-		parseToml(dir, item);
+		parseToml(dir, item) ||
+		parseCson(dir, item);
 	// parseCsson(dir, item);
 	return result;
 }

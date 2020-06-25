@@ -1,7 +1,21 @@
-[UnitTemplate]
-name = "Tank"
-speed = 0.5
-health = 100
-weapons = [
-	"big cannon",
-	"small turret" ]
+[[fruit]]
+  name = "apple" # I am a property in fruit table/map
+
+  [fruit.geometry]
+    shape = "round"
+    note = "I am a property in geometry table/map"
+
+  [[fruit.color]]
+    name = "red"
+    note = "I am an array item in apple fruit's table/map"
+
+  [[fruit.color]]
+    name = "green"
+    note = "I am in the same array as red"
+
+[[fruit]]
+  name = "banana"
+
+  [[fruit.color]]
+    name = "yellow"
+    note = "I am an array item in banana fruit's table/map"
