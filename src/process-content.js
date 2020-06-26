@@ -5,8 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import frontmatter from 'front-matter';
 import toml from 'toml';
-var CSON = require('cson')
-var Hjson = require('hjson');
+import hjson from 'hjson';
 
 // const smarkt = require('smarkt');
 // const YAML = require('yaml');
@@ -44,7 +43,7 @@ function parseHjson(dir, item) {
 		if (getFileExt(item) === 'hjson' || getFileExt(item) === 'json') {
 			let content = fs.readFileSync(path.join(dir, item), 'utf8');
 
-			return Hjson.parse(content);
+			return hjson.parse(content);
 		}
 	}
 }
