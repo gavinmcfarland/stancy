@@ -1,4 +1,5 @@
 @import 'typolize';
+@import './syntax-highlighting.css';
 
 /* Reset */
 
@@ -12,6 +13,10 @@ body {
 
 #sapper {
 	margin: initial;
+}
+
+code {
+	overflow-x: scroll;
 }
 
 /* Ratios */
@@ -425,6 +430,7 @@ hr {
 @media (max-width: 600px) {
 	:root {
 		--spacing-ratio: 0.5;
+		--font-ratio: 1.1;
 	}
 }
 

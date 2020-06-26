@@ -210,6 +210,62 @@ small {
 	--spacing-ratio: 1;
 	--cap-height: 0.75;
 }
+/*
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+*/
+.hljs {
+	display: block;
+	overflow-x: auto;
+  }
+.hljs-comment,
+  .hljs-quote,
+  .hljs-variable {
+	color: #008000;
+  }
+.hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in,
+  .hljs-name,
+  .hljs-tag {
+	color: #C751FF;
+  }
+.hljs-selector-class {
+	color: #519D2D;
+  }
+.hljs-string,
+  .hljs-title,
+  .hljs-section,
+  .hljs-attribute,
+  .hljs-literal,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-addition {
+	color: #875BBF;
+  }
+.hljs-deletion,
+  .hljs-selector-attr,
+  .hljs-selector-pseudo,
+  .hljs-meta {
+	color: #519D2D;
+  }
+.hljs-doctag {
+	color: #808080;
+  }
+.hljs-attr {
+	color: #f00;
+  }
+.hljs-symbol,
+  .hljs-bullet,
+  .hljs-link {
+	color: #00b0e8;
+  }
+.hljs-emphasis {
+	font-style: italic;
+  }
+.hljs-strong {
+	font-weight: bold;
+  }
 /* Reset */
 * {
 	list-style: none;
@@ -219,6 +275,9 @@ body {
 }
 #sapper {
 	margin: initial;
+}
+code {
+	overflow-x: scroll;
 }
 /* Ratios */
 :root {
@@ -549,6 +608,7 @@ hr {
 @media (max-width: 600px) {
 	:root {
 		--spacing-ratio: 0.5;
+		--font-ratio: 1.1;
 	}
 }
 @media (max-width: 375px) {
