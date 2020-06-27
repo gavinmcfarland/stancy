@@ -3,36 +3,32 @@ import fs from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
 
-// const fs = require('fs');
-// const path = require('path');
-// const pluralize = require('pluralize');
-
 const type = {
 	is: {
-		file: function(item) {
+		file: function (item) {
 			if (/\..+$/.test(item)) {
 				return item.split('.')[0];
 			} else {
 				return false;
 			}
 		},
-		folder: function(item) {
+		folder: function (item) {
 			if (!/\..+$/.test(item)) {
 				return item;
 			} else {
 				return false;
 			}
 		},
-		singular: function(item) {
+		singular: function (item) {
 			return pluralize.isSingular(item);
 		},
-		plural: function(item) {
+		plural: function (item) {
 			return pluralize.isPlural(item);
 		},
-		index: function(value) {
+		index: function (value) {
 			return /^index..+$/.test(value);
 		},
-		collection: function(source, value) {
+		collection: function (source, value) {
 			let isCollection = false;
 			if (type.is.folder(value)) {
 				isCollection = true;
@@ -40,19 +36,19 @@ const type = {
 			// console.log(value)
 			return isCollection;
 		},
-		item: function(source, value) {
+		item: function (source, value) {
 			let isItem = false;
 			if (type.is.file(value) || type.has.index(source, value)) {
 				isItem = true;
 			}
 			return isItem;
 		},
-		hidden: function(value) {
+		hidden: function (value) {
 			return /^_/.test(value);
 		}
 	},
 	has: {
-		index: function(source, value) {
+		index: function (source, value) {
 			let hasIndex = false;
 			if (type.is.folder(value)) {
 				fs.readdirSync(path.join(source + value)).map((value) => {
@@ -64,7 +60,7 @@ const type = {
 
 			return hasIndex;
 		},
-		children: function(source, value) {
+		children: function (source, value) {
 			let hasChildren = false;
 			if (type.is.folder(value)) {
 				fs.readdirSync(path.join(source + value)).map(() => {
@@ -77,7 +73,7 @@ const type = {
 	}
 };
 
-function createResrouce(dir, value, index, parent, root) {
+function createResource(dir, value, index, parent, root) {
 	// If thing is hidden don't return resource
 	if (type.is.hidden(value)) {
 		return;
@@ -102,10 +98,6 @@ function createResrouce(dir, value, index, parent, root) {
 	// Add source
 	resource._source = path.join(dir + slug);
 
-	if (type.is.singular(value)) {
-		// resource._type = "item"
-	}
-
 	if (type.is.folder(value) && !type.has.index(dir, value)) {
 		// resource._type = "collection"
 	}
@@ -120,7 +112,7 @@ function createResrouce(dir, value, index, parent, root) {
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 		fs.readdirSync(subDir).map((value, index) => {
-			createResrouce(subDir, value, index, parent, root);
+			createResource(subDir, value, index, parent, root);
 		});
 	}
 
@@ -136,27 +128,46 @@ function createResrouce(dir, value, index, parent, root) {
 	}
 
 	// Apply content from index file
-	if (type.is.folder(value) && !type.is.item(dir, value)) {
-		// let subDir = path.join(dir + value + '/');
-		let indexContent = '';
-		fs.readdirSync(dir).map((value) => {
-			if (/index..+$/.test(value)) {
-				indexContent = preprocess(dir, value);
-			}
-		});
-		Object.assign(resource, indexContent);
-	}
+	// if (type.has.index(dir, value)) {
+	// 	// let subDir = path.join(dir + value + '/');
+	// 	let indexContent = '';
+	// 	fs.readdirSync(dir).map((value) => {
+
+	// 		if (/index..+$/.test(value)) {
+
+	// 			indexContent = preprocess(dir, value);
+	// 		}
+	// 	});
+	// 	Object.assign(resource, indexContent);
+	// }
+
+
 
 	// Add children of folder to resource
 	if (type.is.folder(value)) {
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 
-		resource[parent] = [];
+
+		if (type.is.plural(parent)) {
+			resource[parent] = [];
+		}
 
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
-			if (!type.is.index(value)) {
-				resource[parent].push(createResrouce(subDir, value, index, parent, root));
+
+			if (type.is.singular(parent)) {
+				resource._type = parent
+				if (type.is.index(value)) {
+					Object.assign(resource, preprocess(subDir, value));
+				} else {
+					Object.assign(resource, { [value.split('.')[0]]: preprocess(subDir, value) });
+				}
+
+			}
+
+			else {
+
+				resource[parent].push(createResource(subDir, value, index, parent, root));
 			}
 		});
 	}
@@ -168,16 +179,8 @@ export default function createDatabase(dir) {
 	let root = dir;
 
 	let database = fs.readdirSync(dir).map((value, index) => {
-		return createResrouce(dir, value, index, null, root);
+		return createResource(dir, value, index, null, root);
 	});
 
 	return database;
 }
-
-// export function write(dir) {
-// 	let db = JSON.stringify(createDatabase(dir), null, '\t');
-// 	fs.writeFile('db.json', db, (err) => {
-// 		if (err) throw err;
-// 		// console.log('The file has been saved!');
-// 	});
-// }

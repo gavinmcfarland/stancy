@@ -8,9 +8,10 @@ function isObjectEmpty(obj) {
 export default async function getContent(database, { resource1, resource2, query }) {
 	var expression = jsonata(`**[_type="${resource1}"]`);
 	if (resource1 && !resource2) {
+
 		if (query) {
 			let array = [];
-			for (let [ key, value ] of Object.entries(query)) {
+			for (let [key, value] of Object.entries(query)) {
 				let string = `[${key}=${value}]`;
 				array.push(string);
 			}
@@ -23,7 +24,7 @@ export default async function getContent(database, { resource1, resource2, query
 	if (resource1 && resource2) {
 		if (query) {
 			let array = [];
-			for (let [ key, value ] of Object.entries(query)) {
+			for (let [key, value] of Object.entries(query)) {
 				let string = `[${key}=${value}]`;
 				array.push(string);
 			}
@@ -39,7 +40,7 @@ export default async function getContent(database, { resource1, resource2, query
 				return database;
 			}
 			let array = [];
-			for (let [ key, value ] of Object.entries(query)) {
+			for (let [key, value] of Object.entries(query)) {
 				let string = `[${key}=${value}]`;
 				array.push(string);
 			}

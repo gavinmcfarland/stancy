@@ -7,13 +7,6 @@ import frontmatter from 'front-matter';
 import toml from 'toml';
 import hjson from 'hjson';
 
-// const smarkt = require('smarkt');
-// const YAML = require('yaml');
-// const JSON5 = require('json5');
-// const fs = require('fs');
-// const path = require('path');
-// const frontmatter = require('front-matter');
-
 function getFileExt(item) {
 	if (item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)) return item.match(/\.([0-9a-z]+)(?:[?#]|$)/i)[1];
 }
