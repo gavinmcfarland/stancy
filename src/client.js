@@ -81,8 +81,16 @@ class Client {
 				base = options.production;
 			}
 		} else {
-			base = options.production;
+			if (options.production) {
+				base = options.production;
+			}
+			else {
+				base = options.preview;
+			}
+
 		}
+
+		console.log('production - ' + options.production)
 
 		console.log('browser - ' + !process.browser);
 
@@ -103,7 +111,7 @@ class Client {
 		});
 	}
 	preprocess(type, callback) {
-		Object.assign(this._options, { preprocess: [ type, callback ] });
+		Object.assign(this._options, { preprocess: [type, callback] });
 	}
 }
 

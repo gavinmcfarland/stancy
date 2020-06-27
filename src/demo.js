@@ -1,7 +1,7 @@
 const marked = require('marked');
 const stancy = require('../dist');
 
-var client = stancy('content/').client('https://now-restlike-api.now.sh/api/');
+var client = stancy('content/').client();
 
 client.preprocess('content', (data) => {
 	return marked(data);
