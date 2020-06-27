@@ -15,7 +15,7 @@
 		"compression": "^1.7.1",
 		"polka": "next",
 		"sirv": "^0.4.0",
-		"stancy": "^1.0.0-alpha.23"
+		"stancy": "^1.0.0-alpha.24"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",

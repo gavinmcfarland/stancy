@@ -9,17 +9,16 @@
 	} from 'svelte-feather-icons'
 
 	export async function preload({ params }) {
-		const page = await client.get('site')
-		const usage = await client.get('usage')
-		const features = await client.get('features')
-		return { usage, page, features }
+		const page = await client.get('home')
+		// const page = await client.get('site')
+		// const usage = await client.get('usage')
+		// const features = await client.get('features')
+		return { page }
 	}
 </script>
 
 <script>
 	export let page
-	export let usage
-	export let features
 </script>
 
 <style>
@@ -52,11 +51,11 @@
 </style>
 
 <svelte:head>
-	<title>{page.title}</title>
+	<title>{page.site.title}</title>
 </svelte:head>
 <div>
 	<div text-gap="3">
-		<h1 text="center">{page.title}</h1>
+		<h1 text="center">{page.site.title}</h1>
 
 		<div class="highlights" flex="wrap" column-gap="2" row-gap="3">
 			{#each page.highlights as { svg, description }}
@@ -81,7 +80,7 @@
 		<div flex="wrap" class="usage">
 			<h2 width="1\3">Usage</h2>
 			<div width="1\2">
-				{@html usage.content}
+				{@html page.usage.content}
 			</div>
 		</div>
 
@@ -90,7 +89,7 @@
 		<div flex="wrap" class="features">
 			<h2 width="1\3">Features</h2>
 			<div width="1\2">
-				{@html features.content}
+				{@html page.features.content}
 			</div>
 		</div>
 
