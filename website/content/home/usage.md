@@ -1,4 +1,4 @@
-Create your content. Folders create collections. Files create items.
+Create and structure your content. Plural sounding folders will give you a collection.
 
 ```
 content/

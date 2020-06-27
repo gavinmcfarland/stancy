@@ -38,13 +38,6 @@ Now start the server.
 stancy('content/').serve(3000, '/api/')
 ```
 
-The API generates endpoints for collections and items following the structure of the directory.
-
-```
-/:item
-/:collection[/:item]
-```
-
 We can access the content using the following requests:
 
 - [localhost:3000/api/site](http://localhost:3000/api/site)
@@ -80,7 +73,7 @@ import stancy from 'stancy'
 
 - ### Collections and Items
 
-  Collections are created by grouping files with a folder. Items are created by files.
+  Collections are created by plural sounding folders. Items are created using folders.
 
 ---
 
@@ -90,19 +83,13 @@ import stancy from 'stancy'
 
 ---
 
-- ### Singular Folders
-  
-  When a singular name is used for a folder it will create an item (instead of a collection). The files contained in that folder become fields of that item.
-
----
-
 - ### Index File
 
-  Placing an index file inside a folder will create an item. The files contained inside that folder become children of that item. This is useful if you prefer to organise using folders or if you want to create an index page for a group of related content.
+  This is useful if you prefer to organise using folders or if you want to create an index page for a group of related content.
 
   ```bash
   # Creates a collection of items
-  collection/
+  posts/
     item-one.md
     item-two.md
     item-three.md
@@ -125,7 +112,7 @@ import stancy from 'stancy'
 
 ---
 
-- ### File Types <mark>(coming soon)</mark>
+- ### File Types <mark>(Planned)</mark>
 
   The following file types are supported.
 
@@ -138,7 +125,7 @@ import stancy from 'stancy'
 
 ---
 
-- ### Meta Data <mark>(coming soon)</mark>
+- ### Meta Data <mark>(Planned)</mark>
 
   You can add meta data to images by creating a data file with a matching name.
 
@@ -281,7 +268,6 @@ import stancy from 'stancy'
 
     ```json
     {
-        "_extension": ".json",
         "url": "users/jerry",
         "name": "Jerry",
         "age": "24",
@@ -302,7 +288,7 @@ import stancy from 'stancy'
     ```
 ---
 
-- ### Configure using config file <mark>(Coming soon)</mark>
+- ### Configure using config file <mark>(Planned)</mark>
 
     __stancy.config.js__
 
