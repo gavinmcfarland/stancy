@@ -74,6 +74,7 @@ const type = {
 };
 
 function createResource(dir, value, index, parent, root) {
+
 	// If thing is hidden don't return resource
 	if (type.is.hidden(value)) {
 		return;
@@ -145,31 +146,41 @@ function createResource(dir, value, index, parent, root) {
 
 	// Add children of folder to resource
 	if (type.is.folder(value)) {
+
+
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 
-
 		if (type.is.plural(parent)) {
-			resource[parent] = [];
-		}
+			var array = [];
+			fs.readdirSync(path.join(dir + value)).map((value, index) => {
 
-		fs.readdirSync(path.join(dir + value)).map((value, index) => {
-
-			if (type.is.singular(parent)) {
-				resource._type = parent
-				if (type.is.index(value)) {
-					Object.assign(resource, preprocess(subDir, value));
-				} else {
-					Object.assign(resource, { [value.split('.')[0]]: preprocess(subDir, value) });
+				if (type.is.singular(parent)) {
+					resource._type = parent
+					if (type.is.index(value)) {
+						Object.assign(resource, preprocess(subDir, value));
+					} else {
+						Object.assign(resource, { [value.split('.')[0]]: preprocess(subDir, value) });
+					}
 				}
 
+				else {
+					if (!type.is.index(value)) {
+						array.push(createResource(subDir, value, index, parent, root));
+					}
+					else {
+						Object.assign(resource, preprocess(subDir, value));
+					}
+
+				}
+			});
+			if (array.length > 0) {
+				resource[parent] = array;
 			}
 
-			else {
+		}
 
-				resource[parent].push(createResource(subDir, value, index, parent, root));
-			}
-		});
+
 	}
 
 	return resource;

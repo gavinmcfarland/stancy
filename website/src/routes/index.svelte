@@ -1,18 +1,9 @@
 <script context="module">
 	import client from '../../stancyClient.js'
 	import Button from '../components/Button.svelte'
-	import {
-		FileIcon,
-		FolderIcon,
-		BoxIcon,
-		CloudIcon,
-	} from 'svelte-feather-icons'
 
 	export async function preload({ params }) {
 		const page = await client.get('home')
-		// const page = await client.get('site')
-		// const usage = await client.get('usage')
-		// const features = await client.get('features')
 		return { page }
 	}
 </script>
