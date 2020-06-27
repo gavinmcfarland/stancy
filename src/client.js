@@ -90,16 +90,6 @@ class Client {
 
 		}
 
-		console.log('production - ' + options.production)
-
-		console.log('browser - ' + !process.browser);
-
-		console.log('source - ' + this._source);
-
-		console.log('preview - ' + options.preview);
-
-		console.log(`${base}${path}`);
-
 		return fetch(`${base}${path}`).then((res) => res.text()).then((json) => {
 			try {
 				var result = this._process(json, options);
