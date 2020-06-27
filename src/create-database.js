@@ -110,6 +110,7 @@ function createResource(dir, value, index, parent, root) {
 	}
 
 	if (type.is.folder(value)) {
+
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 		fs.readdirSync(subDir).map((value, index) => {
@@ -144,41 +145,63 @@ function createResource(dir, value, index, parent, root) {
 
 
 
-	// Add children of folder to resource
+	// If it's a folder
 	if (type.is.folder(value)) {
 
 
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 
-		if (type.is.plural(parent)) {
-			var array = [];
-			fs.readdirSync(path.join(dir + value)).map((value, index) => {
 
-				if (type.is.singular(parent)) {
-					resource._type = parent
-					if (type.is.index(value)) {
-						Object.assign(resource, preprocess(subDir, value));
-					} else {
-						Object.assign(resource, { [value.split('.')[0]]: preprocess(subDir, value) });
+		var array = [];
+
+		// Loop through its contents
+		fs.readdirSync(path.join(dir + value)).map((value, index) => {
+
+			if (type.is.singular(parent)) {
+				// If parent is singular
+				resource._type = parent
+
+				if (type.is.index(value)) {
+					// If item is index file then apply contents to parent
+					Object.assign(resource, preprocess(subDir, value));
+				} else {
+					// Else apply files as properties to parent
+					Object.assign(resource, { [value.split('.')[0]]: preprocess(subDir, value) });
+
+					if (type.has.index(subDir, value)) {
+						let previous = value
+						fs.readdirSync(subDir + value).map((value) => {
+
+							if (type.is.index(value)) {
+
+								// Temporary fix for folders that contain index file
+								Object.assign(resource, { [previous]: preprocess(subDir + previous, value) });
+							}
+						})
 					}
+
 				}
 
-				else {
-					if (!type.is.index(value)) {
-						array.push(createResource(subDir, value, index, parent, root));
-					}
-					else {
-						Object.assign(resource, preprocess(subDir, value));
-					}
 
-				}
-			});
-			if (array.length > 0) {
-				resource[parent] = array;
 			}
 
+			else {
+				// If parent is plural
+				if (!type.is.index(value)) {
+					array.push(createResource(subDir, value, index, parent, root));
+				}
+				else {
+					Object.assign(resource, preprocess(subDir, value));
+				}
+
+			}
+		});
+		if (array.length > 0) {
+			resource[parent] = array;
 		}
+
+
 
 
 	}
