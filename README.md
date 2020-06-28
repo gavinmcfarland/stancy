@@ -54,13 +54,7 @@ Check out the [examples](/examples).
 Add the npm package to your project.
 
 ```bash
-npm install stancy --save-dev
-```
-
-Import stancy in your application.
-
-```js
-import stancy from 'stancy'
+npm install stancy
 ```
 
 ## Features

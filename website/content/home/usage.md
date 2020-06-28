@@ -18,5 +18,5 @@ var client = stancy('content/').client()
 To get content, just specify the end point which matches your content structure.
 
 ```js
-client.get('pages/about')
+client.get('pages/about').then((data) => console.log(data))
 ```
