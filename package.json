@@ -1,6 +1,6 @@
 {
 	"name": "stancy",
-	"version": "1.0.0-alpha.27",
+	"version": "1.0.0-alpha.28",
 	"description": "A simple API for delivering content from static files and folders.",
 	"main": "dist/index.js",
 	"browser": "dist/client/index.js",
