@@ -24,10 +24,6 @@ content/
     home.md
     about.md
     services.md
-    blog/
-        index.md
-        my-first-post.md
-        another-post.md
 ```
 
 Here we've created a file `site.json` which stores key information about our site, some `pages`, and a `blog`.
@@ -42,10 +38,7 @@ We can access the content using the following requests:
 
 - [localhost:3000/api/site](http://localhost:3000/api/site)
 - [localhost:3000/api/pages](http://localhost:3000/api/pages)
-- [localhost:3000/api/pages?status=draft](http://localhost:3000/api/pages?status=draft)
 - [localhost:3000/api/pages/about](http://localhost:3000/api/pages/about)
-
-Items in collections can be filtered by querying their _fields_. For example the query `?status=draft` will list all draft pages.
 
 Check out the [examples](/examples).
 
