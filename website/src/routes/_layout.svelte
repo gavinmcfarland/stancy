@@ -11,7 +11,9 @@
 	}
 </style>
 
-<div class="Site" padding-inline="3" text-gap="1">
+<template lang="phtml">
+
+<div class="Site pr-3 pl-3 text-gap-1">
 	<div class="App">
 		<Nav {segment} />
 
@@ -19,6 +21,9 @@
 			<slot />
 		</main>
 
+
 		<Footer />
 	</div>
 </div>
+
+</template>

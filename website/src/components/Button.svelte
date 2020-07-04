@@ -7,7 +7,6 @@
 		margin-top: var(--em-2);
 		display: inline-block;
 		border-width: 2px;
-		padding: var(--em--1) var(--em-0);
 		text-decoration: none;
 		background: none;
 		color: black;
@@ -15,8 +14,10 @@
 	}
 </style>
 
+<template lang="phtml">
 {#if href}
-	<a class="Button" border {href}>
+	<a class="Button border p-1" {href}>
 		<slot />
 	</a>
 {/if}
+</template>

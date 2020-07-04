@@ -3,7 +3,7 @@ Create and structure your content. Plural sounding folders will give you a colle
 ```
 content/
 	pages/
-		home.md
+		home.md 
 		features.md
 		about.md
 	site.json
@@ -18,5 +18,5 @@ var client = stancy('content/').client()
 To get content, just specify the end point which matches your content structure.
 
 ```js
-client.get('pages/about').then((data) => console.log(data))
+client.get('pages/about').then((res) => console.log(res))
 ```

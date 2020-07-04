@@ -39,19 +39,22 @@
 		/* flex-basis: clamp(20ch, 38vw, 16rem); */
 		width: clamp(20ch, calc(75% - 96px), 133rem);
 	}
+
 </style>
 
 <svelte:head>
 	<title>{page.site.title}</title>
 </svelte:head>
-<div>
-	<div text-gap="3">
-		<h1 text="center">{page.site.title}</h1>
 
-		<div class="highlights" flex="wrap" column-gap="2" row-gap="3">
+<template lang="phtml">
+<div>
+	<div class="text-gap-3">
+		<h1 class="text-center">{page.site.title}</h1>
+
+		<div class="highlights flex-wrap" column-gap="2" row-gap="3">
 			{#each page.highlights as { svg, description }}
 				<div>
-					<span style="margin: auto; display: table;">
+					<span class="mx-auto display-table">
 						{@html svg}
 					</span>
 					<p>{description}</p>
@@ -59,7 +62,7 @@
 			{/each}
 		</div>
 
-		<div text="center">
+		<div class="text-center">
 			<Button href="https://github.com/limitlessloop/stancy">
 				View on Github
 			</Button>
@@ -68,7 +71,7 @@
 
 	<hr width="viewport" />
 	<div>
-		<div flex="wrap" class="usage">
+		<div class="usage flex-wrap">
 			<h2 width="1\3">Usage</h2>
 			<div width="1\2">
 				{@html page.usage.content}
@@ -77,7 +80,7 @@
 
 		<hr width="viewport" />
 
-		<div flex="wrap" class="features">
+		<div class="features flex-wrap">
 			<h2 width="1\3">Features</h2>
 			<div width="1\2">
 				{@html page.features.content}
@@ -86,3 +89,4 @@
 
 	</div>
 </div>
+</template>

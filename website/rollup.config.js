@@ -10,9 +10,22 @@ import processPostCSS from './preprocess.js';
 import glob from 'glob';
 import sveltePreprocess from 'svelte-preprocess';
 import svg from 'rollup-plugin-svg';
+const phtmlUtilityClass = require('phtml-utility-class');
+const phtmlMarkdown = require('@phtml/markdown');
+import pug from "pug";
+import phtml from 'phtml';
 
 const preprocess = sveltePreprocess({
-	postcss: true
+	postcss: true,
+
+	phtml({ content, filename }) {
+		return phtmlUtilityClass.process(content, { from: filename }).then(result => ({ code: result.html, map: null }));
+		// return phtmlMarkdown.process(content, { from: filename }).then(result => ({ code: result.html, map: null }));
+	},
+	pug({ content, filename }) {
+		const code = pug.render(content)
+		return { code, map: null }
+	}
 });
 
 processPostCSS('src/styles/index.css', 'static/global.css');
@@ -42,38 +55,38 @@ export default {
 			}),
 			resolve({
 				browser: true,
-				dedupe: [ 'svelte' ]
+				dedupe: ['svelte']
 			}),
 			commonjs(),
 
 			legacy &&
-				babel({
-					extensions: [ '.js', '.mjs', '.html', '.svelte' ],
-					babelHelpers: 'runtime',
-					exclude: [ 'node_modules/@babel/**' ],
-					presets: [
-						[
-							'@babel/preset-env',
-							{
-								targets: '> 0.25%, not dead'
-							}
-						]
-					],
-					plugins: [
-						'@babel/plugin-syntax-dynamic-import',
-						[
-							'@babel/plugin-transform-runtime',
-							{
-								useESModules: true
-							}
-						]
+			babel({
+				extensions: ['.js', '.mjs', '.html', '.svelte'],
+				babelHelpers: 'runtime',
+				exclude: ['node_modules/@babel/**'],
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: '> 0.25%, not dead'
+						}
 					]
-				}),
+				],
+				plugins: [
+					'@babel/plugin-syntax-dynamic-import',
+					[
+						'@babel/plugin-transform-runtime',
+						{
+							useESModules: true
+						}
+					]
+				]
+			}),
 
 			!dev &&
-				terser({
-					module: true
-				})
+			terser({
+				module: true
+			})
 		],
 
 		preserveEntrySignatures: false,
@@ -88,12 +101,12 @@ export default {
 				buildStart() {
 					var self = this;
 					var source = 'content/';
-					glob(source + '**/*', null, function(er, files) {
+					glob(source + '**/*', null, function (er, files) {
 						files.forEach((file) => {
 							self.addWatchFile(file);
 						});
 					});
-					glob('src/styles/**/*', null, function(er, files) {
+					glob('src/styles/**/*', null, function (er, files) {
 						files.forEach((file) => {
 							self.addWatchFile(file);
 						});
@@ -111,7 +124,7 @@ export default {
 				preprocess
 			}),
 			resolve({
-				dedupe: [ 'svelte' ]
+				dedupe: ['svelte']
 			}),
 			commonjs()
 		],

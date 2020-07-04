@@ -10,8 +10,8 @@
 	}
 </style>
 
-<header class="Nav" width="viewport">
-	<div class="wrapper" flex column-gap="1">
+<header class="Nav width-viewport">
+	<div class="wrapper flex column-gap-1">
 		<a
 			style="font-size: 1px"
 			aria-current={segment === undefined ? 'page' : undefined}
