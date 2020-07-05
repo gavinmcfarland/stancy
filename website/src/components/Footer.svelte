@@ -9,6 +9,7 @@
   }
 </style>
 
+<template lang="phtml">
 <footer class="Footer flex-shrink width-viewport">
   <ul class="flex column-gap-1">
     <li>Copyright 2020 &copy; Limitless Loop</li>
@@ -20,3 +21,4 @@
     </li>
   </ul>
 </footer>
+</template>

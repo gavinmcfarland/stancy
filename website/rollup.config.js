@@ -13,7 +13,6 @@ import svg from 'rollup-plugin-svg';
 const phtmlUtilityClass = require('phtml-utility-class');
 const phtmlMarkdown = require('@phtml/markdown');
 import pug from "pug";
-import phtml from 'phtml';
 
 const preprocess = sveltePreprocess({
 	postcss: true,
@@ -27,6 +26,12 @@ const preprocess = sveltePreprocess({
 		return { code, map: null }
 	}
 });
+
+const myPreprocessor = {
+	markup({ content, filename }) {
+		return phtmlUtilityClass.process(content, { from: filename }).then(result => ({ code: result.html, map: null }));
+	}
+}
 
 processPostCSS('src/styles/index.css', 'static/global.css');
 
@@ -51,7 +56,10 @@ export default {
 				dev,
 				hydratable: true,
 				emitCss: true,
-				preprocess
+				preprocess: [
+					preprocess,
+					// myPreprocessor
+				]
 			}),
 			resolve({
 				browser: true,

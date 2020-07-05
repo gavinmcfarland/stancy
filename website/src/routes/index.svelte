@@ -51,7 +51,7 @@
 	<div class="text-gap-3">
 		<h1 class="text-center">{page.site.title}</h1>
 
-		<div class="highlights flex-wrap" column-gap="2" row-gap="3">
+		<div class="highlights flex-wrap column-gap-2 row-gap-3">
 			{#each page.highlights as { svg, description }}
 				<div>
 					<span class="mx-auto display-table">
@@ -69,20 +69,21 @@
 		</div>
 	</div>
 
-	<hr width="viewport" />
+	<hr class="width-viewport" />
+
 	<div>
 		<div class="usage flex-wrap">
-			<h2 width="1\3">Usage</h2>
-			<div width="1\2">
+			<h2 class="width-1\3">Usage</h2>
+			<div class="width-1\2">
 				{@html page.usage.content}
 			</div>
 		</div>
 
-		<hr width="viewport" />
+		<hr class="width-viewport" />
 
 		<div class="features flex-wrap">
-			<h2 width="1\3">Features</h2>
-			<div width="1\2">
+			<h2 class="width-1\3">Features</h2>
+			<div class="width-1\2">
 				{@html page.features.content}
 			</div>
 		</div>

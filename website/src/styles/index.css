@@ -149,7 +149,7 @@ svg {
 /* Text gap */
 
 [class^='text-gap'] > *,
-[class*=' text-gap'] {
+[class*=' text-gap'] > * {
 	margin-bottom: unset;
 }
 
@@ -263,7 +263,7 @@ svg {
 	--item-column-gap: var(--rem-1);
 }
 
-.column-gap-1 {
+.column-gap-2 {
 	--parent-column-gap: var(--rem-2);
 }
 

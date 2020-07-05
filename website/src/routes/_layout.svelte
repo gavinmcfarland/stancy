@@ -13,7 +13,7 @@
 
 <template lang="phtml">
 
-<div class="Site pr-3 pl-3 text-gap-1">
+<div class="Site p-0,4 text-gap-1">
 	<div class="App">
 		<Nav {segment} />
 

@@ -386,7 +386,7 @@ svg {
 }
 /* Text gap */
 [class^='text-gap'] > *,
-[class*=' text-gap'] {
+[class*=' text-gap'] > * {
 	margin-bottom: unset;
 }
 .text-gap-none > * {
@@ -474,7 +474,7 @@ svg {
 .column-gap-1 > * {
 	--item-column-gap: var(--rem-1);
 }
-.column-gap-1 {
+.column-gap-2 {
 	--parent-column-gap: var(--rem-2);
 }
 .column-gap-2 > * {
