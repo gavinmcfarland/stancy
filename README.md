@@ -31,7 +31,7 @@ Here we've created a file `site.json` which stores key information about our sit
 Now start the server.
 
 ```js
-stancy('content/').serve(3000, '/api/')
+stancy('content/').server(3000, '/api/')
 ```
 
 We can access the content using the following requests:
