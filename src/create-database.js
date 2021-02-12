@@ -5,30 +5,38 @@ import pluralize from 'pluralize';
 
 const type = {
 	is: {
-		file: function (item) {
-			if (/\..+$/.test(item)) {
+		image(item) {
+			if (/.jpg|.jpeg|.png/.test(item)) {
+				return item
+			}
+			else {
+				return false
+			}
+		},
+		file(item) {
+			if (/\.(?!png|jpg|jpeg).+$/.test(item)) {
 				return item.split('.')[0];
 			} else {
 				return false;
 			}
 		},
-		folder: function (item) {
+		folder(item) {
 			if (!/\..+$/.test(item)) {
 				return item;
 			} else {
 				return false;
 			}
 		},
-		singular: function (item) {
+		singular(item) {
 			return pluralize.isSingular(item);
 		},
-		plural: function (item) {
+		plural(item) {
 			return pluralize.isPlural(item);
 		},
-		index: function (value) {
+		index(value) {
 			return /^index..+$/.test(value);
 		},
-		collection: function (source, value) {
+		collection(source, value) {
 			let isCollection = false;
 			if (type.is.folder(value)) {
 				isCollection = true;
@@ -36,19 +44,19 @@ const type = {
 			// console.log(value)
 			return isCollection;
 		},
-		item: function (source, value) {
+		item(source, value) {
 			let isItem = false;
 			if (type.is.file(value) || type.has.index(source, value)) {
 				isItem = true;
 			}
 			return isItem;
 		},
-		hidden: function (value) {
+		hidden(value) {
 			return /^_/.test(value);
 		}
 	},
 	has: {
-		index: function (source, value) {
+		index(source, value) {
 			let hasIndex = false;
 			if (type.is.folder(value)) {
 				fs.readdirSync(path.join(source + value)).map((value) => {
@@ -60,7 +68,7 @@ const type = {
 
 			return hasIndex;
 		},
-		children: function (source, value) {
+		children(source, value) {
 			let hasChildren = false;
 			if (type.is.folder(value)) {
 				fs.readdirSync(path.join(source + value)).map(() => {
@@ -143,17 +151,15 @@ function createResource(dir, value, index, parent, root) {
 	// 	Object.assign(resource, indexContent);
 	// }
 
-
-
 	// If it's a folder
 	if (type.is.folder(value)) {
-
 
 		let subDir = path.join(dir + value + '/');
 		let parent = value;
 
 
 		var array = [];
+		var images = []
 
 		// Loop through its contents
 		fs.readdirSync(path.join(dir + value)).map((value, index) => {
@@ -161,6 +167,11 @@ function createResource(dir, value, index, parent, root) {
 			if (type.is.singular(parent)) {
 				// If parent is singular
 				resource._type = parent
+
+				// If it's an image
+				if (type.is.image(value)) {
+					images.push({ url: path.join("images", resource.url, value) });
+				}
 
 				if (type.is.index(value)) {
 					// If item is index file then apply contents to parent
@@ -201,10 +212,16 @@ function createResource(dir, value, index, parent, root) {
 			resource[parent] = array;
 		}
 
+		if (images.length > 0) {
+			resource.images = images
+		}
+
 
 
 
 	}
+
+	// console.log(resource)
 
 	return resource;
 }

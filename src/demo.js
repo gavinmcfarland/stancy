@@ -7,6 +7,6 @@ client.preprocess('content', (data) => {
 	return marked(data);
 });
 
-client.get('users/jerry').then((res) => console.log(res));
+client.get('home').then((res) => console.log(res));
 
 // client.get('users/').then((res) => console.log(res));
