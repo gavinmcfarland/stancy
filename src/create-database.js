@@ -3,29 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
 
-function copyFile(source, target, cb) {
-	var cbCalled = false;
-
-	var rd = fs.createReadStream(source);
-	rd.on("error", function (err) {
-		done(err);
-	});
-	var wr = fs.createWriteStream(target);
-	wr.on("error", function (err) {
-		done(err);
-	});
-	wr.on("close", function (ex) {
-		done();
-	});
-	rd.pipe(wr);
-
-	function done(err) {
-		if (!cbCalled) {
-			cb(err);
-			cbCalled = true;
-		}
-	}
-}
+// TODO: Need to add option in API to specific folder for images
+// FIXME: Check that paths for images are correct
+// TODO: Check that creating images and dir works when used in another project
 
 const type = {
 	is: {
