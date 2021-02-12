@@ -3,6 +3,30 @@ import fs from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
 
+function copyFile(source, target, cb) {
+	var cbCalled = false;
+
+	var rd = fs.createReadStream(source);
+	rd.on("error", function (err) {
+		done(err);
+	});
+	var wr = fs.createWriteStream(target);
+	wr.on("error", function (err) {
+		done(err);
+	});
+	wr.on("close", function (ex) {
+		done();
+	});
+	rd.pipe(wr);
+
+	function done(err) {
+		if (!cbCalled) {
+			cb(err);
+			cbCalled = true;
+		}
+	}
+}
+
 const type = {
 	is: {
 		image(item) {
@@ -171,6 +195,20 @@ function createResource(dir, value, index, parent, root) {
 				// If it's an image
 				if (type.is.image(value)) {
 					images.push({ url: path.join("images", resource.url, value) });
+
+					// Copy file to another destination
+					var oldPath = path.join(process.cwd(), subDir, value)
+					// resource.url returns / for index, need to check if this is correct AND if below need changing
+					var newPath = path.join(process.cwd(), "images", resource.url, value)
+
+					if (!fs.existsSync(path.join(process.cwd(), "images"))) {
+						fs.mkdirSync(path.join(process.cwd(), "images", resource.url), { recursive: true });
+					}
+
+					fs.copyFile(oldPath, newPath, (err) => {
+						if (err) throw err;
+						console.log('source.txt was copied to destination.txt');
+					});
 				}
 
 				if (type.is.index(value)) {
