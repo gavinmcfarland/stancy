@@ -17,7 +17,7 @@
 		"phtml": "^4.1.0",
 		"phtml-utility-class": "^2.0.2",
 		"polka": "next",
-		"pug": "^3.0.0",
+		"pug": "^3.0.1",
 		"sirv": "^0.4.0",
 		"stancy": "^1.0.0-alpha.27"
 	},
