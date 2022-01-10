@@ -60,7 +60,7 @@ npm install stancy
 
 - ### Collections and Items
 
-  Collections are created by plural sounding folders. Items are created using folders.
+  Collections are created by plural sounding folders. Items are created using files and non-plural sounding folders.
 
 ---
 
