@@ -1,9 +1,10 @@
 <body>
 
-	<h1>Title</h1>
+	<h1>About</h1>
 
-	<!-- Use content to access file content-->
-	<div>{{data.content}}</div>
+	<!-- file uses json, so you can access any of the fields -->
+	<p>{{data.name}}</p>
+	<p><a href="{{data.url}}">personal website</a></div>
 
 </body>
 
@@ -53,8 +54,10 @@
 	async function fetchData() {
 		// Call the url matching the content structure
 		// In production you'll want to add a env variable to change between local and production
-		const res = await fetch(`http://localhost:4001/index`);
+		const res = await fetch(`http://localhost:4001/about`);
 		const data = await res.json();
+
+		console.log("data", data)
 
 		if (res.ok) {
 			return data;
