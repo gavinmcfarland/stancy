@@ -1,0 +1,72 @@
+<body>
+
+	<h1>Title</h1>
+
+	<div>{{data.content}}</div>
+
+</body>
+
+<script>
+	// Just a simple function to replace template strings with data (you can use the framework of your choice)
+	function replaceTemplateStrings(dataObject) {
+		// Get all elements within the body tag
+		const elements = document.body.querySelectorAll('*');
+
+		// Loop through each element
+		elements.forEach(element => {
+			// If the element has child nodes
+			if (element.childNodes.length) {
+				element.childNodes.forEach(node => {
+					// Check if the node is a text node
+					if (node.nodeType === Node.TEXT_NODE) {
+						// Get the text content of the node
+						let textContent = node.textContent;
+
+						// Use regex to match the pattern {{...}}
+						const matches = textContent.match(/\{\{(.*?)\}\}/g);
+
+						// If there are matches
+						if (matches) {
+							// Loop through each match
+							matches.forEach(match => {
+								// Get the key inside the {{...}}
+								const key = match.slice(2, -2).trim();
+
+								// Get the value from the data object using the key
+								const value = key.split('.').reduce((obj, k) => obj && obj[k], dataObject);
+
+								// Replace the template string with the value
+								textContent = textContent.replace(match, value);
+							});
+
+							// Update the text content of the node
+							node.textContent = textContent;
+						}
+					}
+				});
+			}
+		});
+	}
+
+	// Example using fetch (importing a simple JS object coming soon)
+	async function fetchData() {
+		// Call the url matching the content structure
+		const res = await fetch(`http://localhost:4001/index`);
+		const data = await res.json();
+
+		if (res.ok) {
+			return data;
+		} else {
+			return {
+				status: res.status,
+				error: new Error('Could not load data')
+			};
+		}
+	}
+
+	// Fetch and replace data on load
+	window.onload = async function () {
+		const data = await fetchData()
+		replaceTemplateStrings({ data });
+	};
+</script>
