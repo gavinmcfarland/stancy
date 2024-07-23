@@ -51,6 +51,7 @@
 	// Example using fetch (importing a simple JS object coming soon)
 	async function fetchData() {
 		// Call the url matching the content structure
+		// In production you'll want to add a env variable to change between local and production
 		const res = await fetch(`http://localhost:4001/index`);
 		const data = await res.json();
 
